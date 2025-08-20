@@ -6,9 +6,9 @@ import { Line, LineChart, ResponsiveContainer, Tooltip } from 'recharts'
 import Image from "next/image"
 
 const subscriptions = [
-  { name: "Netflix", logo: "/netflix.png", frequency: "Monthly", next_renewal: "June 15", cost: 15, underused: true },
-  { name: "Spotify", logo: "/spotify.png", frequency: "Monthly", next_renewal: "June 20", cost: 10, underused: false },
-  { name: "Adobe CC", logo: "/adobe.png", frequency: "Yearly", next_renewal: "Aug 01", cost: 599, underused: false },
+  { name: "Netflix", logo: "https://placehold.co/32x32.png", frequency: "Monthly", next_renewal: "June 15", cost: 15, underused: true },
+  { name: "Spotify", logo: "https://placehold.co/32x32.png", frequency: "Monthly", next_renewal: "June 20", cost: 10, underused: false },
+  { name: "Adobe CC", logo: "https://placehold.co/32x32.png", frequency: "Yearly", next_renewal: "Aug 01", cost: 599, underused: false },
 ]
 
 const historyData = [
