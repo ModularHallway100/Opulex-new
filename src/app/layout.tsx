@@ -3,8 +3,8 @@ import './globals.css';
 import { Toaster } from "@/components/ui/toaster"
 
 export const metadata: Metadata = {
-  title: 'Opulex - Redefining Wealth Management',
-  description: 'The future of intelligent wealth management. Get early access to Opulex.',
+  title: 'Opulex - Take Control of Your Money with AI',
+  description: 'AI-driven budgeting, subscription tracking, and global, multi-currency support.',
 };
 
 export default function RootLayout({
