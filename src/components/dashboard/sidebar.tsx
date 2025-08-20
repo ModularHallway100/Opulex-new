@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Home, BarChart2, Wallet, Settings, LogOut, PiggyBank, Receipt } from 'lucide-react'
+import { Home, BarChart2, Wallet, Settings, LogOut, PiggyBank, Receipt, Target } from 'lucide-react'
 import Logo from '@/components/logo'
 import { Button } from '@/components/ui/button'
 
@@ -7,6 +7,7 @@ const navItems = [
   { href: '/dashboard', icon: <Home />, label: 'Dashboard' },
   { href: '/dashboard/budget', icon: <PiggyBank />, label: 'Budget' },
   { href: '/dashboard/transactions', icon: <Receipt />, label: 'Transactions' },
+  { href: '/dashboard/goals', icon: <Target />, label: 'Goals' },
   { href: '/dashboard/reports', icon: <BarChart2 />, label: 'Reports' },
   { href: '/dashboard/accounts', icon: <Wallet />, label: 'Accounts' },
   { href: '/dashboard/settings', icon: <Settings />, label: 'Settings' },
@@ -22,7 +23,7 @@ const Sidebar = () => {
       </div>
       <nav className="flex-1 space-y-2">
         {navItems.map((item) => (
-          <Link key={item.href} href={item.href} passHref>
+          <Link key={item.label} href={item.href} passHref>
             <Button variant="ghost" className="w-full justify-start text-base py-6">
                 {item.icon}
                 {item.label}
