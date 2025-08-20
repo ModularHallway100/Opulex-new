@@ -11,20 +11,19 @@ const navItems = [
   { href: '/dashboard/reports', icon: <BarChart2 />, label: 'Reports' },
   { href: '/dashboard/notifications', icon: <Bell />, label: 'Notifications' },
   { href: '/dashboard/accounts', icon: <Wallet />, label: 'Accounts' },
-  { href: '/dashboard/settings', icon: <Settings />, label: 'Settings' },
 ]
 
 const Sidebar = () => {
   return (
     <aside className="hidden lg:flex flex-col w-64 h-screen px-4 py-8 bg-secondary border-r border-border/40">
       <div className="flex items-center justify-center mb-12">
-        <Link href="/dashboard" passHref>
+        <Link href="/dashboard">
             <Logo />
         </Link>
       </div>
       <nav className="flex-1 space-y-2">
         {navItems.map((item) => (
-          <Button key={item.label} variant="ghost" className="w-full justify-start text-base py-6" asChild>
+          <Button key={item.href} variant="ghost" className="w-full justify-start text-base py-6" asChild>
             <Link href={item.href}>
                 {item.icon}
                 {item.label}
@@ -32,8 +31,14 @@ const Sidebar = () => {
           </Button>
         ))}
       </nav>
-       <div>
-         <Link href="/" passHref>
+       <div className="mt-auto">
+        <Button variant="ghost" className="w-full justify-start text-base py-6" asChild>
+          <Link href="/dashboard/settings">
+            <Settings />
+            Settings
+          </Link>
+        </Button>
+         <Link href="/">
             <Button variant="ghost" className="w-full justify-start text-base py-6">
                 <LogOut />
                 Sign Out

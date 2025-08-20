@@ -1,4 +1,7 @@
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import ProfileSettings from "@/components/settings/profile-settings";
+import SecuritySettings from "@/components/settings/security-settings";
+import PreferenceSettings from "@/components/settings/preferences-settings";
+import DataPrivacySettings from "@/components/settings/data-privacy-settings";
 
 export default function SettingsPage() {
   return (
@@ -8,15 +11,16 @@ export default function SettingsPage() {
         <p className="text-muted-foreground">Customize your Opulex experience.</p>
       </div>
       
-      <Card className="bg-secondary/50 border-primary/20">
-        <CardHeader>
-          <CardTitle>Application Settings</CardTitle>
-          <CardDescription>Manage your preferences for notifications, security, and more.</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <p className="text-muted-foreground">Settings options will be built out here.</p>
-        </CardContent>
-      </Card>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="lg:col-span-2 space-y-8">
+            <ProfileSettings />
+            <SecuritySettings />
+        </div>
+        <div className="space-y-8">
+            <PreferenceSettings />
+            <DataPrivacySettings />
+        </div>
+      </div>
     </div>
   );
 }
