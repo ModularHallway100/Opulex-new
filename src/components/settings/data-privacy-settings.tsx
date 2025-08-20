@@ -1,10 +1,35 @@
+"use client";
+
+import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { Database, Download, Trash2 } from "lucide-react";
+import { Database, Download, Trash2, AlertTriangle } from "lucide-react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { Input } from '../ui/input';
 
 const DataPrivacySettings = () => {
+    const [confirmationText, setConfirmationText] = useState('');
+
+    const handleDelete = () => {
+        // In a real app, this would trigger a backend process
+        // to send a confirmation email.
+        console.log("Account deletion initiated.");
+        alert("A confirmation link has been sent to your email to finalize the deletion.");
+        setConfirmationText('');
+    };
+
     return (
         <Card className="bg-secondary/50 border-primary/20">
             <CardHeader>
@@ -35,10 +60,42 @@ const DataPrivacySettings = () => {
                         <Download className="mr-2" />
                         Export All Data
                      </Button>
-                      <Button variant="destructive" className="w-full">
-                        <Trash2 className="mr-2" />
-                        Delete Account
-                     </Button>
+                    <AlertDialog>
+                      <AlertDialogTrigger asChild>
+                         <Button variant="destructive" className="w-full">
+                            <Trash2 className="mr-2" />
+                            Delete Account
+                         </Button>
+                      </AlertDialogTrigger>
+                      <AlertDialogContent className="bg-secondary border-primary/20">
+                        <AlertDialogHeader>
+                          <AlertDialogTitle className="flex items-center gap-2">
+                            <AlertTriangle className="text-destructive" />
+                            Are you absolutely sure?
+                            </AlertDialogTitle>
+                          <AlertDialogDescription>
+                            This action cannot be undone. This will permanently delete your account and remove your data from our servers. A confirmation link will be sent to your email.
+                            <br/><br/>
+                            Please type <strong>DELETE</strong> to confirm.
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <Input 
+                            value={confirmationText}
+                            onChange={(e) => setConfirmationText(e.target.value)}
+                            placeholder="DELETE"
+                            className="bg-background"
+                        />
+                        <AlertDialogFooter>
+                          <AlertDialogCancel onClick={() => setConfirmationText('')}>Cancel</AlertDialogCancel>
+                          <AlertDialogAction
+                            disabled={confirmationText !== 'DELETE'}
+                            onClick={handleDelete}
+                          >
+                            Continue
+                          </AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
                 </div>
             </CardContent>
         </Card>
