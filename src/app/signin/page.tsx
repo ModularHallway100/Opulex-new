@@ -9,6 +9,8 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import Logo from '@/components/logo';
+import { Separator } from "@/components/ui/separator";
+import { Chrome } from "lucide-react";
 
 const formSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email." }),
@@ -27,6 +29,7 @@ export default function SignInPage() {
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log("Sign in with:", values);
     // Handle sign-in logic here
+    // On success, you would redirect to /verify-2fa if enabled
   }
 
   return (
@@ -43,6 +46,17 @@ export default function SignInPage() {
             </CardDescription>
           </CardHeader>
           <CardContent>
+            <div className="grid grid-cols-2 gap-4 mb-6">
+                <Button variant="outline"><Chrome className="mr-2 h-4 w-4" /> Google</Button>
+                <Button variant="outline">Phone</Button>
+            </div>
+
+            <div className="flex items-center my-4">
+                <div className="flex-grow border-t border-muted-foreground/20"></div>
+                <span className="mx-4 text-xs uppercase text-muted-foreground">OR</span>
+                <div className="flex-grow border-t border-muted-foreground/20"></div>
+            </div>
+
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                 <FormField
@@ -63,7 +77,12 @@ export default function SignInPage() {
                   name="password"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Password</FormLabel>
+                        <div className="flex items-center justify-between">
+                            <FormLabel>Password</FormLabel>
+                            <Link href="/forgot-password" passHref>
+                                <Button variant="link" className="p-0 h-auto text-xs">Forgot password?</Button>
+                            </Link>
+                        </div>
                       <FormControl>
                         <Input type="password" placeholder="••••••••" {...field} />
                       </FormControl>

@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
@@ -10,28 +9,22 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import Logo from '@/components/logo';
-import { Chrome } from "lucide-react";
-import PasswordStrength from "@/components/password-strength";
 
 const formSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email." }),
-  password: z.string().min(8, { message: "Password must be at least 8 characters." }),
 });
 
-export default function SignUpPage() {
-  const [password, setPassword] = useState('');
-
+export default function ForgotPasswordPage() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: "",
-      password: "",
     },
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log("Sign up with:", values);
-    // Handle sign-up logic here
+    console.log("Password reset for:", values.email);
+    // Handle password reset logic here
   }
 
   return (
@@ -42,22 +35,12 @@ export default function SignUpPage() {
         </div>
         <Card className="bg-secondary border-primary/20">
           <CardHeader>
-            <CardTitle className="text-2xl font-headline text-primary">Get Started</CardTitle>
+            <CardTitle className="text-2xl font-headline text-primary">Forgot Password</CardTitle>
             <CardDescription className="text-muted-foreground font-body">
-              Create an account to start managing your finances.
+             Enter your email and we'll send you a link to reset your password.
             </CardDescription>
           </CardHeader>
           <CardContent>
-             <div className="grid grid-cols-2 gap-4 mb-6">
-                <Button variant="outline"><Chrome className="mr-2 h-4 w-4" /> Google</Button>
-                <Button variant="outline">Phone</Button>
-            </div>
-
-            <div className="flex items-center my-4">
-                <div className="flex-grow border-t border-muted-foreground/20"></div>
-                <span className="mx-4 text-xs uppercase text-muted-foreground">OR</span>
-                <div className="flex-grow border-t border-muted-foreground/20"></div>
-            </div>
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                 <FormField
@@ -73,35 +56,13 @@ export default function SignUpPage() {
                     </FormItem>
                   )}
                 />
-                <FormField
-                  control={form.control}
-                  name="password"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Password</FormLabel>
-                      <FormControl>
-                        <Input 
-                          type="password" 
-                          placeholder="••••••••" 
-                          {...field} 
-                          onChange={(e) => {
-                            field.onChange(e);
-                            setPassword(e.target.value);
-                          }}
-                        />
-                      </FormControl>
-                      <PasswordStrength password={password} />
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
                 <Button type="submit" className="w-full">
-                  Create Account
+                  Send Reset Link
                 </Button>
               </form>
             </Form>
             <p className="mt-4 text-center text-sm text-muted-foreground">
-              Already have an account?{" "}
+              Remembered your password?{" "}
               <Link href="/signin" className="font-semibold text-primary hover:underline">
                 Sign In
               </Link>
