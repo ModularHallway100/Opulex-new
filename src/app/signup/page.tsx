@@ -12,6 +12,7 @@ import { z } from "zod";
 import Logo from '@/components/logo';
 import { Chrome } from "lucide-react";
 import PasswordStrength from "@/components/password-strength";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email." }),
@@ -20,6 +21,7 @@ const formSchema = z.object({
 
 export default function SignUpPage() {
   const [password, setPassword] = useState('');
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -31,7 +33,9 @@ export default function SignUpPage() {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log("Sign up with:", values);
-    // Handle sign-up logic here
+    // In a real app, handle sign-up logic here.
+    // For this prototype, we'll navigate to the 2FA setup.
+    router.push('/verify-2fa');
   }
 
   return (

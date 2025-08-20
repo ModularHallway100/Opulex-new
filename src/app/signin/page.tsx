@@ -9,8 +9,8 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import Logo from '@/components/logo';
-import { Separator } from "@/components/ui/separator";
 import { Chrome } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email." }),
@@ -18,6 +18,7 @@ const formSchema = z.object({
 });
 
 export default function SignInPage() {
+  const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -28,8 +29,15 @@ export default function SignInPage() {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log("Sign in with:", values);
-    // Handle sign-in logic here
-    // On success, you would redirect to /verify-2fa if enabled
+    // In a real app, handle sign-in logic here.
+    // For this prototype, we'll assume success and check for 2FA.
+    const is2faEnabled = true; // Simulate user with 2FA enabled
+    
+    if (is2faEnabled) {
+        router.push('/verify-2fa');
+    } else {
+        router.push('/dashboard');
+    }
   }
 
   return (

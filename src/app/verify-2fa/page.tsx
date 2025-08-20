@@ -8,12 +8,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import Logo from '@/components/logo';
+import { useRouter } from 'next/navigation';
 
 const formSchema = z.object({
   code: z.string().min(6, { message: "Your code must be 6 digits." }).max(6),
 });
 
 export default function Verify2FAPage() {
+  const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -23,7 +25,9 @@ export default function Verify2FAPage() {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log("2FA code:", values.code);
-    // Handle 2FA verification logic here
+    // In a real app, handle 2FA verification logic here.
+    // On success, redirect to dashboard.
+    router.push('/dashboard');
   }
 
   return (
