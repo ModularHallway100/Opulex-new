@@ -1,20 +1,11 @@
-import { redirect } from 'next/navigation';
 import BudgetSummary from '@/components/dashboard/budget-summary';
 import ExpenseBreakdown from '@/components/dashboard/expense-breakdown';
 import UpcomingBills from '@/components/dashboard/upcoming-bills';
 import SubscriptionTracker from '@/components/dashboard/subscription-tracker';
 import QuickActions from '@/components/dashboard/quick-actions';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
 
 export default function DashboardPage() {
-  // In a real app, you'd check for an active session.
-  const isAuthenticated = true; 
-
-  if (!isAuthenticated) {
-    redirect('/signin');
-  }
-
   return (
     <div className="space-y-8">
       {/* Notification Banner - shown when budget is low */}
