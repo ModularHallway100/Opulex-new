@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
-import { Gem, Twitter, Linkedin, Facebook } from 'lucide-react';
+import { Twitter, Linkedin, Facebook } from 'lucide-react';
+import Logo from '@/components/logo';
 
 const Footer = () => {
   return (
@@ -7,8 +8,7 @@ const Footer = () => {
       <div className="container flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="text-center md:text-left">
             <a href="#" className="flex items-center gap-2 justify-center md:justify-start">
-              <Gem className="h-6 w-6 text-primary" />
-              <span className="font-bold text-lg font-headline">Opulex</span>
+              <Logo />
             </a>
             <p className="text-sm text-muted-foreground mt-2">
                 © {new Date().getFullYear()} Opulex Inc. All rights reserved.
