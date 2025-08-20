@@ -1,10 +1,11 @@
 import Link from 'next/link'
-import { Home, BarChart2, Wallet, Settings, LogOut } from 'lucide-react'
+import { Home, BarChart2, Wallet, Settings, LogOut, PiggyBank } from 'lucide-react'
 import Logo from '@/components/logo'
 import { Button } from '@/components/ui/button'
 
 const navItems = [
   { href: '/dashboard', icon: <Home />, label: 'Dashboard' },
+  { href: '/dashboard/budget', icon: <PiggyBank />, label: 'Budget' },
   { href: '/dashboard/reports', icon: <BarChart2 />, label: 'Reports' },
   { href: '/dashboard/accounts', icon: <Wallet />, label: 'Accounts' },
   { href: '/dashboard/settings', icon: <Settings />, label: 'Settings' },
