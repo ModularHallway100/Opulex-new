@@ -23,12 +23,12 @@ const Sidebar = () => {
       </div>
       <nav className="flex-1 space-y-2">
         {navItems.map((item) => (
-          <Link key={item.label} href={item.href} passHref>
-            <Button variant="ghost" className="w-full justify-start text-base py-6">
+          <Button key={item.label} variant="ghost" className="w-full justify-start text-base py-6" asChild>
+            <Link href={item.href}>
                 {item.icon}
                 {item.label}
-            </Button>
-          </Link>
+            </Link>
+          </Button>
         ))}
       </nav>
        <div>
