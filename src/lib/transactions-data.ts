@@ -1,4 +1,4 @@
-import { ShoppingBag, UtensilsCrossed, Car, Home, HeartPulse, Receipt } from 'lucide-react';
+import { ShoppingBag, UtensilsCrossed, Car, Home, HeartPulse, Receipt, Shirt, Clapperboard } from 'lucide-react';
 
 export interface Transaction {
     id: string;
@@ -6,7 +6,7 @@ export interface Transaction {
     amount: number;
     status: 'completed' | 'pending';
     date: string;
-    category: 'groceries' | 'utilities' | 'rent' | 'transportation' | 'shopping' | 'income';
+    category: 'groceries' | 'utilities' | 'rent' | 'transportation' | 'shopping' | 'entertainment' | 'income';
 }
 
 export const transactions: Transaction[] = [
@@ -80,7 +80,7 @@ export const transactions: Transaction[] = [
         amount: -15.99,
         status: 'pending',
         date: '2025-06-15',
-        category: 'shopping',
+        category: 'entertainment',
     },
 ];
 
@@ -90,6 +90,7 @@ export const categories = [
     { value: 'rent', label: 'Rent', icon: Home },
     { value: 'transportation', label: 'Transportation', icon: Car },
     { value: 'shopping', label: 'Shopping', icon: ShoppingBag },
+    { value: 'entertainment', label: 'Entertainment', icon: Clapperboard },
     { value: 'income', label: 'Income', icon: Receipt },
 ];
 

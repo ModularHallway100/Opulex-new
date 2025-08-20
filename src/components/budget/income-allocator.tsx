@@ -19,7 +19,7 @@ interface IncomeAllocatorProps {
   categories: Category[];
 }
 
-const IncomeAllocator = ({ totalIncome, remainingToAllocate }: IncomeAllocatorProps) => {
+const IncomeAllocator = ({ totalIncome, totalAllocated, remainingToAllocate }: IncomeAllocatorProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -49,9 +49,9 @@ const IncomeAllocator = ({ totalIncome, remainingToAllocate }: IncomeAllocatorPr
             <div className="w-full bg-muted rounded-full h-6 dark:bg-gray-700">
                 <div 
                     className="bg-primary h-6 rounded-full text-center text-white text-sm flex items-center justify-center" 
-                    style={{ width: `${(1 - remainingToAllocate / totalIncome) * 100}%` }}
+                    style={{ width: `${(totalAllocated / totalIncome) * 100}%` }}
                 >
-                    ${(totalIncome - remainingToAllocate).toLocaleString()} Allocated
+                    ${totalAllocated.toLocaleString()} Allocated
                 </div>
             </div>
              <p className="text-center mt-2 font-bold text-lg">

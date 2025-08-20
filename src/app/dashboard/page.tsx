@@ -4,6 +4,8 @@ import UpcomingBills from '@/components/dashboard/upcoming-bills';
 import SubscriptionTracker from '@/components/dashboard/subscription-tracker';
 import QuickActions from '@/components/dashboard/quick-actions';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 export default function DashboardPage() {
   return (
@@ -30,8 +32,11 @@ export default function DashboardPage() {
       <QuickActions />
 
        <Card className="bg-secondary/50 border-primary/20">
-        <CardHeader>
+        <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle className="text-xl font-headline">View All Accounts</CardTitle>
+          <Button asChild variant="outline" size="sm">
+            <Link href="/dashboard/accounts">Manage Accounts</Link>
+          </Button>
         </CardHeader>
         <CardContent>
           <ul className="space-y-2 text-sm">
