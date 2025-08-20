@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Home, BarChart2, Wallet, Settings, LogOut, PiggyBank, Receipt, Target, Bell, Users } from 'lucide-react'
+import { Home, BarChart2, Wallet, Settings, LogOut, PiggyBank, Receipt, Target, Bell, Users, Briefcase } from 'lucide-react'
 import Logo from '@/components/logo'
 import { Button } from '@/components/ui/button'
 
@@ -9,6 +9,7 @@ const navItems = [
   { href: '/dashboard/transactions', icon: <Receipt />, label: 'Transactions' },
   { href: '/dashboard/goals', icon: <Target />, label: 'Goals' },
   { href: '/dashboard/reports', icon: <BarChart2 />, label: 'Reports' },
+  { href: '/dashboard/portfolio', icon: <Briefcase />, label: 'Portfolio' },
   { href: '/dashboard/notifications', icon: <Bell />, label: 'Notifications' },
   { href: '/dashboard/accounts', icon: <Wallet />, label: 'Accounts' },
   { href: '/dashboard/family', icon: <Users />, label: 'Family' },
