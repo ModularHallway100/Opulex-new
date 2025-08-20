@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Home, BarChart2, Wallet, Settings, LogOut, PiggyBank, Receipt, Target, Bell } from 'lucide-react'
+import { Home, BarChart2, Wallet, Settings, LogOut, PiggyBank, Receipt, Target, Bell, Users } from 'lucide-react'
 import Logo from '@/components/logo'
 import { Button } from '@/components/ui/button'
 
@@ -11,6 +11,7 @@ const navItems = [
   { href: '/dashboard/reports', icon: <BarChart2 />, label: 'Reports' },
   { href: '/dashboard/notifications', icon: <Bell />, label: 'Notifications' },
   { href: '/dashboard/accounts', icon: <Wallet />, label: 'Accounts' },
+  { href: '/dashboard/family', icon: <Users />, label: 'Family' },
 ]
 
 const Sidebar = () => {
@@ -24,24 +25,24 @@ const Sidebar = () => {
       <nav className="flex-1 space-y-2">
         {navItems.map((item) => (
           <Button key={item.href} variant="ghost" className="w-full justify-start text-base py-6" asChild>
-            <Link href={item.href}>
+            <Link href={item.href} className="flex items-center gap-4">
                 {item.icon}
-                {item.label}
+                <span>{item.label}</span>
             </Link>
           </Button>
         ))}
       </nav>
        <div className="mt-auto">
         <Button variant="ghost" className="w-full justify-start text-base py-6" asChild>
-          <Link href="/dashboard/settings">
+          <Link href="/dashboard/settings" className="flex items-center gap-4">
             <Settings />
-            Settings
+            <span>Settings</span>
           </Link>
         </Button>
          <Link href="/">
-            <Button variant="ghost" className="w-full justify-start text-base py-6">
+            <Button variant="ghost" className="w-full justify-start text-base py-6 flex items-center gap-4">
                 <LogOut />
-                Sign Out
+                <span>Sign Out</span>
             </Button>
          </Link>
       </div>

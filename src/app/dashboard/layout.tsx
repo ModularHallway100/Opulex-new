@@ -1,6 +1,7 @@
 import React from 'react';
 import Sidebar from '@/components/dashboard/sidebar';
 import Header from '@/components/dashboard/header';
+import ChatWidget from '@/components/chatbot/chat-widget';
 
 export default function DashboardLayout({
   children,
@@ -15,6 +16,7 @@ export default function DashboardLayout({
         <main className="flex-1 overflow-x-hidden overflow-y-auto bg-background p-4 sm:p-6 lg:p-8">
           {children}
         </main>
+        <ChatWidget />
       </div>
     </div>
   );
