@@ -16,7 +16,8 @@ import { Table } from "@tanstack/react-table";
 import { Separator } from "../ui/separator";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
-import { Textarea } from "../ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import { PlusCircle } from "lucide-react";
 
 interface DataTableFilterSheetProps<TData> {
   isOpen: boolean;
@@ -32,65 +33,83 @@ export function DataTableFilterSheet<TData>({
 
   const handleClear = () => {
     table.resetColumnFilters();
+    table.resetGlobalFilter();
     onClose();
   }
 
   return (
     <Sheet open={isOpen} onOpenChange={onClose}>
-      <SheetContent className="flex flex-col">
+      <SheetContent className="flex flex-col bg-secondary border-primary/20">
         <SheetHeader>
-          <SheetTitle className="font-headline text-primary">Transaction Filters</SheetTitle>
+          <SheetTitle className="font-headline text-primary">Advanced Filters</SheetTitle>
           <SheetDescription>
-            Refine your view of the ledger with advanced filters.
+            Refine the Ledger with custom rules and filters.
           </SheetDescription>
         </SheetHeader>
         
-        <div className="flex-1 space-y-6 py-4">
-            <div className="space-y-3">
-                <h4 className="text-sm font-semibold">Filter by Status</h4>
-                <div className="flex gap-2">
-                    {table.getColumn("category") && (
-                    <DataTableFacetedFilter
-                        column={table.getColumn("category")}
-                        title="Category"
-                        options={categories}
-                    />
-                    )}
-                    {table.getColumn("status") && (
-                    <DataTableFacetedFilter
-                        column={table.getColumn("status")}
-                        title="Status"
-                        options={statuses}
-                    />
-                    )}
-                </div>
+        <div className="flex-1 space-y-6 py-4 overflow-y-auto">
+            <div className="space-y-4">
+                <h4 className="text-sm font-semibold text-muted-foreground">FILTER BY</h4>
+                <div className="space-y-2">
+                    <Label htmlFor="date-range">Date Range</Label>
+                    <Select>
+                        <SelectTrigger id="date-range">
+                            <SelectValue placeholder="All time" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectItem value="all">All time</SelectItem>
+                            <SelectItem value="7d">Last 7 days</SelectItem>
+                            <SelectItem value="30d">Last 30 days</SelectItem>
+                            <SelectItem value="90d">Last 90 days</SelectItem>
+                            <SelectItem value="custom">Custom Range</SelectItem>
+                        </SelectContent>
+                    </Select>
+                 </div>
+                 <div className="space-y-2">
+                    <Label>Amount</Label>
+                    <div className="flex gap-2">
+                        <Input placeholder="Min amount" type="number" className="bg-background" />
+                        <Input placeholder="Max amount" type="number" className="bg-background" />
+                    </div>
+                 </div>
             </div>
 
             <Separator />
 
             <div className="space-y-4">
-                <h4 className="text-sm font-semibold">Auto-Categorization Rules</h4>
+                <h4 className="text-sm font-semibold text-muted-foreground">AUTO-CATEGORIZATION RULES</h4>
                  <div className="space-y-2">
                     <Label htmlFor="rule-merchant">If merchant contains...</Label>
-                    <Input id="rule-merchant" placeholder="e.g., Starbucks" className="bg-secondary" />
+                    <Input id="rule-merchant" placeholder="e.g., Starbucks" className="bg-background" />
                  </div>
                  <div className="space-y-2">
                     <Label htmlFor="rule-category">Then assign category...</Label>
-                     {table.getColumn("category") && (
-                        <DataTableFacetedFilter
-                            column={table.getColumn("category")}
-                            title="Category"
-                            options={categories}
-                        />
-                    )}
+                     <Select>
+                        <SelectTrigger id="rule-category">
+                            <SelectValue placeholder="Select a category" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            {categories.map(cat => (
+                                <SelectItem key={cat.value} value={cat.value}>
+                                    <div className="flex items-center gap-2">
+                                        <cat.icon className="h-4 w-4" />
+                                        {cat.label}
+                                    </div>
+                                </SelectItem>
+                            ))}
+                        </SelectContent>
+                    </Select>
                  </div>
-                 <Button size="sm" variant="outline" className="w-full">+ Add Rule</Button>
+                 <Button size="sm" variant="outline" className="w-full">
+                    <PlusCircle className="mr-2 h-4 w-4"/>
+                    Add New Rule
+                 </Button>
             </div>
         </div>
 
-        <SheetFooter>
-          <Button variant="ghost" onClick={handleClear}>Clear All</Button>
-          <Button onClick={onClose}>Apply Filters</Button>
+        <SheetFooter className="pt-4 border-t border-primary/20">
+          <Button variant="ghost" onClick={handleClear}>Clear Filters</Button>
+          <Button onClick={onClose}>Apply</Button>
         </SheetFooter>
       </SheetContent>
     </Sheet>

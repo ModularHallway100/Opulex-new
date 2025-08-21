@@ -7,8 +7,8 @@ import { SlidersHorizontal } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { categories, statuses } from "@/lib/transactions-data"
 import { DataTableFacetedFilter } from "./data-table-faceted-filter"
+import { categories, statuses } from "@/lib/transactions-data"
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>
@@ -32,6 +32,20 @@ export function DataTableToolbar<TData>({
           }
           className="h-9 w-[150px] lg:w-[250px] bg-background/50"
         />
+         {table.getColumn("category") && (
+          <DataTableFacetedFilter
+            column={table.getColumn("category")}
+            title="Category"
+            options={categories}
+          />
+        )}
+        {table.getColumn("status") && (
+          <DataTableFacetedFilter
+            column={table.getColumn("status")}
+            title="Status"
+            options={statuses}
+          />
+        )}
         {isFiltered && (
           <Button
             variant="ghost"
@@ -46,9 +60,8 @@ export function DataTableToolbar<TData>({
       <div className="flex items-center gap-2">
         <Button variant="outline" size="sm" className="h-9" onClick={onFilterClick}>
             <SlidersHorizontal className="mr-2 h-4 w-4" />
-            Filters
+            Advanced Filters
         </Button>
-        <Button size="sm" className="h-9">+ New Manual Entry</Button>
       </div>
     </div>
   )
