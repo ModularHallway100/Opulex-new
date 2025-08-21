@@ -27,15 +27,15 @@ const totalActual = budgetData.reduce((sum, item) => sum + item.actual, 0)
 const remainingBudget = totalBudget - totalActual
 const percentSpent = (totalActual / totalBudget) * 100
 
-const getProgressBarColor = () => {
-  if (percentSpent > 90) return "bg-destructive";
-  if (percentSpent > 75) return "bg-yellow-500";
-  return "bg-green-500";
+const getProgressBarColor = (percent: number) => {
+    if (percent > 90) return "bg-destructive";
+    if (percent > 75) return "bg-yellow-500";
+    return "bg-green-500";
 };
 
 const BudgetSummary = () => {
   return (
-    <Card className="bg-secondary/50 border-primary/20">
+    <Card className="bg-background/40 border-primary/20">
       <CardHeader>
         <div className="flex justify-between items-start">
             <div>
@@ -49,7 +49,7 @@ const BudgetSummary = () => {
                     <p className="text-xs text-muted-foreground">of ${totalBudget.toLocaleString()}</p>
                 </div>
                 <div className="w-48">
-                    <Progress value={percentSpent} className={getProgressBarColor()} />
+                    <Progress value={percentSpent} className="h-3" indicatorClassName={getProgressBarColor(percentSpent)} />
                 </div>
             </div>
         </div>

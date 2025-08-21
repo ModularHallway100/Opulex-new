@@ -10,7 +10,7 @@ const bills = [
 
 const UpcomingBills = () => {
   return (
-    <Card className="bg-secondary/50 border-primary/20">
+    <Card className="bg-background/40 border-primary/20">
       <CardHeader>
         <CardTitle className="text-xl font-headline">Upcoming Bills</CardTitle>
       </CardHeader>

@@ -11,7 +11,7 @@ const actions = [
 
 const QuickActions = () => {
   return (
-    <Card className="bg-secondary/50 border-primary/20">
+    <Card className="bg-background/40 border-primary/20">
       <CardContent className="p-4">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {actions.map((action) => (

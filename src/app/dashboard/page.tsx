@@ -29,7 +29,7 @@ export default function DashboardPage() {
       
       <QuickActions />
 
-       <Card className="bg-secondary/50 border-primary/20">
+       <Card className="bg-background/40 border-primary/20 hover:border-primary/40 transition-all">
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle className="text-xl font-headline">View All Accounts</CardTitle>
           <Button asChild variant="outline" size="sm">
