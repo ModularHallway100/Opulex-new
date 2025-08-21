@@ -25,23 +25,23 @@ const Sidebar = () => {
       </div>
       <nav className="flex-1 space-y-2">
         {navItems.map((item) => (
-          <Button key={item.href} variant="ghost" className="w-full justify-start text-base py-6" asChild>
-            <Link href={item.href} className="flex items-center gap-4">
+          <Link href={item.href} key={item.href} passHref>
+            <Button variant="ghost" className="w-full justify-start text-base py-6">
                 {item.icon}
                 <span>{item.label}</span>
-            </Link>
-          </Button>
+            </Button>
+          </Link>
         ))}
       </nav>
        <div className="mt-auto">
-        <Button variant="ghost" className="w-full justify-start text-base py-6" asChild>
-          <Link href="/dashboard/settings" className="flex items-center gap-4">
-            <Settings />
-            <span>Settings</span>
-          </Link>
-        </Button>
-         <Link href="/">
-            <Button variant="ghost" className="w-full justify-start text-base py-6 flex items-center gap-4">
+        <Link href="/dashboard/settings" passHref>
+            <Button variant="ghost" className="w-full justify-start text-base py-6">
+                <Settings />
+                <span>Settings</span>
+            </Button>
+        </Link>
+         <Link href="/" passHref>
+            <Button variant="ghost" className="w-full justify-start text-base py-6">
                 <LogOut />
                 <span>Sign Out</span>
             </Button>
