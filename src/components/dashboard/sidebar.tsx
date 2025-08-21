@@ -36,13 +36,13 @@ const Sidebar = () => {
         ))}
       </nav>
        <div className="mt-auto">
-        <Link href="/dashboard/settings" key="/dashboard/settings" passHref>
+        <Link href="/dashboard/settings" passHref>
             <Button variant="ghost" className="w-full justify-start text-base py-6">
                 <Settings className="mr-4" />
                 <span>Settings</span>
             </Button>
         </Link>
-         <Link href="/" key="/" passHref>
+         <Link href="/" passHref>
             <Button variant="ghost" className="w-full justify-start text-base py-6">
                 <LogOut className="mr-4" />
                 <span>Sign Out</span>
