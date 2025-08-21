@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useState } from 'react';
@@ -22,7 +23,7 @@ export default function SignUpPage() {
         setIsUnlocking(true);
         setTimeout(() => {
             router.push('/dashboard');
-        }, 500); // match animation duration
+        }, 1200); // match animation duration
     }
 
     const handleGoogleSignUp = (e: React.MouseEvent) => {
@@ -30,21 +31,20 @@ export default function SignUpPage() {
         setIsUnlocking(true);
         setTimeout(() => {
             router.push('/dashboard');
-        }, 500); // match animation duration
+        }, 1200); // match animation duration
     }
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-background py-12">
+             {isUnlocking && (
+                <div className="gate-unlock-overlay">
+                    <KeyRound className="gate-unlock-key" />
+                </div>
+            )}
             <Card className="w-full max-w-md bg-secondary border-primary/20 shadow-2xl shadow-primary/10 overflow-hidden">
                 <CardHeader className="text-center p-8 bg-black/30 border-b-2 border-primary">
                      <div className="flex justify-center mb-4 h-12">
-                        {isUnlocking ? (
-                            <div className="relative h-12 w-12">
-                                <KeyRound className="h-12 w-12 text-primary animate-unlock" />
-                            </div>
-                        ) : (
-                            <Logo />
-                        )}
+                        <Logo />
                     </div>
                     <CardTitle className="text-2xl font-headline text-primary">You Are Invited</CardTitle>
                     <CardDescription>Join Opulex and begin your wealth mastery journey.</CardDescription>

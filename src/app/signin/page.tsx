@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useState } from 'react';
@@ -20,21 +21,20 @@ export default function SignInPage() {
         // In a real app, you'd have validation and an API call here.
         setTimeout(() => {
             router.push('/dashboard');
-        }, 500); // match animation duration
+        }, 1200); // match animation duration
     }
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-background">
+            {isUnlocking && (
+                <div className="gate-unlock-overlay">
+                    <KeyRound className="gate-unlock-key" />
+                </div>
+            )}
             <Card className="w-full max-w-md bg-secondary border-primary/20 overflow-hidden">
                 <CardHeader className="text-center">
                     <div className="flex justify-center mb-4">
-                       {isUnlocking ? (
-                            <div className="relative h-12 w-12">
-                                <KeyRound className="h-12 w-12 text-primary animate-unlock" />
-                            </div>
-                        ) : (
-                            <Logo />
-                        )}
+                        <Logo />
                     </div>
                     <CardTitle className="text-2xl font-headline">Welcome Back</CardTitle>
                     <CardDescription>Unlock your Opulex command center.</CardDescription>
