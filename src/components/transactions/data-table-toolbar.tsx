@@ -1,7 +1,9 @@
+
 "use client"
 
 import { Cross2Icon } from "@radix-ui/react-icons"
 import { Table } from "@tanstack/react-table"
+import { SlidersHorizontal } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -10,10 +12,12 @@ import { DataTableFacetedFilter } from "./data-table-faceted-filter"
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>
+  onFilterClick: () => void;
 }
 
 export function DataTableToolbar<TData>({
   table,
+  onFilterClick
 }: DataTableToolbarProps<TData>) {
   const isFiltered = table.getState().columnFilters.length > 0
 
@@ -26,34 +30,26 @@ export function DataTableToolbar<TData>({
           onChange={(event) =>
             table.getColumn("merchant")?.setFilterValue(event.target.value)
           }
-          className="h-8 w-[150px] lg:w-[250px]"
+          className="h-9 w-[150px] lg:w-[250px] bg-background/50"
         />
-        {table.getColumn("category") && (
-          <DataTableFacetedFilter
-            column={table.getColumn("category")}
-            title="Category"
-            options={categories}
-          />
-        )}
-         {table.getColumn("status") && (
-          <DataTableFacetedFilter
-            column={table.getColumn("status")}
-            title="Status"
-            options={statuses}
-          />
-        )}
         {isFiltered && (
           <Button
             variant="ghost"
             onClick={() => table.resetColumnFilters()}
-            className="h-8 px-2 lg:px-3"
+            className="h-9 px-2 lg:px-3"
           >
             Reset
             <Cross2Icon className="ml-2 h-4 w-4" />
           </Button>
         )}
       </div>
-       <Button className="h-8">+ New Manual Entry</Button>
+      <div className="flex items-center gap-2">
+        <Button variant="outline" size="sm" className="h-9" onClick={onFilterClick}>
+            <SlidersHorizontal className="mr-2 h-4 w-4" />
+            Filters
+        </Button>
+        <Button size="sm" className="h-9">+ New Manual Entry</Button>
+      </div>
     </div>
   )
 }

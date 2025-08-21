@@ -1,3 +1,4 @@
+
 "use client";
 
 import * as React from 'react';
@@ -24,6 +25,7 @@ import {
 } from '@/components/ui/table';
 import { DataTableToolbar } from './data-table-toolbar';
 import { DataTablePagination } from './data-table-pagination';
+import { DataTableFilterSheet } from './data-table-filter-sheet';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -38,6 +40,8 @@ export function DataTable<TData, TValue>({
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
+  const [isFilterSheetOpen, setIsFilterSheetOpen] = React.useState(false);
+
 
   const table = useReactTable({
     data,
@@ -60,7 +64,12 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="space-y-4">
-      <DataTableToolbar table={table} />
+      <DataTableToolbar table={table} onFilterClick={() => setIsFilterSheetOpen(true)} />
+      <DataTableFilterSheet
+        isOpen={isFilterSheetOpen}
+        onClose={() => setIsFilterSheetOpen(false)}
+        table={table}
+      />
       <div className="rounded-md border border-border/40">
         <Table>
           <TableHeader>
