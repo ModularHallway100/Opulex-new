@@ -70,3 +70,4 @@ const SpendingBreakdownChart = () => {
 }
 
 export default SpendingBreakdownChart;
+

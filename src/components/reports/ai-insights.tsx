@@ -38,7 +38,7 @@ const AiInsights = () => {
     return (
         <Card className="bg-secondary/50 border-primary/20">
             <CardHeader>
-                <CardTitle className="text-xl font-headline">AI Insights & Forecasts</CardTitle>
+                <CardTitle className="text-xl font-headline">AI Insights & Royal Decrees</CardTitle>
                 <CardDescription>Personalized analysis to help you make smarter financial decisions.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
@@ -57,21 +57,23 @@ const AiInsights = () => {
                 </div>
 
                  <div className="space-y-4">
-                     <h3 className="text-lg font-semibold text-center">Predictive Forecasts</h3>
+                     <h3 className="text-lg font-semibold text-center text-primary">Predictive Forecasts</h3>
                     {forecasts.map((forecast, index) => (
-                        <div key={index} className="flex items-center justify-between p-4 bg-background/50 rounded-lg">
-                            <div>
-                                <p className="font-semibold">{forecast.title}</p>
-                                <p className="text-sm text-muted-foreground">{forecast.description}</p>
-                            </div>
-                            <div className="flex gap-2">
-                                <Button variant="ghost" size="sm">Okay</Button>
-                                <Button size="sm">
-                                    <Bell className="mr-2 h-4 w-4" />
-                                    Set Reminder
-                                </Button>
-                            </div>
-                        </div>
+                        <Card key={index} className="bg-background/50 border-primary/20">
+                            <CardContent className="p-4 flex items-center justify-between">
+                                <div>
+                                    <p className="font-semibold">{forecast.title}</p>
+                                    <p className="text-sm text-muted-foreground">{forecast.description}</p>
+                                </div>
+                                <div className="flex gap-2">
+                                    <Button variant="outline" size="sm">Acknowledge</Button>
+                                    <Button size="sm">
+                                        <Bell className="mr-2 h-4 w-4" />
+                                        Set Reminder
+                                    </Button>
+                                </div>
+                            </CardContent>
+                        </Card>
                     ))}
                  </div>
 

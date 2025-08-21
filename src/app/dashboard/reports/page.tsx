@@ -7,8 +7,8 @@ export default function ReportsPage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-headline text-primary">Reports & Insights</h1>
-        <p className="text-muted-foreground">Analyze your financial health with detailed reports and AI-powered insights.</p>
+        <h1 className="text-3xl font-headline text-primary">The Oracle Room</h1>
+        <p className="text-muted-foreground">Consult the oracle for deep insights into your financial empire.</p>
       </div>
 
       <AiInsights />
