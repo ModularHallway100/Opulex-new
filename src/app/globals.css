@@ -74,4 +74,22 @@
   .animation-delay-4000 {
     animation-delay: 4000ms;
   }
+  .animate-unlock {
+    animation: unlock 0.5s ease-out forwards;
+  }
+}
+
+@keyframes unlock {
+  0% {
+    transform: translateY(0) rotate(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-20px) rotate(-15deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-20px) rotate(15deg) scale(0);
+    opacity: 0;
+  }
 }

@@ -107,12 +107,18 @@ export default {
           '100%': {
             transform: 'translate(0px, 0px) scale(1)',
           },
-        }
+        },
+        unlock: {
+            '0%': { transform: 'translateY(0) rotate(0)', opacity: '1' },
+            '50%': { transform: 'translateY(-20px) rotate(-15deg)', opacity: '1' },
+            '100%': { transform: 'translateY(-20px) rotate(15deg) scale(0)', opacity: '0' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         'blob': 'blob 7s infinite',
+        'unlock': 'unlock 0.5s ease-out forwards',
       },
     },
   },

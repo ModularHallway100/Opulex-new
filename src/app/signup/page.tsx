@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import Logo from '@/components/logo';
 import PasswordStrength from '@/components/password-strength';
+import { Separator } from '@/components/ui/separator';
 
 export default function SignUpPage() {
     const router = useRouter();
@@ -22,16 +23,16 @@ export default function SignUpPage() {
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-background py-12">
-            <Card className="w-full max-w-md bg-secondary border-primary/20">
-                <CardHeader className="text-center">
+            <Card className="w-full max-w-md bg-secondary border-primary/20 shadow-2xl shadow-primary/10">
+                <CardHeader className="text-center p-8 bg-black/30 border-b-2 border-primary">
                      <div className="flex justify-center mb-4">
                         <Logo />
                     </div>
-                    <CardTitle className="text-2xl font-headline">Create Your Account</CardTitle>
-                    <CardDescription>Join Opulex and start your wealth mastery journey.</CardDescription>
+                    <CardTitle className="text-2xl font-headline text-primary">You Are Invited</CardTitle>
+                    <CardDescription>Join Opulex and begin your wealth mastery journey.</CardDescription>
                 </CardHeader>
                 <form onSubmit={handleSignUp}>
-                    <CardContent className="space-y-4">
+                    <CardContent className="space-y-4 p-8">
                          <div className="space-y-2">
                             <Label htmlFor="name">Full Name</Label>
                             <Input id="name" type="text" placeholder="John Doe" required />
@@ -52,15 +53,18 @@ export default function SignUpPage() {
                             <PasswordStrength password={password} />
                         </div>
                     </CardContent>
-                    <CardFooter className="flex-col gap-4">
-                        <Button className="w-full">Create Account</Button>
-                         <p className="text-xs text-muted-foreground text-center">
-                            By signing up, you agree to our Terms of Service.
-                        </p>
+                    <CardFooter className="flex-col gap-4 p-8 pt-4">
+                        <Button className="w-full" size="lg">Accept Invitation</Button>
+                        <div className="flex items-center w-full gap-4 text-xs text-muted-foreground">
+                            <Separator className="flex-1" />
+                            OR
+                            <Separator className="flex-1" />
+                        </div>
+                        <Button variant="outline" className="w-full">Sign up with Google</Button>
                         <p className="text-xs text-muted-foreground">
-                            Already have an account?{" "}
+                            Already a member?{" "}
                             <Link href="/signin" passHref>
-                                <span className="text-primary hover:underline cursor-pointer">Sign In</span>
+                                <span className="text-primary hover:underline cursor-pointer">Log In</span>
                             </Link>
                         </p>
                     </CardFooter>

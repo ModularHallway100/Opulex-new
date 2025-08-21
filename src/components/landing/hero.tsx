@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
-import { Gem, Globe, DollarSign } from 'lucide-react';
+import { Gem, Globe, DollarSign, KeyRound } from 'lucide-react';
 
 const heroFeatures = [
     {
@@ -24,9 +24,9 @@ const heroFeatures = [
 
 const Hero = () => {
   return (
-    <section className="relative text-center py-20 px-6 bg-secondary/20 overflow-hidden">
+    <section className="relative text-center py-20 px-6 bg-secondary/20 overflow-hidden min-h-screen flex items-center justify-center">
       <div className="absolute inset-0 bg-black/80 z-10">
-          <div className="absolute inset-0 opacity-20 animate-pulse">
+          <div className="absolute inset-0 opacity-40 animate-pulse">
             {/* Golden threads effect */}
             <div className="absolute top-0 left-1/4 w-1 h-full bg-primary/50 transform -skew-x-12"></div>
             <div className="absolute top-0 left-1/2 w-px h-full bg-primary/50 transform skew-x-12"></div>
@@ -41,6 +41,14 @@ const Hero = () => {
         <p className="text-xl md:text-2xl text-muted-foreground mb-8">
             Command your money. Conquer your goals. Live in luxury.
         </p>
+         <div className="flex justify-center gap-4 mb-16">
+            <Link href="/signup" passHref>
+                <Button size="lg">
+                    <KeyRound className="mr-2" />
+                    Enter the Vault
+                </Button>
+            </Link>
+        </div>
         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
             {heroFeatures.map((feature) => (
                 <Card key={feature.title} className="bg-background/40 border-primary/20 text-center">

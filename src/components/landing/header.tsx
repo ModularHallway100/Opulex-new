@@ -4,14 +4,14 @@ import Logo from '@/components/logo';
 
 const Header = () => {
   return (
-    <header className="py-4 px-6 md:px-12 flex justify-between items-center">
+    <header className="py-4 px-6 md:px-12 flex justify-between items-center absolute top-0 left-0 w-full z-30">
       <Logo />
       <nav className="flex items-center gap-4">
         <Link href="/signin" passHref>
-          <Button variant="ghost">Sign In</Button>
+          <Button variant="ghost">Log In</Button>
         </Link>
         <Link href="/signup" passHref>
-          <Button>Get Started</Button>
+          <Button>Enter the Vault</Button>
         </Link>
       </nav>
     </header>
