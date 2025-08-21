@@ -13,7 +13,7 @@ const PreferenceSettings = () => {
 
     useEffect(() => {
         const root = document.documentElement;
-        root.classList.remove('theme-midnight-marble', 'theme-solaris-gold', 'theme-ruby-empire');
+        root.classList.remove('theme-midnight-marble', 'theme-solaris-gold', 'theme-ruby-empire', 'theme-platinum-silver', 'theme-emerald-noir');
         
         if (theme !== 'opulex-prime') {
             root.classList.add(`theme-${theme}`);
@@ -70,6 +70,8 @@ const PreferenceSettings = () => {
                             <SelectItem value="midnight-marble">Midnight Marble</SelectItem>
                             <SelectItem value="solaris-gold">Solaris Gold</SelectItem>
                             <SelectItem value="ruby-empire">Ruby Empire</SelectItem>
+                            <SelectItem value="platinum-silver">Platinum Silver</SelectItem>
+                            <SelectItem value="emerald-noir">Emerald Noir</SelectItem>
                         </SelectContent>
                     </Select>
                 </div>

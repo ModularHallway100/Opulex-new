@@ -98,6 +98,30 @@
     --destructive: 200 80% 60%; /* Contrasting Cyan */
     --warning: 38 92% 50%;
   }
+
+  .theme-platinum-silver {
+    --background: 220 13% 95%;
+    --foreground: 220 10% 20%;
+    --primary: 210 15% 60%;
+    --primary-foreground: 220 10% 10%;
+    --secondary: 220 13% 85%;
+    --card: 220 13% 90%;
+    --border: 220 13% 80%;
+    --destructive: 0 70% 60%;
+    --warning: 38 92% 50%;
+  }
+
+  .theme-emerald-noir {
+    --background: 150 15% 5%;
+    --foreground: 150 10% 90%;
+    --primary: 150 60% 50%;
+    --primary-foreground: 150 15% 5%;
+    --secondary: 150 15% 15%;
+    --card: 150 15% 10%;
+    --border: 150 15% 20%;
+    --destructive: 340 80% 65%;
+    --warning: 45 100% 60%;
+  }
 }
 
 @layer base {
