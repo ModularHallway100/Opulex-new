@@ -43,6 +43,21 @@ const PreferenceSettings = () => {
                     </Select>
                 </div>
 
+                 <div className="space-y-2">
+                    <Label htmlFor="luxury-theme">Luxury Theme Pack</Label>
+                    <Select defaultValue="opulex-prime">
+                        <SelectTrigger id="luxury-theme">
+                            <SelectValue placeholder="Select theme pack" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectItem value="opulex-prime">Opulex Prime (Default)</SelectItem>
+                            <SelectItem value="midnight-marble">Midnight Marble</SelectItem>
+                            <SelectItem value="solaris-gold">Solaris Gold</SelectItem>
+                            <SelectItem value="ruby-empire">Ruby Empire</SelectItem>
+                        </SelectContent>
+                    </Select>
+                </div>
+
                 <div className="flex items-center justify-between pt-4 border-t border-border/50">
                     <Label htmlFor="date-format">Use DD/MM/YYYY format</Label>
                     <Switch id="date-format" />
