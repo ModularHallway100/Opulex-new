@@ -1,3 +1,4 @@
+
 "use client"
 
 import { DotsHorizontalIcon } from "@radix-ui/react-icons"
@@ -30,11 +31,11 @@ export function DataTableRowActions<TData>({
           <span className="sr-only">Open menu</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-[160px] bg-secondary">
+      <DropdownMenuContent align="end" className="w-[160px]">
         <DropdownMenuItem>Edit</DropdownMenuItem>
         <DropdownMenuItem>Recategorize</DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="text-destructive">
+        <DropdownMenuItem className="text-destructive focus:text-destructive focus:bg-destructive/10">
           Delete
         </DropdownMenuItem>
       </DropdownMenuContent>
