@@ -13,9 +13,11 @@ const PreferenceSettings = () => {
 
     useEffect(() => {
         const root = document.documentElement;
+        // Remove all theme classes
         root.classList.remove('theme-midnight-marble', 'theme-solaris-gold', 'theme-ruby-empire', 'theme-platinum-silver', 'theme-emerald-noir');
         
-        if (theme !== 'opulex-prime') {
+        // Add the selected theme class if it's not the default
+        if (theme && theme !== 'opulex-prime') {
             root.classList.add(`theme-${theme}`);
         }
     }, [theme]);
@@ -77,11 +79,11 @@ const PreferenceSettings = () => {
                 </div>
 
                 <div className="flex items-center justify-between pt-4 border-t border-border/50">
-                    <Label htmlFor="date-format">Use DD/MM/YYYY format</Label>
+                    <Label htmlFor="date-format" className="flex-shrink-0 pr-4">Use DD/MM/YYYY format</Label>
                     <Switch id="date-format" />
                 </div>
                  <div className="flex items-center justify-between">
-                    <Label htmlFor="number-format">Use dots for thousands separators</Label>
+                    <Label htmlFor="number-format" className="flex-shrink-0 pr-4">Use dots for thousands separators</Label>
                     <Switch id="number-format" />
                 </div>
             </CardContent>

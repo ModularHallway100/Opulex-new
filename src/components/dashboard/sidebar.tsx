@@ -1,9 +1,13 @@
 
+"use client";
+
 import React from 'react';
 import Link from 'next/link'
+import { usePathname } from 'next/navigation';
 import { Home, BarChart2, Wallet, Settings, LogOut, PiggyBank, Receipt, Target, Bell, Users, Briefcase } from 'lucide-react'
 import Logo from '@/components/logo'
 import { Button } from '@/components/ui/button'
+import { cn } from '@/lib/utils';
 
 const navItems = [
   { href: '/dashboard', icon: <Home />, label: 'Dashboard' },
@@ -18,6 +22,26 @@ const navItems = [
   { href: '/dashboard/family', icon: <Users />, label: 'Family' },
 ]
 
+const SidebarLink = ({ href, icon, label }: { href: string, icon: React.ReactElement, label: string }) => {
+    const pathname = usePathname();
+    const isActive = pathname === href;
+
+    return (
+        <Link href={href} passHref>
+            <Button 
+                variant={isActive ? "secondary" : "ghost"}
+                className={cn(
+                    "w-full justify-start text-base py-6",
+                    isActive && "bg-primary/10 text-primary border-primary/50 border"
+                )}
+            >
+                {React.cloneElement(icon, { className: "mr-4" })}
+                <span>{label}</span>
+            </Button>
+        </Link>
+    );
+}
+
 const Sidebar = () => {
   return (
     <aside className="hidden lg:flex flex-col w-64 h-screen px-4 py-8 bg-secondary border-r border-border/40">
@@ -28,22 +52,12 @@ const Sidebar = () => {
       </div>
       <nav className="flex-1 space-y-2">
         {navItems.map((item) => (
-          <Link href={item.href} passHref key={item.href}>
-            <Button variant="ghost" className="w-full justify-start text-base py-6">
-                {React.cloneElement(item.icon, { className: "mr-4" })}
-                <span>{item.label}</span>
-            </Button>
-          </Link>
+          <SidebarLink key={item.href} {...item} />
         ))}
       </nav>
        <div className="mt-auto">
-        <Link href="/dashboard/settings" passHref>
-            <Button variant="ghost" className="w-full justify-start text-base py-6">
-                <Settings className="mr-4" />
-                <span>Settings</span>
-            </Button>
-        </Link>
-         <Link href="/" passHref>
+        <SidebarLink href="/dashboard/settings" icon={<Settings />} label="Settings" />
+        <Link href="/" passHref>
             <Button variant="ghost" className="w-full justify-start text-base py-6">
                 <LogOut className="mr-4" />
                 <span>Sign Out</span>
