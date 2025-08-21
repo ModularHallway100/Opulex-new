@@ -26,12 +26,12 @@ const Hero = () => {
   return (
     <section className="relative text-center py-20 px-6 bg-secondary/20 overflow-hidden min-h-screen flex items-center justify-center">
       <div className="absolute inset-0 bg-black/80 z-10">
-          <div className="absolute inset-0 opacity-40 animate-pulse">
+          <div className="absolute inset-0 opacity-20 animate-pulse blur-xl -z-10">
             {/* Golden threads effect */}
-            <div className="absolute top-0 left-1/4 w-1 h-full bg-primary/50 transform -skew-x-12"></div>
-            <div className="absolute top-0 left-1/2 w-px h-full bg-primary/50 transform skew-x-12"></div>
-            <div className="absolute top-0 left-3/4 w-0.5 h-full bg-primary/50 transform -skew-x-12"></div>
-             <div className="absolute bottom-0 right-1/4 w-1 h-full bg-primary/50 transform skew-x-12"></div>
+            <div className="absolute top-0 left-1/4 w-1 h-full bg-primary/80 transform -skew-x-12 animate-pulse duration-3000"></div>
+            <div className="absolute top-0 left-1/2 w-px h-full bg-primary/80 transform skew-x-12 animate-pulse duration-2000"></div>
+            <div className="absolute top-0 left-3/4 w-0.5 h-full bg-primary/80 transform -skew-x-12 animate-pulse duration-3000"></div>
+             <div className="absolute bottom-0 right-1/4 w-1 h-full bg-primary/80 transform skew-x-12 animate-pulse duration-2000"></div>
           </div>
       </div>
       <div className="relative z-20 max-w-4xl mx-auto">
