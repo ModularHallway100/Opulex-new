@@ -9,6 +9,7 @@ const navItems = [
   { href: '/dashboard', icon: <Home />, label: 'Dashboard' },
   { href: '/dashboard/budget', icon: <PiggyBank />, label: 'Budget' },
   { href: '/dashboard/transactions', icon: <Receipt />, label: 'Transactions' },
+  { href: '/dashboard/subscriptions', icon: <Receipt />, label: 'Subscriptions' },
   { href: '/dashboard/goals', icon: <Target />, label: 'Goals' },
   { href: '/dashboard/reports', icon: <BarChart2 />, label: 'Reports' },
   { href: '/dashboard/portfolio', icon: <Briefcase />, label: 'Portfolio' },
