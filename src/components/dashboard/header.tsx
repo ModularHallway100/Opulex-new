@@ -1,6 +1,7 @@
+
 "use client"
 
-import { Bell, Search, User } from 'lucide-react'
+import { Bell, Search, User, Gem, Award } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import Logo from '@/components/logo'
@@ -19,7 +20,17 @@ const Header = () => {
         </div>
       </div>
 
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-6">
+        <div className="flex items-center gap-4 border-r border-border/50 pr-6">
+            <div className="flex items-center gap-2 text-primary">
+                <Award className="h-5 w-5" />
+                <span className="font-semibold text-sm">Wealth Apprentice</span>
+            </div>
+            <div className="flex items-center gap-2 text-primary">
+                <Gem className="h-5 w-5" />
+                <span className="font-semibold text-sm">1,250</span>
+            </div>
+        </div>
         <Button variant="ghost" size="icon">
           <Bell className="h-5 w-5" />
           <span className="sr-only">Notifications</span>

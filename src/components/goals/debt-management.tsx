@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Button } from "@/components/ui/button"
 import { Switch } from "@/components/ui/switch"
 import { Label } from "@/components/ui/label"
-import { AlertCircle, LineChart, Banknote } from "lucide-react"
+import { AlertCircle, LineChart, Banknote, Gem } from "lucide-react"
 import { debts, totalDebt } from "@/lib/goals-data"
 import {
   Tooltip,
@@ -28,6 +28,8 @@ const DebtManagement = () => {
       return debtsCopy.sort((a, b) => b.interestRate - a.interestRate);
     }
   }, [strategy]);
+
+  const freedomPoints = strategy === 'avalanche' ? 1500 : 1200;
 
   return (
     <Card className="bg-secondary/50 border-primary/20 mt-4">
@@ -57,9 +59,18 @@ const DebtManagement = () => {
         <div className="p-3 bg-blue-900/40 border border-blue-500/50 rounded-lg text-sm flex items-center gap-2">
             <LineChart className="h-5 w-5 text-blue-400" />
             <p>
-                <span className="font-bold">Timeline Estimate:</span> Using the <span className="font-semibold">{strategy}</span> method, you could be debt-free by 
+                <span className="font-bold">Golden Bridge to Freedom:</span> Using the <span className="font-semibold">{strategy}</span> method, you could be debt-free by 
                 {strategy === 'avalanche' ? ' January 2026.' : ' March 2026.'}
             </p>
+        </div>
+        
+         <div className="text-center">
+            <p className="text-sm text-muted-foreground">Following this path earns you</p>
+             <div className="flex items-center justify-center gap-2 text-primary mt-1">
+                <Gem className="h-5 w-5" />
+                <span className="font-bold text-lg">{freedomPoints.toLocaleString()}</span>
+                <span className="text-sm">Freedom Pts</span>
+            </div>
         </div>
 
         <div className="space-y-4">
