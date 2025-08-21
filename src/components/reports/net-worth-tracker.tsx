@@ -1,3 +1,4 @@
+
 "use client"
 
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
@@ -33,6 +34,20 @@ const NetWorthTracker = () => {
                         <div className="h-[300px] w-full">
                         <ResponsiveContainer width="100%" height="100%">
                             <AreaChart data={netWorthData}>
+                            <defs>
+                                <linearGradient id="colorNetWorth" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="5%" stopColor="hsl(var(--primary))" stopOpacity={0.8}/>
+                                    <stop offset="95%" stopColor="hsl(var(--primary))" stopOpacity={0}/>
+                                </linearGradient>
+                                 <linearGradient id="colorAssets" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="5%" stopColor="hsl(var(--secondary))" stopOpacity={0.3}/>
+                                    <stop offset="95%" stopColor="hsl(var(--secondary))" stopOpacity={0}/>
+                                </linearGradient>
+                                 <linearGradient id="colorLiabilities" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="5%" stopColor="hsl(var(--destructive))" stopOpacity={0.3}/>
+                                    <stop offset="95%" stopColor="hsl(var(--destructive))" stopOpacity={0}/>
+                                </linearGradient>
+                            </defs>
                             <XAxis dataKey="month" stroke="hsl(var(--muted-foreground))" fontSize={12} />
                             <YAxis stroke="hsl(var(--muted-foreground))" fontSize={12} tickFormatter={(value) => `$${value/1000}k`} />
                             <Tooltip 
@@ -43,9 +58,9 @@ const NetWorthTracker = () => {
                                 }}
                             />
                             <Legend wrapperStyle={{fontSize: "12px"}}/>
-                            <Area type="monotone" dataKey="assets" stackId="1" stroke="#2563eb" fill="#2563eb" name="Assets" />
-                            <Area type="monotone" dataKey="liabilities" stackId="1" stroke="#dc2626" fill="#dc2626" name="Liabilities" />
-                            <Area type="monotone" dataKey="netWorth" stackId="2" stroke="hsl(var(--primary))" fill="hsl(var(--primary))" name="Net Worth" />
+                            <Area type="monotone" dataKey="assets" stackId="1" stroke="hsl(var(--secondary-foreground))" fill="url(#colorAssets)" name="Assets" />
+                            <Area type="monotone" dataKey="liabilities" stackId="1" stroke="hsl(var(--destructive))" fill="url(#colorLiabilities)" name="Liabilities" />
+                            <Area type="monotone" dataKey="netWorth" stackId="2" stroke="hsl(var(--primary))" fill="url(#colorNetWorth)" name="Net Worth" />
                             </AreaChart>
                         </ResponsiveContainer>
                         </div>

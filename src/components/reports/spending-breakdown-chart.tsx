@@ -1,3 +1,4 @@
+
 "use client"
 
 import * as React from "react"
@@ -37,7 +38,13 @@ const SpendingBreakdownChart = () => {
               <PieChart>
                 <Tooltip
                   cursor={false}
-                  content={<ChartTooltipContent hideLabel />}
+                  content={<ChartTooltipContent 
+                    hideLabel
+                    contentStyle={{ 
+                        backgroundColor: 'hsl(var(--background))', 
+                        borderColor: 'hsl(var(--border))',
+                    }}
+                    />}
                 />
                 <Pie
                   data={spendingBreakdownData}
@@ -45,6 +52,7 @@ const SpendingBreakdownChart = () => {
                   nameKey="name"
                   innerRadius={60}
                   strokeWidth={5}
+                  stroke="hsl(var(--background))"
                 >
                     {spendingBreakdownData.map((entry, index) => (
                         <Cell key={`cell-${index}`} fill={entry.fill} />
