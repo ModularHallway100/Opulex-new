@@ -1,18 +1,19 @@
+
 export const budgetData = {
     income: {
         sources: [
             { id: 'salary', name: 'Salary', amount: 4500 },
             { id: 'side-gig', name: 'Side Gig', amount: 500 },
-            { id: 'investments', name: 'Investment Income', amount: 0 },
         ]
     },
     categories: [
-        { id: 'rent', name: 'Rent', allocated: 2000, spent: 2000, aiSuggestion: 2000, isEssential: true },
-        { id: 'groceries', name: 'Groceries', allocated: 450, spent: 300, aiSuggestion: 480 },
-        { id: 'utilities', name: 'Utilities', allocated: 150, spent: 160, aiSuggestion: 180, isEssential: true },
-        { id: 'transportation', name: 'Transportation', allocated: 100, spent: 50, aiSuggestion: 100 },
-        { id: 'subscriptions', name: 'Subscriptions', allocated: 50, spent: 50, aiSuggestion: 50 },
-        { id: 'entertainment', name: 'Entertainment', allocated: 200, spent: 215, aiSuggestion: 250 },
-        { id: 'savings', name: 'Savings', allocated: 1000, spent: 1000, aiSuggestion: 1000, isEssential: true },
+        { id: 'housing', name: 'Housing', allocated: 1800, spent: 1800, aiSuggestion: 1800, isEssential: true },
+        { id: 'food', name: 'Food', allocated: 600, spent: 450, aiSuggestion: 650, isEssential: true },
+        { id: 'utilities', name: 'Utilities', allocated: 200, spent: 180, aiSuggestion: 200, isEssential: true },
+        { id: 'transportation', name: 'Transportation', allocated: 150, spent: 90, aiSuggestion: 150 },
+        { id: 'savings', name: 'Savings', allocated: 1000, spent: 1000, aiSuggestion: 1200, isEssential: true },
+        { id: 'debt-repayment', name: 'Debt Repayment', allocated: 500, spent: 500, aiSuggestion: 500 },
+        { id: 'entertainment', name: 'Entertainment (Luxury)', allocated: 250, spent: 300, aiSuggestion: 200 },
+        { id: 'shopping', name: 'Shopping (Luxury)', allocated: 250, spent: 150, aiSuggestion: 150 },
     ]
 };

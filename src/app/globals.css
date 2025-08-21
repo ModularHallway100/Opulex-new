@@ -34,6 +34,9 @@
     --ring: 46 65% 52%; /* Gold for rings */
     
     --radius: 0.5rem;
+
+    --warning: 38 92% 50%; /* Amber */
+    --warning-foreground: 20 14% 4%;
   }
 
   .dark {
@@ -56,6 +59,8 @@
     --border: 220 70% 25%;
     --input: 220 70% 18%;
     --ring: 46 65% 52%;
+    --warning: 38 92% 50%; /* Amber */
+    --warning-foreground: 20 14% 4%;
   }
 
   .theme-midnight-marble {
@@ -67,6 +72,7 @@
     --card: 210 10% 20%;
     --border: 210 10% 30%;
     --destructive: 0 70% 60%; /* Brighter Red */
+    --warning: 38 92% 50%;
   }
 
   .theme-solaris-gold {
@@ -78,6 +84,7 @@
     --card: 30 30% 17%;
     --border: 30 30% 25%;
     --destructive: 15 80% 60%; /* Fiery Orange */
+    --warning: 38 92% 50%;
   }
 
   .theme-ruby-empire {
@@ -89,6 +96,7 @@
     --card: 340 10% 20%;
     --border: 340 10% 30%;
     --destructive: 200 80% 60%; /* Contrasting Cyan */
+    --warning: 38 92% 50%;
   }
 }
 

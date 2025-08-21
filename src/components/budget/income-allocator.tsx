@@ -1,26 +1,21 @@
+
 "use client";
 
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Pencil, HandCoins } from 'lucide-react';
+import { Pencil, HandCoins, Gem } from 'lucide-react';
 import IncomeEditorModal from './income-editor';
-
-interface Category {
-  id: string;
-  name: string;
-  allocated: number;
-}
 
 interface IncomeAllocatorProps {
   totalIncome: number;
   totalAllocated: number;
   remainingToAllocate: number;
-  categories: Category[];
 }
 
 const IncomeAllocator = ({ totalIncome, totalAllocated, remainingToAllocate }: IncomeAllocatorProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const allocationPercentage = totalIncome > 0 ? (totalAllocated / totalIncome) * 100 : 0;
 
   return (
     <>
@@ -45,18 +40,33 @@ const IncomeAllocator = ({ totalIncome, totalAllocated, remainingToAllocate }: I
              <p className="text-sm text-muted-foreground">to be budgeted</p>
           </div>
         </CardHeader>
-        <CardContent>
-            <div className="w-full bg-muted rounded-full h-6 dark:bg-gray-700">
+        <CardContent className="text-center">
+            <div className="w-full bg-muted rounded-full h-8 dark:bg-black/50 relative overflow-hidden border-2 border-primary/30">
                 <div 
-                    className="bg-primary h-6 rounded-full text-center text-white text-sm flex items-center justify-center" 
-                    style={{ width: `${(totalAllocated / totalIncome) * 100}%` }}
+                    className="bg-primary/80 h-full rounded-full transition-all duration-500 ease-in-out flex items-center justify-center text-primary-foreground font-bold text-sm" 
+                    style={{ width: `${allocationPercentage}%` }}
                 >
-                    ${totalAllocated.toLocaleString()} Allocated
+                   <span>${totalAllocated.toLocaleString()} Allocated</span>
+                </div>
+                 <div className="absolute inset-0 flex items-center justify-center">
+                     {remainingToAllocate > 0 && (
+                        <p className="font-bold text-lg flex items-center gap-2">
+                            <Gem className="h-5 w-5 text-primary animate-pulse" />
+                            <span>${remainingToAllocate.toLocaleString()} Remaining to Allocate</span>
+                        </p>
+                     )}
+                      {remainingToAllocate === 0 && (
+                        <p className="font-bold text-lg text-primary">
+                            Every dollar has a job!
+                        </p>
+                     )}
+                      {remainingToAllocate < 0 && (
+                        <p className="font-bold text-lg text-destructive">
+                            You've over-allocated by ${Math.abs(remainingToAllocate).toLocaleString()}!
+                        </p>
+                     )}
                 </div>
             </div>
-             <p className="text-center mt-2 font-bold text-lg">
-                ${remainingToAllocate.toLocaleString()} Remaining to Allocate
-            </p>
         </CardContent>
       </Card>
       <IncomeEditorModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />

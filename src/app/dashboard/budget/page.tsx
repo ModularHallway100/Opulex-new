@@ -1,3 +1,4 @@
+
 import IncomeAllocator from '@/components/budget/income-allocator';
 import CategoryManager from '@/components/budget/category-manager';
 import FinancialHealth from '@/components/budget/financial-health';
@@ -22,7 +23,6 @@ export default function BudgetPage() {
         totalIncome={totalIncome} 
         totalAllocated={totalAllocated}
         remainingToAllocate={remainingToAllocate}
-        categories={budgetData.categories} 
       />
       
        <Tabs defaultValue="zero-based" className="w-full">
@@ -31,7 +31,7 @@ export default function BudgetPage() {
           <TabsTrigger value="envelopes">Virtual Envelopes</TabsTrigger>
         </TabsList>
         <TabsContent value="zero-based">
-            <CategoryManager categories={budgetData.categories} />
+            <CategoryManager categories={budgetData.categories} totalIncome={totalIncome} />
         </TabsContent>
         <TabsContent value="envelopes">
             <VirtualEnvelopes categories={budgetData.categories} />
@@ -42,7 +42,7 @@ export default function BudgetPage() {
       <FinancialHealth />
 
       <div className="flex justify-end pt-4">
-        <Button size="lg" disabled={remainingToAllocate > 0}>
+        <Button size="lg" disabled={remainingToAllocate !== 0}>
           Save Budget Plan
         </Button>
       </div>
