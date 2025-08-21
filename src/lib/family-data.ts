@@ -4,7 +4,7 @@ export const householdMembers = [
     name: "Alice",
     email: "alice@example.com",
     avatar: "https://placehold.co/100x100.png",
-    role: "Full Access",
+    role: "Master",
     lastActive: "2 hours ago",
   },
   {
@@ -12,7 +12,7 @@ export const householdMembers = [
     name: "Bob",
     email: "bob@example.com",
     avatar: "https://placehold.co/100x100.png",
-    role: "Editor",
+    role: "Contributor",
     lastActive: "1 day ago",
   },
 ];

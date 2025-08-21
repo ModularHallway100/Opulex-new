@@ -1,3 +1,4 @@
+
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -14,7 +15,7 @@ const MemberManager = () => {
     <Card className="bg-secondary/50 border-primary/20">
       <CardHeader>
         <CardTitle className="text-xl font-headline">Manage Collaborators</CardTitle>
-        <CardDescription>Invite and set permissions for household members.</CardDescription>
+        <CardDescription>Invite members to your Inner Circle and set their permissions.</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="flex space-x-2 mb-6">
@@ -51,9 +52,9 @@ const MemberManager = () => {
                             <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                            <SelectItem value="Full Access">Full Access</SelectItem>
-                            <SelectItem value="Editor">Editor</SelectItem>
-                            <SelectItem value="View-Only">View-Only</SelectItem>
+                            <SelectItem value="Master">Master</SelectItem>
+                            <SelectItem value="Contributor">Contributor</SelectItem>
+                            <SelectItem value="Viewer">Viewer</SelectItem>
                         </SelectContent>
                     </Select>
                 </TableCell>

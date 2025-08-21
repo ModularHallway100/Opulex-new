@@ -6,8 +6,8 @@ export default function FamilyPage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-headline text-primary">Household Budget</h1>
-        <p className="text-muted-foreground">Collaborate on your finances with family or roommates.</p>
+        <h1 className="text-3xl font-headline text-primary">The Inner Circle</h1>
+        <p className="text-muted-foreground">Manage your shared wealth and collaborate on financial goals as a team.</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
