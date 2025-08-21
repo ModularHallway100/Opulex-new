@@ -34,11 +34,14 @@ const Hero = () => {
              <div className="absolute bottom-0 right-1/4 w-1 h-full bg-primary/20 transform skew-x-12"></div>
           </div>
       </div>
-      <div className="relative z-20">
+      <div className="relative z-20 max-w-4xl mx-auto">
         <h1 className="text-5xl md:text-6xl font-headline font-bold text-primary mb-4">
-            Your journey to financial freedom begins here.
+            Opulex – The Game of Wealth Mastery
         </h1>
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <p className="text-xl md:text-2xl text-muted-foreground mb-8">
+            Command your money. Conquer your goals. Live in luxury.
+        </p>
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
             {heroFeatures.map((feature) => (
                 <Card key={feature.title} className="bg-background/40 border-primary/20 text-center">
                     <CardHeader className="items-center">
