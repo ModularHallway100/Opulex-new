@@ -36,7 +36,7 @@ const MemberManager = () => {
               <TableRow key={member.id}>
                 <TableCell>
                   <div className="flex items-center gap-3">
-                    <Avatar>
+                    <Avatar className="border-2 border-primary/50">
                       <AvatarImage src={member.avatar} alt={member.name} data-ai-hint="portrait" />
                       <AvatarFallback>{member.name.charAt(0)}</AvatarFallback>
                     </Avatar>

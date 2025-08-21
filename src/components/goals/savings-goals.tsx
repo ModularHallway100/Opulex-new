@@ -80,7 +80,7 @@ const SavingsGoals = () => {
                                 </CardHeader>
                                 <CardContent className="flex-grow flex flex-col justify-end">
                                     <div className="space-y-2">
-                                        <Progress value={progress} className={getProgressBarColor(progress)} />
+                                        <Progress value={progress} className="h-3" indicatorClassName={getProgressBarColor(progress)} />
                                         <div className="text-xs flex justify-between">
                                             <span className="text-muted-foreground">Progress</span>
                                             <span className="font-semibold">${goal.currentAmount.toLocaleString()} / ${goal.targetAmount.toLocaleString()}</span>

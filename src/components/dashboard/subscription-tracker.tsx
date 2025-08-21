@@ -64,7 +64,7 @@ const SubscriptionTracker = () => {
                         </div>
                         <div>
                         <Label className="text-xs text-muted-foreground">Usage Meter</Label>
-                        <Progress value={sub.usage} className={cn("h-2 mt-1", getUsageColor(sub.usage))} />
+                        <Progress value={sub.usage} className="h-2 mt-1" indicatorClassName={getUsageColor(sub.usage)} />
                         </div>
                     </CardContent>
                 </Card>

@@ -98,8 +98,8 @@ export function DataTable<TData, TValue>({
                   key={row.id}
                   data-state={row.getIsSelected() && 'selected'}
                   className={cn(
-                    "hover:bg-muted/50",
-                    "even:bg-secondary/20",
+                    "transition-colors",
+                    "even:bg-secondary/20 hover:bg-muted/50",
                     "data-[state=selected]:bg-primary/20"
                   )}
                 >

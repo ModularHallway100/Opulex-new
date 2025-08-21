@@ -45,7 +45,7 @@ const Features = () => {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
         {features.map((feature) => (
-          <Card key={feature.title} className="bg-background/40 border-primary/20 text-center">
+          <Card key={feature.title} className="bg-background/40 border-primary/20 text-center hover:shadow-primary/20 hover:shadow-lg transition-shadow">
             <CardHeader className="items-center">
                 {feature.icon}
                 <CardTitle className="font-headline text-xl mt-4">{feature.title}</CardTitle>

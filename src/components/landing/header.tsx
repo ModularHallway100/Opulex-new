@@ -8,7 +8,7 @@ const Header = () => {
       <Logo />
       <nav className="flex items-center gap-4">
         <Link href="/signin" passHref>
-          <Button variant="ghost">Log In</Button>
+          <Button variant="outline">Log In</Button>
         </Link>
         <Link href="/signup" passHref>
           <Button>Enter the Vault</Button>

@@ -15,7 +15,7 @@ export default function BudgetPage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-headline text-primary">Plan Your Money</h1>
+        <h1 className="text-3xl font-headline text-primary">The Treasury Room</h1>
         <p className="text-muted-foreground">Set up your budget for the month using your preferred method.</p>
       </div>
 
