@@ -1,3 +1,4 @@
+
 "use client";
 
 import * as React from 'react';
@@ -29,24 +30,23 @@ const getAlert = (category: Category) => {
     if (remaining < 0) {
         return {
             type: 'overspent',
-            message: `You've overspent by $${Math.abs(remaining).toFixed(2)}.`
-        }
+            message: `You've overspent by $${Math.abs(remaining).toFixed(2)}.`,
+        };
     }
     if (remaining < category.allocated * 0.15 && remaining > 0) {
         return {
             type: 'low',
-            message: `Only $${remaining.toFixed(2)} left. Consider replenishing.`
-        }
+            message: `Only $${remaining.toFixed(2)} left. Consider replenishing.`,
+        };
     }
-     if (category.allocated < category.aiSuggestion) {
+    if (category.allocated < category.aiSuggestion) {
         return {
             type: 'info',
-            message: `AI suggests allocating $${category.aiSuggestion} to this envelope.`
-        }
+            message: `AI suggests allocating $${category.aiSuggestion} to this envelope for optimal results.`,
+        };
     }
     return null;
 }
-
 
 const VirtualEnvelopes = ({ categories: initialCategories }: VirtualEnvelopesProps) => {
   return (
@@ -61,7 +61,7 @@ const VirtualEnvelopes = ({ categories: initialCategories }: VirtualEnvelopesPro
                 const remaining = category.allocated - category.spent;
                 const alert = getAlert(category);
                 return (
-                    <Card key={category.id} className={getEnvelopeColor(category.allocated, category.spent)}>
+                    <Card key={category.id} className={`${getEnvelopeColor(category.allocated, category.spent)} shadow-lg`}>
                         <CardHeader>
                             <div className="flex items-center justify-between">
                                 <CardTitle className="flex items-center gap-2 text-lg font-bold">
@@ -85,7 +85,7 @@ const VirtualEnvelopes = ({ categories: initialCategories }: VirtualEnvelopesPro
                                     alert.type === 'overspent' ? 'text-destructive-foreground bg-destructive/40' : 
                                     alert.type === 'low' ? 'text-yellow-400 bg-yellow-900/30' : 'text-blue-400 bg-blue-900/30'
                                 }`}>
-                                    {alert.type === 'overspent' || alert.type === 'low' ? <AlertTriangle className="h-4 w-4 mt-0.5" /> : <Info className="h-4 w-4 mt-0.5" />}
+                                    {alert.type === 'overspent' || alert.type === 'low' ? <AlertTriangle className="h-4 w-4 mt-0.5 flex-shrink-0" /> : <Info className="h-4 w-4 mt-0.5 flex-shrink-0" />}
                                     <span>{alert.message}</span>
                                 </div>
                             )}

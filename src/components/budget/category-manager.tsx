@@ -30,9 +30,9 @@ interface CategoryManagerProps {
 const getStatusColor = (allocated: number, suggestion: number) => {
     const diff = Math.abs(allocated - suggestion);
     const tolerance = suggestion * 0.1;
-    if (diff <= tolerance) return 'bg-primary'; // Gold
-    if (diff <= tolerance * 2) return 'bg-yellow-500'; // Amber
-    return 'bg-destructive'; // Crimson
+    if (diff <= tolerance) return 'bg-primary'; // Gold - On Track
+    if (diff <= tolerance * 2) return 'bg-yellow-500'; // Amber - Caution
+    return 'bg-destructive'; // Ruby - Critical
 }
 
 const CategoryManager = ({ categories: initialCategories, totalIncome }: CategoryManagerProps) => {
@@ -66,22 +66,25 @@ const CategoryManager = ({ categories: initialCategories, totalIncome }: Categor
           return (
             <div key={category.id} className="space-y-3">
               <div className="flex justify-between items-center">
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-3">
                       <TooltipProvider>
                           <Tooltip>
                               <TooltipTrigger asChild>
-                                <div className={`w-4 h-4 rounded-full ${statusColor} flex items-center justify-center`}>
-                                    {statusColor === 'bg-primary' && <Gem className="h-2 w-2 text-primary-foreground" />}
+                                <div className="cursor-pointer flex items-center gap-3">
+                                    <div className={`w-3 h-3 rounded-full ${statusColor} flex items-center justify-center`}>
+                                        {statusColor === 'bg-primary' && <Gem className="h-1.5 w-1.5 text-primary-foreground" />}
+                                    </div>
+                                    <span className="font-semibold">{category.name}</span>
                                 </div>
                               </TooltipTrigger>
-                              <TooltipContent className="bg-background border-primary/30">
-                                  <p>AI suggests budgeting ${category.aiSuggestion}.</p>
-                                  {category.allocated < category.aiSuggestion && <p>You have allocated ${category.aiSuggestion - category.allocated} less.</p>}
-                                  {category.allocated > category.aiSuggestion && <p>You have allocated ${category.allocated - category.aiSuggestion} more.</p>}
+                              <TooltipContent className="bg-background border-primary/30 shadow-2xl">
+                                  <p className="font-bold text-base">AI Note Card</p>
+                                  <p className="text-sm">AI suggests budgeting ${category.aiSuggestion}.</p>
+                                  {category.allocated < category.aiSuggestion && <p className="text-sm">You have allocated ${category.aiSuggestion - category.allocated} less.</p>}
+                                  {category.allocated > category.aiSuggestion && <p className="text-sm">You have allocated ${category.allocated - category.aiSuggestion} more.</p>}
                               </TooltipContent>
                           </Tooltip>
                       </TooltipProvider>
-                      <span className="font-semibold">{category.name}</span>
                   </div>
                   <div className="flex items-center gap-2">
                       <Button variant="ghost" size="icon" className="h-7 w-7">

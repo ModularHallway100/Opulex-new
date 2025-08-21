@@ -26,8 +26,8 @@ const IncomeAllocator = ({ totalIncome, totalAllocated, remainingToAllocate }: I
                 <HandCoins className="h-8 w-8 text-primary" />
             </div>
             <div>
-              <CardTitle className="text-xl font-headline">Total Monthly Income</CardTitle>
-              <CardDescription>Allocate every dollar to a category.</CardDescription>
+              <CardTitle className="text-xl font-headline">Total Monthly Treasury</CardTitle>
+              <CardDescription>Allocate every dollar from your treasury.</CardDescription>
             </div>
           </div>
           <div className="text-right">
