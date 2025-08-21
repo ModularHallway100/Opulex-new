@@ -2,73 +2,71 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Line, LineChart, ResponsiveContainer, Tooltip } from 'recharts'
+import { Gem, AlertTriangle, Sparkles } from "lucide-react"
 import Image from "next/image"
+import { Button } from "../ui/button"
 
 const subscriptions = [
-  { name: "Netflix", logo: "https://placehold.co/32x32.png", frequency: "Monthly", next_renewal: "June 15", cost: 15, underused: true },
-  { name: "Spotify", logo: "https://placehold.co/32x32.png", frequency: "Monthly", next_renewal: "June 20", cost: 10, underused: false },
-  { name: "Adobe CC", logo: "https://placehold.co/32x32.png", frequency: "Yearly", next_renewal: "Aug 01", cost: 599, underused: false },
-]
-
-const historyData = [
-    { month: 'Jan', spend: 25 },
-    { month: 'Feb', spend: 25 },
-    { month: 'Mar', spend: 25 },
-    { month: 'Apr', spend: 35 },
-    { month: 'May', spend: 25 },
-    { month: 'Jun', spend: 25 },
+  { name: "Netflix Premium", logo: "https://placehold.co/40x40.png", next_renewal: "June 15", cost: 22.99, usage: 25, underused: true },
+  { name: "Spotify Duo", logo: "https://placehold.co/40x40.png", next_renewal: "June 20", cost: 14.99, usage: 90, underused: false },
+  { name: "Adobe CC All Apps", logo: "https://placehold.co/40x40.png", next_renewal: "Aug 01", cost: 59.99, usage: 75, underused: false },
 ]
 
 const SubscriptionTracker = () => {
   return (
-    <Card className="bg-secondary/50 border-primary/20">
-      <CardHeader>
-        <CardTitle className="text-xl font-headline">Subscriptions</CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-4">
-        {subscriptions.map((sub) => (
-          <div key={sub.name} className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <Image src={sub.logo} alt={`${sub.name} logo`} width={32} height={32} className="rounded-md" data-ai-hint="logo" />
-              <div>
-                <p className="font-semibold">{sub.name}</p>
-                <p className="text-xs text-muted-foreground">Renews: {sub.next_renewal}</p>
-              </div>
-            </div>
-            <p className="font-mono text-sm">${sub.cost}</p>
-             {sub.underused && <Badge variant="destructive" className="text-xs">Underused</Badge>}
-          </div>
-        ))}
-
-        {subscriptions.find(s => s.underused) && (
-            <div className="p-3 bg-red-900/40 border border-destructive/50 rounded-lg text-xs">
-                <p className="font-bold">Consider Cancelling?</p>
-                <p className="text-destructive-foreground/80">You paid $15/month for Netflix but watched only 3 hours in May. Cancelling could save $180/year.</p>
-            </div>
-        )}
+    <div className="space-y-4">
+        <h2 className="text-xl font-headline text-primary">Subscription Concierge</h2>
         
-        <div className="pt-4">
-            <p className="text-sm font-medium mb-2 text-center">Historical Subscription Spend</p>
-             <div className="h-[100px] w-full">
-                <ResponsiveContainer width="100%" height="100%">
-                    <LineChart data={historyData}>
-                        <Tooltip
-                            contentStyle={{ 
-                                backgroundColor: 'hsl(var(--background))', 
-                                borderColor: 'hsl(var(--border))',
-                                fontSize: '12px',
-                                borderRadius: 'var(--radius)',
-                            }}
-                        />
-                        <Line type="monotone" dataKey="spend" stroke="hsl(var(--primary))" strokeWidth={2} dot={false} />
-                    </LineChart>
-                </ResponsiveContainer>
-             </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {subscriptions.map((sub) => (
+                <Card key={sub.name} className="bg-black border-primary/40 text-foreground flex flex-col justify-between shadow-lg shadow-primary/10">
+                    <CardHeader className="flex-row justify-between items-start">
+                        <Image src={sub.logo} alt={`${sub.name} logo`} width={40} height={40} className="rounded-md" data-ai-hint="logo" />
+                        {sub.underused && <Badge variant="destructive" className="bg-amber-500 text-black text-xs gap-1"><AlertTriangle className="h-3 w-3" /> Underused</Badge>}
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                        <div>
+                            <p className="font-headline text-lg text-primary">{sub.name}</p>
+                            <p className="text-xs text-muted-foreground">Next payment: {sub.next_renewal}</p>
+                        </div>
+                        <div className="text-right">
+                             <p className="text-2xl font-mono text-primary">${sub.cost}</p>
+                             <p className="text-xs text-muted-foreground">/ month</p>
+                        </div>
+                        <div className="flex items-center justify-between text-xs text-muted-foreground">
+                            <span>Usage Meter</span>
+                            <div className="flex items-center gap-1 text-primary">
+                                <Gem className="h-3 w-3" />
+                                <span>{sub.usage}%</span>
+                            </div>
+                        </div>
+                    </CardContent>
+                </Card>
+            ))}
         </div>
 
-      </CardContent>
-    </Card>
+        <Card className="bg-secondary/50 border-primary/20">
+            <CardHeader className="flex-row items-center gap-4">
+                <Sparkles className="h-6 w-6 text-primary" />
+                <CardTitle className="text-lg font-headline">AI Concierge</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+                <div className="p-4 bg-background/50 rounded-lg flex justify-between items-center">
+                    <div>
+                        <p className="font-semibold">Downgrade Netflix to Basic</p>
+                        <p className="text-sm text-muted-foreground">Your low usage on Premium suggests the Basic plan ($9.99/mo) is a better fit.</p>
+                    </div>
+                    <div className="text-center">
+                        <p className="font-bold text-lg text-green-500">+156</p>
+                        <p className="text-xs flex items-center gap-1"><Gem className="h-3 w-3" />Freedom Pts/yr</p>
+                    </div>
+                </div>
+                <div className="flex justify-end">
+                    <Button variant="ghost">Dismiss All</Button>
+                </div>
+            </CardContent>
+        </Card>
+    </div>
   )
 }
 
