@@ -1,7 +1,6 @@
 import BudgetSummary from '@/components/dashboard/budget-summary';
 import ExpenseBreakdown from '@/components/dashboard/expense-breakdown';
 import UpcomingBills from '@/components/dashboard/upcoming-bills';
-import SubscriptionTracker from '@/components/dashboard/subscription-tracker';
 import QuickActions from '@/components/dashboard/quick-actions';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -25,7 +24,6 @@ export default function DashboardPage() {
         </div>
         <div className="space-y-8">
           <UpcomingBills />
-          <SubscriptionTracker />
         </div>
       </div>
       
