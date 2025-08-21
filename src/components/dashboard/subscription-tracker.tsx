@@ -21,15 +21,17 @@ const SubscriptionTracker = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {subscriptions.map((sub) => (
                 <Card key={sub.name} className="bg-black border-primary/40 text-foreground flex flex-col justify-between shadow-lg shadow-primary/10">
-                    <CardHeader className="flex-row justify-between items-start">
-                        <div className="flex items-start gap-4">
-                             <Image src={sub.logo} alt={`${sub.name} logo`} width={40} height={40} className="rounded-md flex-shrink-0" data-ai-hint="logo" />
-                             <div className="flex-grow">
-                                <p className="font-headline text-lg text-primary">{sub.name}</p>
-                                <p className="text-xs text-muted-foreground">Next payment: {sub.next_renewal}</p>
+                    <CardHeader>
+                        <div className="flex justify-between items-start gap-2">
+                             <div className="flex items-start gap-4">
+                                <Image src={sub.logo} alt={`${sub.name} logo`} width={40} height={40} className="rounded-md flex-shrink-0" data-ai-hint="logo" />
+                                <div className="flex-grow">
+                                    <p className="font-headline text-lg text-primary">{sub.name}</p>
+                                    <p className="text-xs text-muted-foreground">Next payment: {sub.next_renewal}</p>
+                                </div>
                             </div>
+                            {sub.underused && <Badge variant="destructive" className="bg-amber-500 text-black text-xs gap-1 whitespace-nowrap"><AlertTriangle className="h-3 w-3" /> Underused</Badge>}
                         </div>
-                        {sub.underused && <Badge variant="destructive" className="bg-amber-500 text-black text-xs gap-1 whitespace-nowrap"><AlertTriangle className="h-3 w-3" /> Underused</Badge>}
                     </CardHeader>
                     <CardContent className="flex flex-col justify-end space-y-4">
                         <div className="text-right">
