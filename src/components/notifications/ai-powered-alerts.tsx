@@ -1,6 +1,6 @@
 "use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { AlertTriangle, TrendingUp, ArrowRightLeft } from "lucide-react";
 import { aiAlerts } from "@/lib/notifications-data";
@@ -9,9 +9,9 @@ const AiPoweredAlerts = () => {
   const getIcon = (type: string) => {
     switch (type) {
       case "warning":
-        return <AlertTriangle className="h-6 w-6 text-destructive" />;
+        return <AlertTriangle className="h-6 w-6 text-destructive flex-shrink-0" />;
       case "opportunity":
-        return <TrendingUp className="h-6 w-6 text-green-500" />;
+        return <TrendingUp className="h-6 w-6 text-green-500 flex-shrink-0" />;
       default:
         return null;
     }
@@ -21,10 +21,11 @@ const AiPoweredAlerts = () => {
     <Card className="bg-secondary/50 border-primary/20">
       <CardHeader>
         <CardTitle className="text-xl font-headline">AI-Powered Alerts</CardTitle>
+        <CardDescription>Proactive insights from your financial oracle.</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         {aiAlerts.map((alert) => (
-          <Card key={alert.id} className="bg-background/40">
+          <Card key={alert.id} className="bg-background/40 border-primary/10">
             <CardContent className="p-4 flex items-center justify-between">
               <div className="flex items-start gap-4">
                 {getIcon(alert.type)}
