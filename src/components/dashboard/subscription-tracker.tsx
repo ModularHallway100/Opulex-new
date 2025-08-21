@@ -1,11 +1,13 @@
+
 "use client"
 
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { Badge } from "@/components/ui/badge"
-import { Gem, AlertTriangle, Info } from "lucide-react"
+import { Gem, Info } from "lucide-react"
 import { Progress } from "../ui/progress"
+import { cn } from "@/lib/utils"
 
 const subscriptions = [
   {
@@ -13,64 +15,70 @@ const subscriptions = [
     logo: "https://placehold.co/40x40.png",
     renewalDate: "June 15",
     cost: 22.99,
-    usage: 25,
-    underused: true,
+    usage: 25, // Low usage
   },
   {
     name: "Spotify Duo",
     logo: "https://placehold.co/40x40.png",
     renewalDate: "June 20",
     cost: 14.99,
-    usage: 90,
-    underused: false,
+    usage: 90, // High usage
   },
   {
     name: "Adobe CC All Apps",
     logo: "https://placehold.co/40x40.png",
     renewalDate: "Aug 01",
     cost: 59.99,
-    usage: 75,
-    underused: false,
+    usage: 75, // Medium usage
   },
 ]
+
+const getUsageColor = (usage: number) => {
+    if (usage >= 80) return "bg-green-500"; // Emerald
+    if (usage >= 40) return "bg-blue-500"; // Sapphire
+    return "bg-red-500"; // Ruby
+}
 
 const SubscriptionTracker = () => {
   return (
     <Card className="bg-secondary/50 border-primary/20">
       <CardContent className="pt-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-          {subscriptions.map((sub, index) => (
-            <Card key={index} className="bg-background/40 flex flex-col">
-              <CardHeader className="flex-row items-start gap-4 space-y-0">
-                <Image src={sub.logo} alt={`${sub.name} logo`} width={40} height={40} className="rounded-md" data-ai-hint="logo" />
-                <div className="flex-grow">
-                  <CardTitle className="text-lg font-bold">{sub.name}</CardTitle>
-                  <CardDescription className="text-xs">Next payment: {sub.renewalDate}</CardDescription>
-                </div>
-                {sub.underused && (
-                   <Badge variant="destructive" className="bg-yellow-500/80 text-yellow-foreground text-xs">Underused</Badge>
-                )}
-              </CardHeader>
-              <CardContent className="flex-grow flex flex-col justify-end space-y-4">
-                <div>
-                  <p className="text-2xl font-bold font-mono">${sub.cost}<span className="text-sm text-muted-foreground">/ month</span></p>
-                </div>
-                <div>
-                   <Label className="text-xs text-muted-foreground">Usage Meter</Label>
-                   <Progress value={sub.usage} className="h-2 mt-1" />
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+          {subscriptions.map((sub, index) => {
+            const isUnderused = sub.usage < 40;
+            return (
+                 <Card key={index} className="bg-background/40 flex flex-col shadow-lg border-primary/10 hover:border-primary/30 transition-all">
+                    <CardHeader className="flex-row items-start gap-4 space-y-0">
+                        <Image src={sub.logo} alt={`${sub.name} logo`} width={40} height={40} className="rounded-md" data-ai-hint="logo" />
+                        <div className="flex-grow">
+                        <CardTitle className="text-lg font-bold">{sub.name}</CardTitle>
+                        <CardDescription className="text-xs">Next payment: {sub.renewalDate}</CardDescription>
+                        </div>
+                        {isUnderused && (
+                            <Badge variant="destructive" className="bg-red-500/80 text-white text-xs">Low Usage</Badge>
+                        )}
+                    </CardHeader>
+                    <CardContent className="flex-grow flex flex-col justify-end space-y-4">
+                        <div>
+                        <p className="text-2xl font-bold font-mono">${sub.cost}<span className="text-sm text-muted-foreground">/ month</span></p>
+                        </div>
+                        <div>
+                        <Label className="text-xs text-muted-foreground">Usage Meter</Label>
+                        <Progress value={sub.usage} className={cn("h-2 mt-1", getUsageColor(sub.usage))} />
+                        </div>
+                    </CardContent>
+                </Card>
+            )
+          })}
         </div>
         
         <Card className="bg-blue-900/30 border-blue-500/50">
             <CardHeader className="flex-row items-start gap-4">
                  <Info className="h-6 w-6 text-blue-400 flex-shrink-0 mt-1" />
                  <div>
-                    <CardTitle className="text-lg font-headline">AI Concierge</CardTitle>
+                    <CardTitle className="text-lg font-headline">AI Concierge Note</CardTitle>
                     <CardDescription className="text-blue-200/80">
-                        Downgrade Netflix to Basic. Your low usage on Premium suggests the Basic plan ($9.99/mo) is a better fit.
+                        Your usage on the Netflix Premium plan is low. Downgrading to the Basic plan ($9.99/mo) could be a better fit for your needs.
                     </CardDescription>
                  </div>
             </CardHeader>
