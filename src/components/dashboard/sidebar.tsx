@@ -27,7 +27,7 @@ const Sidebar = () => {
         {navItems.map((item) => (
           <Link href={item.href} key={item.href} passHref>
             <Button variant="ghost" className="w-full justify-start text-base py-6">
-                {item.icon}
+                {React.cloneElement(item.icon, { key: item.href + '-icon' })}
                 <span>{item.label}</span>
             </Button>
           </Link>
