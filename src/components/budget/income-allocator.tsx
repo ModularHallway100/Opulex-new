@@ -55,11 +55,6 @@ const IncomeAllocator = ({ totalIncome, totalAllocated, remainingToAllocate }: I
                             <span>${remainingToAllocate.toLocaleString()} Remaining to Allocate</span>
                         </p>
                      )}
-                      {remainingToAllocate === 0 && (
-                        <p className="font-bold text-lg text-primary">
-                            Every dollar has a job!
-                        </p>
-                     )}
                       {remainingToAllocate < 0 && (
                         <p className="font-bold text-lg text-destructive">
                             You've over-allocated by ${Math.abs(remainingToAllocate).toLocaleString()}!
