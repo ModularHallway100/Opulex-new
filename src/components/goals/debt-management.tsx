@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useState, useMemo } from 'react'
@@ -5,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Button } from "@/components/ui/button"
 import { Switch } from "@/components/ui/switch"
 import { Label } from "@/components/ui/label"
-import { AlertCircle, LineChart } from "lucide-react"
+import { AlertCircle, LineChart, Banknote } from "lucide-react"
 import { debts, totalDebt } from "@/lib/goals-data"
 import {
   Tooltip,
@@ -65,9 +66,14 @@ const DebtManagement = () => {
             {sortedDebts.map(debt => (
                 <Card key={debt.id} className="bg-background/40">
                     <CardHeader className="p-4 flex-row justify-between items-center">
-                        <div>
-                            <CardTitle className="text-lg font-bold">{debt.creditor}</CardTitle>
-                            <CardDescription className="text-xs">{debt.type}</CardDescription>
+                         <div className="flex items-center gap-3">
+                            <div className="p-2 bg-destructive/10 rounded-md">
+                                <Banknote className="text-destructive h-6 w-6" />
+                            </div>
+                            <div>
+                                <CardTitle className="text-lg font-bold">{debt.creditor}</CardTitle>
+                                <CardDescription className="text-xs">{debt.type}</CardDescription>
+                            </div>
                         </div>
                          <p className="text-lg font-mono font-bold">${debt.balance.toLocaleString()}</p>
                     </CardHeader>

@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from 'react';
@@ -55,8 +56,10 @@ const SavingsGoals = () => {
                             <Card key={goal.id} className="bg-background/40 flex flex-col">
                                 <CardHeader>
                                     <div className="flex justify-between items-start">
-                                        <div className="flex items-center gap-2">
-                                            <Target className="text-primary" />
+                                        <div className="flex items-center gap-3">
+                                            <div className="p-2 bg-primary/10 rounded-md">
+                                                <Target className="text-primary h-6 w-6" />
+                                            </div>
                                             <CardTitle className="text-lg font-bold">{goal.name}</CardTitle>
                                         </div>
                                          <TooltipProvider>
@@ -71,7 +74,9 @@ const SavingsGoals = () => {
                                             </Tooltip>
                                         </TooltipProvider>
                                     </div>
-                                    <CardDescription className="text-xs mt-1">Target: ${goal.targetAmount.toLocaleString()} by {goal.targetDate}</CardDescription>
+                                    <CardDescription className="text-xs mt-2 bg-black/30 p-2 rounded-md border border-white/10 text-center font-mono tracking-widest">
+                                        TARGET: ${goal.targetAmount.toLocaleString()} by {goal.targetDate}
+                                    </CardDescription>
                                 </CardHeader>
                                 <CardContent className="flex-grow flex flex-col justify-end">
                                     <div className="space-y-2">
