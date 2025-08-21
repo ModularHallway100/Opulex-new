@@ -1,36 +1,56 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
+import { Gem, Globe, DollarSign } from 'lucide-react';
+
+const heroFeatures = [
+    {
+        icon: <DollarSign className="h-10 w-10 text-primary" />,
+        title: "Wealth Overview",
+        description: "See all your assets and spending at a glance."
+    },
+    {
+        icon: <Gem className="h-10 w-10 text-primary" />,
+        title: "Intelligent Wealth Tracking",
+        description: "AI-driven insights to keep you ahead."
+    },
+    {
+        icon: <Globe className="h-10 w-10 text-primary" />,
+        title: "Global Reach",
+        description: "Multi-currency mastery, anywhere in the world."
+    }
+]
 
 const Hero = () => {
   return (
-    <section className="text-center py-20 px-6">
-      <h1 className="text-5xl md:text-6xl font-headline font-bold text-primary mb-4">
-        Opulex – The Game of Wealth Mastery
-      </h1>
-      <p className="text-xl md:text-2xl text-foreground mb-8">
-        “Command your money. Conquer your goals. Live in luxury.”
-      </p>
-       <p className="max-w-3xl mx-auto text-muted-foreground mb-12">
-        Opulex isn’t just a budgeting tool — it’s your personal wealth command center, dressed in premium design, infused with AI intelligence, and wrapped in a gamified experience that turns financial discipline into an adventure. Every screen is a step along your Golden Path to Financial Freedom.
-      </p>
-      <div className="flex justify-center gap-4">
-        <Link href="/signup" passHref>
-          <Button size="lg">Begin Your Journey</Button>
-        </Link>
+    <section className="relative text-center py-20 px-6 bg-secondary/20 overflow-hidden">
+      <div className="absolute inset-0 bg-black/80 z-10">
+          <div className="absolute inset-0 opacity-10 animate-pulse">
+            {/* Golden threads effect */}
+            <div className="absolute top-0 left-1/4 w-1 h-full bg-primary/20 transform -skew-x-12"></div>
+            <div className="absolute top-0 left-1/2 w-px h-full bg-primary/20 transform skew-x-12"></div>
+            <div className="absolute top-0 left-3/4 w-0.5 h-full bg-primary/20 transform -skew-x-12"></div>
+             <div className="absolute bottom-0 right-1/4 w-1 h-full bg-primary/20 transform skew-x-12"></div>
+          </div>
       </div>
-       <div className="relative mt-16 w-full max-w-5xl mx-auto">
-        <div className="absolute top-0 -left-4 w-72 h-72 bg-primary/20 rounded-full mix-blend-screen filter blur-xl opacity-70 animate-blob"></div>
-        <div className="absolute top-0 -right-4 w-72 h-72 bg-secondary/30 rounded-full mix-blend-screen filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
-        <div className="absolute -bottom-8 left-20 w-72 h-72 bg-primary/10 rounded-full mix-blend-screen filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
-        <Image
-          src="https://placehold.co/1200x600.png"
-          alt="Opulex Dashboard Preview"
-          width={1200}
-          height={600}
-          className="rounded-lg shadow-2xl mx-auto"
-          data-ai-hint="dashboard finance"
-        />
+      <div className="relative z-20">
+        <h1 className="text-5xl md:text-6xl font-headline font-bold text-primary mb-4">
+            Your journey to financial freedom begins here.
+        </h1>
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {heroFeatures.map((feature) => (
+                <Card key={feature.title} className="bg-background/40 border-primary/20 text-center">
+                    <CardHeader className="items-center">
+                        {feature.icon}
+                        <CardTitle className="font-headline text-xl mt-4">{feature.title}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                    <p className="text-muted-foreground">{feature.description}</p>
+                    </CardContent>
+                </Card>
+            ))}
+        </div>
       </div>
     </section>
   );
