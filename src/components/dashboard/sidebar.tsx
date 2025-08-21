@@ -1,3 +1,4 @@
+import React from 'react';
 import Link from 'next/link'
 import { Home, BarChart2, Wallet, Settings, LogOut, PiggyBank, Receipt, Target, Bell, Users, Briefcase } from 'lucide-react'
 import Logo from '@/components/logo'
@@ -27,7 +28,7 @@ const Sidebar = () => {
         {navItems.map((item) => (
           <Link href={item.href} key={item.href} passHref>
             <Button variant="ghost" className="w-full justify-start text-base py-6">
-                {React.cloneElement(item.icon, { key: item.href + '-icon' })}
+                {React.cloneElement(item.icon, { className: "mr-4" })}
                 <span>{item.label}</span>
             </Button>
           </Link>
@@ -36,13 +37,13 @@ const Sidebar = () => {
        <div className="mt-auto">
         <Link href="/dashboard/settings" key="/dashboard/settings" passHref>
             <Button variant="ghost" className="w-full justify-start text-base py-6">
-                <Settings />
+                <Settings className="mr-4" />
                 <span>Settings</span>
             </Button>
         </Link>
          <Link href="/" key="/" passHref>
             <Button variant="ghost" className="w-full justify-start text-base py-6">
-                <LogOut />
+                <LogOut className="mr-4" />
                 <span>Sign Out</span>
             </Button>
          </Link>
