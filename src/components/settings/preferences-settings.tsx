@@ -1,3 +1,6 @@
+"use client";
+
+import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -5,6 +8,18 @@ import { Palette } from "lucide-react";
 import { Switch } from "../ui/switch";
 
 const PreferenceSettings = () => {
+    const [theme, setTheme] = useState('opulex-prime');
+
+    useEffect(() => {
+        const root = document.documentElement;
+        root.classList.remove('theme-midnight-marble', 'theme-solaris-gold', 'theme-ruby-empire');
+        
+        if (theme !== 'opulex-prime') {
+            root.classList.add(`theme-${theme}`);
+        }
+    }, [theme]);
+
+
     return (
         <Card className="bg-secondary/50 border-primary/20">
             <CardHeader>
@@ -45,7 +60,7 @@ const PreferenceSettings = () => {
 
                  <div className="space-y-2">
                     <Label htmlFor="luxury-theme">Luxury Theme Pack</Label>
-                    <Select defaultValue="opulex-prime">
+                    <Select value={theme} onValueChange={setTheme}>
                         <SelectTrigger id="luxury-theme">
                             <SelectValue placeholder="Select theme pack" />
                         </SelectTrigger>

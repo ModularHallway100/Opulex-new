@@ -57,6 +57,39 @@
     --input: 220 70% 18%;
     --ring: 46 65% 52%;
   }
+
+  .theme-midnight-marble {
+    --background: 210 10% 15%; /* Deep Slate */
+    --foreground: 210 10% 85%; /* Light Slate */
+    --primary: 180 50% 60%; /* Teal */
+    --primary-foreground: 210 10% 5%;
+    --secondary: 210 10% 25%; /* Darker Slate */
+    --card: 210 10% 20%;
+    --border: 210 10% 30%;
+    --destructive: 0 70% 60%; /* Brighter Red */
+  }
+
+  .theme-solaris-gold {
+    --background: 20 20% 12%; /* Dark Brown */
+    --foreground: 35 40% 90%; /* Parchment */
+    --primary: 45 100% 60%; /* Bright Gold */
+    --primary-foreground: 20 20% 5%;
+    --secondary: 30 30% 20%; /* Richer Brown */
+    --card: 30 30% 17%;
+    --border: 30 30% 25%;
+    --destructive: 15 80% 60%; /* Fiery Orange */
+  }
+
+  .theme-ruby-empire {
+    --background: 0 5% 10%; /* Almost Black */
+    --foreground: 0 0% 90%; /* Light Gray */
+    --primary: 340 80% 65%; /* Bright Ruby */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 340 10% 25%; /* Muted Red */
+    --card: 340 10% 20%;
+    --border: 340 10% 30%;
+    --destructive: 200 80% 60%; /* Contrasting Cyan */
+  }
 }
 
 @layer base {
