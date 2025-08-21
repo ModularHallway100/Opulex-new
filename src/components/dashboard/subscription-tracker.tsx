@@ -21,16 +21,20 @@ const SubscriptionTracker = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {subscriptions.map((sub) => (
                 <Card key={sub.name} className="bg-black border-primary/40 text-foreground flex flex-col justify-between shadow-lg shadow-primary/10">
-                    <CardHeader>
-                        <div className="flex justify-between items-start gap-2">
-                             <div className="flex items-start gap-4">
-                                <Image src={sub.logo} alt={`${sub.name} logo`} width={40} height={40} className="rounded-md flex-shrink-0" data-ai-hint="logo" />
-                                <div className="flex-grow">
-                                    <p className="font-headline text-lg text-primary">{sub.name}</p>
+                    <CardHeader className="flex-row items-start gap-4">
+                        <Image src={sub.logo} alt={`${sub.name} logo`} width={40} height={40} className="rounded-md flex-shrink-0" data-ai-hint="logo" />
+                        <div className="flex-1">
+                            <div className="flex justify-between items-start">
+                                <div>
+                                    <p className="font-headline text-lg text-primary leading-tight">{sub.name}</p>
                                     <p className="text-xs text-muted-foreground">Next payment: {sub.next_renewal}</p>
                                 </div>
+                                {sub.underused && (
+                                    <Badge variant="destructive" className="bg-amber-500 text-black text-xs gap-1 whitespace-nowrap">
+                                        <AlertTriangle className="h-3 w-3" /> Underused
+                                    </Badge>
+                                )}
                             </div>
-                            {sub.underused && <Badge variant="destructive" className="bg-amber-500 text-black text-xs gap-1 whitespace-nowrap"><AlertTriangle className="h-3 w-3" /> Underused</Badge>}
                         </div>
                     </CardHeader>
                     <CardContent className="flex flex-col justify-end space-y-4">
@@ -61,9 +65,9 @@ const SubscriptionTracker = () => {
                         <p className="font-semibold">Downgrade Netflix to Basic</p>
                         <p className="text-sm text-muted-foreground">Your low usage on Premium suggests the Basic plan ($9.99/mo) is a better fit.</p>
                     </div>
-                    <div className="text-center">
+                    <div className="text-center pl-4">
                         <p className="font-bold text-lg text-green-500">+156</p>
-                        <p className="text-xs flex items-center gap-1"><Gem className="h-3 w-3" />Freedom Pts/yr</p>
+                        <p className="text-xs flex items-center gap-1 whitespace-nowrap"><Gem className="h-3 w-3" />Freedom Pts/yr</p>
                     </div>
                 </div>
                 <div className="flex justify-end">
