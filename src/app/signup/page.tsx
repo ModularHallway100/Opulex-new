@@ -1,37 +1,32 @@
 
 "use client"
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import Logo from '@/components/logo';
 import PasswordStrength from '@/components/password-strength';
 import { Separator } from '@/components/ui/separator';
 import { KeyRound } from 'lucide-react';
+import { useAuth } from '@/hooks/use-auth';
 
 export default function SignUpPage() {
-    const router = useRouter();
+    const { signUpWithEmail, signInWithGoogle, isUnlocking } = useAuth();
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [isUnlocking, setIsUnlocking] = useState(false);
 
     const handleSignUp = (e: React.FormEvent) => {
         e.preventDefault();
-        setIsUnlocking(true);
-        setTimeout(() => {
-            router.push('/dashboard');
-        }, 1200); // match animation duration
+        signUpWithEmail(email, password);
     }
-
+    
     const handleGoogleSignUp = (e: React.MouseEvent) => {
         e.preventDefault();
-        setIsUnlocking(true);
-        setTimeout(() => {
-            router.push('/dashboard');
-        }, 1200); // match animation duration
+        signInWithGoogle();
     }
 
     return (
@@ -53,11 +48,11 @@ export default function SignUpPage() {
                     <CardContent className="space-y-4 p-8">
                          <div className="space-y-2">
                             <Label htmlFor="name">Full Name</Label>
-                            <Input id="name" type="text" placeholder="John Doe" required />
+                            <Input id="name" type="text" placeholder="John Doe" required value={name} onChange={(e) => setName(e.target.value)} />
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="email">Email</Label>
-                            <Input id="email" type="email" placeholder="john.doe@example.com" required />
+                            <Input id="email" type="email" placeholder="john.doe@example.com" required value={email} onChange={(e) => setEmail(e.target.value)} />
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="password">Password</Label>
@@ -72,13 +67,13 @@ export default function SignUpPage() {
                         </div>
                     </CardContent>
                     <CardFooter className="flex-col gap-4 p-8 pt-4">
-                        <Button type="submit" className="w-full" size="lg">Accept Invitation</Button>
+                        <Button type="submit" className="w-full" size="lg" disabled={isUnlocking}>Accept Invitation</Button>
                         <div className="flex items-center w-full gap-4 text-xs text-muted-foreground">
                             <Separator className="flex-1" />
                             OR
                             <Separator className="flex-1" />
                         </div>
-                        <Button variant="outline" className="w-full" onClick={handleGoogleSignUp}>Sign up with Google</Button>
+                        <Button variant="outline" className="w-full" onClick={handleGoogleSignUp} disabled={isUnlocking}>Sign up with Google</Button>
                         <p className="text-xs text-muted-foreground">
                             Already a member?{" "}
                             <Link href="/signin" passHref>

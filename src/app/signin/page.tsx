@@ -1,27 +1,24 @@
 
 "use client"
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import Logo from '@/components/logo';
 import { KeyRound } from 'lucide-react';
+import { useAuth } from '@/hooks/use-auth';
 
 export default function SignInPage() {
-    const router = useRouter();
-    const [isUnlocking, setIsUnlocking] = useState(false);
+    const { signInWithEmail, isUnlocking } = useAuth();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
     const handleSignIn = (e: React.FormEvent) => {
         e.preventDefault();
-        setIsUnlocking(true);
-        // In a real app, you'd have validation and an API call here.
-        setTimeout(() => {
-            router.push('/dashboard');
-        }, 1200); // match animation duration
+        signInWithEmail(email, password);
     }
 
     return (
@@ -43,7 +40,7 @@ export default function SignInPage() {
                     <CardContent className="space-y-4">
                         <div className="space-y-2">
                             <Label htmlFor="email">Email</Label>
-                            <Input id="email" type="email" placeholder="john.doe@example.com" required />
+                            <Input id="email" type="email" placeholder="john.doe@example.com" required value={email} onChange={(e) => setEmail(e.target.value)} />
                         </div>
                         <div className="space-y-2">
                             <div className="flex justify-between items-center">
@@ -52,11 +49,11 @@ export default function SignInPage() {
                                     <Button variant="link" className="p-0 h-auto text-xs">Forgot password?</Button>
                                 </Link>
                             </div>
-                            <Input id="password" type="password" required />
+                            <Input id="password" type="password" required value={password} onChange={(e) => setPassword(e.target.value)} />
                         </div>
                     </CardContent>
                     <CardFooter className="flex-col gap-4">
-                        <Button type="submit" className="w-full">
+                        <Button type="submit" className="w-full" disabled={isUnlocking}>
                             <KeyRound className="mr-2" />
                             Log In
                         </Button>
