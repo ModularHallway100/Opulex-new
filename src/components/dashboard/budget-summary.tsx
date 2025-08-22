@@ -1,3 +1,4 @@
+
 "use client"
 
 import * as React from "react"
@@ -12,20 +13,12 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 
-const budgetData = [
-  { name: "Rent", budgeted: 2000, actual: 2000 },
-  { name: "Groceries", budgeted: 500, actual: 350 },
-  { name: "Utilities", budgeted: 150, actual: 180 },
-  { name: "Dining", budgeted: 200, actual: 175 },
-  { name: "Transport", budgeted: 100, actual: 80 },
-  { name: "Shopping", budgeted: 300, actual: 450 },
-  { name: "Entertainment", budgeted: 150, actual: 120 },
-]
+const budgetData: any[] = []; // Empty data initially
 
 const totalBudget = budgetData.reduce((sum, item) => sum + item.budgeted, 0)
 const totalActual = budgetData.reduce((sum, item) => sum + item.actual, 0)
 const remainingBudget = totalBudget - totalActual
-const percentSpent = (totalActual / totalBudget) * 100
+const percentSpent = totalBudget > 0 ? (totalActual / totalBudget) * 100 : 0
 
 const getProgressBarColor = (percent: number) => {
     if (percent > 90) return "bg-destructive";
@@ -34,6 +27,21 @@ const getProgressBarColor = (percent: number) => {
 };
 
 const BudgetSummary = () => {
+  if (budgetData.length === 0) {
+    return (
+       <Card className="bg-background/40 border-primary/20">
+         <CardHeader>
+            <CardTitle className="text-xl font-headline">Budget Summary</CardTitle>
+            <CardDescription>Your current month's financial overview.</CardDescription>
+         </CardHeader>
+        <CardContent className="text-center py-10 text-muted-foreground">
+            <p>No budget data available for this month.</p>
+            <p className="text-sm">Create a budget to see your summary here.</p>
+        </CardContent>
+      </Card>
+    )
+  }
+
   return (
     <Card className="bg-background/40 border-primary/20">
       <CardHeader>

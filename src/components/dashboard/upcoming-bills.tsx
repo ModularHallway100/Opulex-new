@@ -1,14 +1,25 @@
+
+"use client"
+import * as React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Bell } from "lucide-react"
 
-const bills = [
-  { name: "Electric", due: "June 10, 2025", amount: 85, reminder: true, dueIn: 3 },
-  { name: "Water", due: "June 15, 2025", amount: 45, reminder: false },
-  { name: "Internet", due: "June 22, 2025", amount: 60, reminder: false },
-  { name: "Car Payment", due: "July 01, 2025", amount: 450, reminder: false },
-]
+const bills: any[] = [];
 
 const UpcomingBills = () => {
+  if (bills.length === 0) {
+    return (
+       <Card className="bg-background/40 border-primary/20">
+         <CardHeader>
+            <CardTitle className="text-xl font-headline">Upcoming Bills</CardTitle>
+         </CardHeader>
+        <CardContent className="flex items-center justify-center h-full text-muted-foreground">
+            <p>No upcoming bills found.</p>
+        </CardContent>
+      </Card>
+    )
+  }
+
   return (
     <Card className="bg-background/40 border-primary/20">
       <CardHeader>

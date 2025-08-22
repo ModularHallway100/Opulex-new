@@ -1,3 +1,4 @@
+
 "use client"
 
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
@@ -10,14 +11,7 @@ import {
   TooltipContent,
 } from "@/components/ui/tooltip"
 
-const expenseData = [
-  { name: "Rent", amount: 1200, budget: 1200, change: 0, lastMonth: 1200 },
-  { name: "Groceries", amount: 350, budget: 1000, change: 15, lastMonth: 300 },
-  { name: "Transportation", amount: 80, budget: 500, change: -10, lastMonth: 90 },
-  { name: "Entertainment", amount: 120, budget: 300, change: 20, lastMonth: 100 },
-  { name: "Utilities", amount: 180, budget: 200, change: 5, lastMonth: 170 },
-  { name: "Shopping", amount: 450, budget: 400, change: 25, lastMonth: 360 },
-]
+const expenseData: any[] = [];
 
 const getProgressBarColor = (percent: number) => {
     if (percent > 90) return "bg-destructive";
@@ -25,8 +19,21 @@ const getProgressBarColor = (percent: number) => {
     return "bg-green-500";
 };
 
-
 const ExpenseBreakdown = () => {
+    if (expenseData.length === 0) {
+    return (
+       <Card className="bg-background/40 border-primary/20 h-full">
+         <CardHeader>
+            <CardTitle className="text-xl font-headline">Expense Breakdown</CardTitle>
+            <CardDescription>Your spending by category for the current month.</CardDescription>
+         </CardHeader>
+        <CardContent className="flex items-center justify-center h-full text-muted-foreground">
+            <p>No expenses recorded this month.</p>
+        </CardContent>
+      </Card>
+    )
+  }
+
   return (
     <Card className="bg-background/40 border-primary/20 h-full">
       <CardHeader>

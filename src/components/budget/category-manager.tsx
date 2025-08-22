@@ -18,7 +18,7 @@ interface Category {
   id: string;
   name: string;
   allocated: number;
-  aiSuggestion: number;
+  aiSuggestion?: number;
   isEssential?: boolean;
 }
 
@@ -27,7 +27,8 @@ interface CategoryManagerProps {
   totalIncome: number;
 }
 
-const getStatusColor = (allocated: number, suggestion: number) => {
+const getStatusColor = (allocated: number, suggestion?: number) => {
+    if (!suggestion) return 'bg-primary';
     const diff = Math.abs(allocated - suggestion);
     const tolerance = suggestion * 0.1;
     if (diff <= tolerance) return 'bg-primary'; // Gold - On Track
@@ -47,6 +48,20 @@ const CategoryManager = ({ categories: initialCategories, totalIncome }: Categor
         setCategories(prev => prev.map(cat => cat.id === id ? { ...cat, allocated: value } : cat));
     };
 
+  if (categories.length === 0) {
+    return (
+      <Card className="bg-secondary/50 border-primary/20 mt-4">
+        <CardContent className="pt-6 text-center text-muted-foreground">
+          <p className="mb-4">No spending categories found. Create one to start building your budget.</p>
+           <Button variant="outline">
+                <PlusCircle className="mr-2" />
+                Create New Category
+            </Button>
+        </CardContent>
+      </Card>
+    )
+  }
+
   return (
     <Card className="bg-secondary/50 border-primary/20">
       <CardHeader>
@@ -57,10 +72,12 @@ const CategoryManager = ({ categories: initialCategories, totalIncome }: Categor
         {categories.map((category) => {
           const statusColor = getStatusColor(category.allocated, category.aiSuggestion);
           let alertMessage = null;
-          if (statusColor === 'bg-destructive') {
-            alertMessage = `Critical: Allocation is significantly different from the AI suggestion of $${category.aiSuggestion}.`;
-          } else if (statusColor === 'bg-yellow-500') {
-            alertMessage = `Your allocation is off from the AI suggestion of $${category.aiSuggestion}.`;
+          if (category.aiSuggestion) {
+              if (statusColor === 'bg-destructive') {
+                alertMessage = `Critical: Allocation is significantly different from the AI suggestion of $${category.aiSuggestion}.`;
+              } else if (statusColor === 'bg-yellow-500') {
+                alertMessage = `Your allocation is off from the AI suggestion of $${category.aiSuggestion}.`;
+              }
           }
           
           return (
@@ -77,12 +94,14 @@ const CategoryManager = ({ categories: initialCategories, totalIncome }: Categor
                                     <span className="font-semibold">{category.name}</span>
                                 </div>
                               </TooltipTrigger>
-                              <TooltipContent className="bg-background border-primary/30 shadow-2xl">
-                                  <p className="font-bold text-base">AI Note Card</p>
-                                  <p className="text-sm">AI suggests budgeting ${category.aiSuggestion}.</p>
-                                  {category.allocated < category.aiSuggestion && <p className="text-sm">You have allocated ${category.aiSuggestion - category.allocated} less.</p>}
-                                  {category.allocated > category.aiSuggestion && <p className="text-sm">You have allocated ${category.allocated - category.aiSuggestion} more.</p>}
-                              </TooltipContent>
+                              {category.aiSuggestion && (
+                                <TooltipContent className="bg-background border-primary/30 shadow-2xl">
+                                    <p className="font-bold text-base">AI Note Card</p>
+                                    <p className="text-sm">AI suggests budgeting ${category.aiSuggestion}.</p>
+                                    {category.allocated < category.aiSuggestion && <p className="text-sm">You have allocated ${category.aiSuggestion - category.allocated} less.</p>}
+                                    {category.allocated > category.aiSuggestion && <p className="text-sm">You have allocated ${category.allocated - category.aiSuggestion} more.</p>}
+                                </TooltipContent>
+                              )}
                           </Tooltip>
                       </TooltipProvider>
                   </div>

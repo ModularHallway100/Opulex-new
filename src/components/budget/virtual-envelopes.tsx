@@ -10,8 +10,8 @@ interface Category {
   id: string;
   name: string;
   allocated: number;
-  spent: number;
-  aiSuggestion: number;
+  spent?: number;
+  aiSuggestion?: number;
 }
 
 interface VirtualEnvelopesProps {
@@ -26,7 +26,8 @@ const getEnvelopeColor = (allocated: number, spent: number) => {
 }
 
 const getAlert = (category: Category) => {
-    const remaining = category.allocated - category.spent;
+    const spent = category.spent || 0;
+    const remaining = category.allocated - spent;
     if (remaining < 0) {
         return {
             type: 'overspent',
@@ -39,7 +40,7 @@ const getAlert = (category: Category) => {
             message: `Only $${remaining.toFixed(2)} left. Consider replenishing.`,
         };
     }
-    if (category.allocated < category.aiSuggestion) {
+    if (category.aiSuggestion && category.allocated < category.aiSuggestion) {
         return {
             type: 'info',
             message: `AI suggests allocating $${category.aiSuggestion} to this envelope for optimal results.`,
@@ -49,6 +50,17 @@ const getAlert = (category: Category) => {
 }
 
 const VirtualEnvelopes = ({ categories: initialCategories }: VirtualEnvelopesProps) => {
+
+   if (initialCategories.length === 0) {
+    return (
+      <Card className="bg-secondary/50 border-primary/20 mt-4">
+        <CardContent className="pt-6 text-center text-muted-foreground">
+          <p>No envelopes created. Assign funds to categories to create virtual envelopes.</p>
+        </CardContent>
+      </Card>
+    )
+  }
+
   return (
     <Card className="bg-secondary/50 border-primary/20">
       <CardHeader>
@@ -58,10 +70,11 @@ const VirtualEnvelopes = ({ categories: initialCategories }: VirtualEnvelopesPro
       <CardContent>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {initialCategories.map(category => {
-                const remaining = category.allocated - category.spent;
+                const spent = category.spent || 0;
+                const remaining = category.allocated - spent;
                 const alert = getAlert(category);
                 return (
-                    <Card key={category.id} className={`${getEnvelopeColor(category.allocated, category.spent)} shadow-lg`}>
+                    <Card key={category.id} className={`${getEnvelopeColor(category.allocated, spent)} shadow-lg`}>
                         <CardHeader>
                             <div className="flex items-center justify-between">
                                 <CardTitle className="flex items-center gap-2 text-lg font-bold">

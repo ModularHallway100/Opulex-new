@@ -1,16 +1,45 @@
 
+"use client"
+import * as React from 'react';
 import IncomeAllocator from '@/components/budget/income-allocator';
 import CategoryManager from '@/components/budget/category-manager';
 import FinancialHealth from '@/components/budget/financial-health';
 import { Button } from '@/components/ui/button';
-import { budgetData } from '@/lib/budget-data';
+import { budgetData as initialData } from '@/lib/budget-data';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import VirtualEnvelopes from '@/components/budget/virtual-envelopes';
+import { Card, CardContent } from '@/components/ui/card';
+import Link from 'next/link';
 
 export default function BudgetPage() {
-  const totalIncome = budgetData.income.sources.reduce((sum, source) => sum + source.amount, 0);
-  const totalAllocated = budgetData.categories.reduce((sum, category) => sum + category.allocated, 0);
+  const [budgetData, setBudgetData] = React.useState(initialData);
+
+  const totalIncome = budgetData.income.sources.reduce((sum, source: any) => sum + source.amount, 0);
+  const totalAllocated = budgetData.categories.reduce((sum, category: any) => sum + category.allocated, 0);
   const remainingToAllocate = totalIncome - totalAllocated;
+
+  if (budgetData.categories.length === 0) {
+    return (
+       <div className="space-y-8">
+        <div>
+            <h1 className="text-3xl font-headline text-primary">The Treasury Room</h1>
+            <p className="text-muted-foreground">Set up your budget for the month using your preferred method.</p>
+        </div>
+        <Card className="bg-secondary/50 border-primary/20 text-center py-12">
+            <CardContent>
+                <p className="text-lg font-semibold mb-2">Your Treasury is Empty</p>
+                <p className="text-muted-foreground mb-6">Start by linking a financial account or manually adding your income sources.</p>
+                <div className="flex justify-center gap-4">
+                    <Button asChild>
+                        <Link href="/dashboard/accounts">Link Account</Link>
+                    </Button>
+                    <Button variant="outline">Add Income Manually</Button>
+                </div>
+            </CardContent>
+        </Card>
+      </div>
+    )
+  }
 
   return (
     <div className="space-y-8">

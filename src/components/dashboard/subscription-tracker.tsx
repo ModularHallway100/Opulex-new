@@ -1,37 +1,16 @@
 
 "use client"
 
+import * as React from "react"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { Badge } from "@/components/ui/badge"
-import { Gem, Info } from "lucide-react"
+import { Gem, Info, PlusCircle } from "lucide-react"
 import { Progress } from "../ui/progress"
 import { cn } from "@/lib/utils"
 
-const subscriptions = [
-  {
-    name: "Netflix Premium",
-    logo: "https://placehold.co/40x40.png",
-    renewalDate: "June 15",
-    cost: 22.99,
-    usage: 25, // Low usage
-  },
-  {
-    name: "Spotify Duo",
-    logo: "https://placehold.co/40x40.png",
-    renewalDate: "June 20",
-    cost: 14.99,
-    usage: 90, // High usage
-  },
-  {
-    name: "Adobe CC All Apps",
-    logo: "https://placehold.co/40x40.png",
-    renewalDate: "Aug 01",
-    cost: 59.99,
-    usage: 75, // Medium usage
-  },
-]
+const subscriptions: any[] = [];
 
 const getUsageColor = (usage: number) => {
     if (usage >= 80) return "bg-green-500"; // Emerald
@@ -40,6 +19,23 @@ const getUsageColor = (usage: number) => {
 }
 
 const SubscriptionTracker = () => {
+   const hasLowUsageSub = subscriptions.some(sub => sub.usage < 40);
+
+  if (subscriptions.length === 0) {
+    return (
+        <Card className="bg-secondary/50 border-primary/20">
+            <CardContent className="pt-6 text-center text-muted-foreground py-12">
+                 <p className="text-lg font-semibold mb-2">No Subscriptions Tracked</p>
+                 <p className="mb-6">Add your subscriptions to get insights on your recurring spending.</p>
+                 <Button variant="outline">
+                    <PlusCircle className="mr-2" />
+                    Add Subscription
+                </Button>
+            </CardContent>
+        </Card>
+    )
+  }
+
   return (
     <Card className="bg-secondary/50 border-primary/20">
       <CardContent className="pt-6">
@@ -72,25 +68,27 @@ const SubscriptionTracker = () => {
           })}
         </div>
         
-        <Card className="bg-blue-900/30 border-blue-500/50">
-            <CardHeader className="flex-row items-start gap-4">
-                 <Info className="h-6 w-6 text-blue-400 flex-shrink-0 mt-1" />
-                 <div>
-                    <CardTitle className="text-lg font-headline">AI Concierge Note</CardTitle>
-                    <CardDescription className="text-blue-200/80">
-                        Your usage on the Netflix Premium plan is low. Downgrading to the Basic plan ($9.99/mo) could be a better fit for your needs.
-                    </CardDescription>
-                 </div>
-            </CardHeader>
-            <CardFooter className="flex justify-between items-center">
-                <div className="flex items-center gap-2 text-primary">
-                    <Gem className="h-5 w-5" />
-                    <span className="font-bold">+156</span>
-                    <span className="text-xs">Freedom Pts/yr</span>
-                </div>
-                <Button variant="ghost" size="sm">Dismiss</Button>
-            </CardFooter>
-        </Card>
+        {hasLowUsageSub && (
+            <Card className="bg-blue-900/30 border-blue-500/50">
+                <CardHeader className="flex-row items-start gap-4">
+                    <Info className="h-6 w-6 text-blue-400 flex-shrink-0 mt-1" />
+                    <div>
+                        <CardTitle className="text-lg font-headline">AI Concierge Note</CardTitle>
+                        <CardDescription className="text-blue-200/80">
+                            We've noticed low usage on some of your subscriptions. Downgrading or canceling could save you money.
+                        </CardDescription>
+                    </div>
+                </CardHeader>
+                <CardFooter className="flex justify-between items-center">
+                    <div className="flex items-center gap-2 text-primary">
+                        <Gem className="h-5 w-5" />
+                        <span className="font-bold">+156</span>
+                        <span className="text-xs">Freedom Pts/yr</span>
+                    </div>
+                    <Button variant="ghost" size="sm">Dismiss</Button>
+                </CardFooter>
+            </Card>
+        )}
 
       </CardContent>
     </Card>
