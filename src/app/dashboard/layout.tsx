@@ -1,6 +1,6 @@
 
 'use client';
-import React, { useEffect } from 'react';
+import React from 'react';
 import Sidebar from '@/components/dashboard/sidebar';
 import Header from '@/components/dashboard/header';
 import ChatWidget from '@/components/chatbot/chat-widget';
@@ -17,13 +17,7 @@ export default function DashboardLayout({
   const { user, loading } = useAuthContext();
   const router = useRouter();
 
-  useEffect(() => {
-    if (!loading && !user) {
-      router.push('/signin');
-    }
-  }, [user, loading, router]);
-
-  if (loading || !user) {
+  if (loading) {
     return (
        <div className="flex items-center justify-center min-h-screen bg-background">
           <div className="gate-unlock-overlay">
@@ -32,6 +26,12 @@ export default function DashboardLayout({
        </div>
     );
   }
+
+  if (!user) {
+    router.push('/signin');
+    return null;
+  }
+
 
   return (
     <div className="flex h-screen bg-background">
