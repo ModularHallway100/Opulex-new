@@ -11,14 +11,14 @@ import { cn } from '@/lib/utils';
 
 const navItems = [
   { href: '/dashboard', icon: <Home />, label: 'Dashboard' },
-  { href: '/dashboard/budget', icon: <PiggyBank />, label: 'Budget' },
+  { href: '/dashboard/budget', icon: <Wallet />, label: 'Budget' },
   { href: '/dashboard/transactions', icon: <Receipt />, label: 'Transactions' },
   { href: '/dashboard/subscriptions', icon: <Receipt />, label: 'Subscriptions' },
   { href: '/dashboard/goals', icon: <Target />, label: 'Goals' },
   { href: '/dashboard/reports', icon: <BarChart2 />, label: 'Reports' },
   { href: '/dashboard/portfolio', icon: <Briefcase />, label: 'Portfolio' },
-  { href: '/dashboard/notifications', icon: <Bell />, label: 'Notifications' },
   { href: '/dashboard/accounts', icon: <Wallet />, label: 'Accounts' },
+  { href: '/dashboard/notifications', icon: <Bell />, label: 'Notifications' },
   { href: '/dashboard/family', icon: <Users />, label: 'Family' },
 ]
 
