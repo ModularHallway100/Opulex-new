@@ -1,6 +1,6 @@
 
 'use client';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Sidebar from '@/components/dashboard/sidebar';
 import Header from '@/components/dashboard/header';
 import ChatWidget from '@/components/chatbot/chat-widget';
@@ -17,7 +17,16 @@ export default function DashboardLayout({
   const { user, loading } = useAuthContext();
   const router = useRouter();
 
-  if (loading) {
+  useEffect(() => {
+    // If loading is finished and there's no user, redirect to signin.
+    if (!loading && !user) {
+      router.push('/signin');
+    }
+  }, [loading, user, router]);
+
+  if (loading || !user) {
+    // While loading or if there's no user, show a loading screen or nothing.
+    // The useEffect above will handle the redirect.
     return (
        <div className="flex items-center justify-center min-h-screen bg-background">
           <div className="gate-unlock-overlay">
@@ -27,12 +36,7 @@ export default function DashboardLayout({
     );
   }
 
-  if (!user) {
-    router.push('/signin');
-    return null;
-  }
-
-
+  // If the user is logged in, render the dashboard.
   return (
     <div className="flex h-screen bg-background">
       <Sidebar />
