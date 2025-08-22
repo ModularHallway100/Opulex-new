@@ -1,7 +1,9 @@
 
 'use server';
 
-import { getCreditCoaching as getCreditCoachingFlow, type CreditCoachInput, type CreditCoachOutput } from "@/ai/flows/credit-coach";
+import { getCreditCoaching as getCreditCoachingFlow } from "@/ai/flows/credit-coach";
+import type { CreditCoachInput, CreditCoachOutput } from "@/ai/schemas/credit-coach-schema";
+
 
 // This service connects the frontend to the Genkit AI flow.
 export const getCreditCoaching = async (input: CreditCoachInput): Promise<CreditCoachOutput> => {
