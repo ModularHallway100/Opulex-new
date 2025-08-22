@@ -27,7 +27,7 @@ const Header = () => {
                 <span className="font-semibold text-sm">Wealth Apprentice</span>
             </div>
             <div className="flex items-center gap-2 text-primary">
-                <Gem className="h-5 w-5" />
+                <Gem className="h-5 w-5 animate-pulse" />
                 <span className="font-semibold text-sm">1,250</span>
             </div>
         </div>

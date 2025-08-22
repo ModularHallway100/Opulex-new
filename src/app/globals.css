@@ -160,6 +160,26 @@
     height: 150px;
     animation: gate-unlock 1.2s ease-in-out forwards;
   }
+  
+  .particle-field {
+    @apply relative w-full h-full;
+  }
+
+  .particle {
+    @apply absolute rounded-full bg-primary/50;
+    animation: drift-up linear infinite;
+  }
+
+  @keyframes drift-up {
+    from {
+      transform: translateY(100vh) scale(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateY(-10vh) scale(1);
+      opacity: 0;
+    }
+  }
 }
 
 @keyframes fade-in {
