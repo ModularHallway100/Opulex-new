@@ -92,12 +92,12 @@
   .theme-ruby-empire {
     --background: 0 5% 10%; /* Almost Black */
     --foreground: 0 0% 90%; /* Light Gray */
-    --primary: 340 80% 65%; /* Bright Ruby */
+    --primary: 0 80% 65%; /* Bright Red */
     --primary-foreground: 0 0% 100%;
-    --secondary: 340 10% 25%; /* Muted Red */
-    --card: 340 10% 20%;
-    --popover: 340 10% 20%;
-    --border: 340 10% 30%;
+    --secondary: 0 10% 25%; /* Muted Red */
+    --card: 0 10% 20%;
+    --popover: 0 10% 20%;
+    --border: 0 10% 30%;
     --destructive: 200 80% 60%; /* Contrasting Cyan */
     --warning: 38 92% 50%;
   }
