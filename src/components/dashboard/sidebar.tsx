@@ -28,7 +28,9 @@ const devNavItems = [
 
 const SidebarLink = ({ href, icon, label }: { href: string, icon: React.ReactElement, label: string }) => {
     const pathname = usePathname();
-    const isActive = pathname === href;
+    // Use startsWith for parent routes to stay active
+    const isActive = pathname.startsWith(href) && (href !== '/dashboard' || pathname === '/dashboard');
+
 
     return (
         <Link href={href} passHref>

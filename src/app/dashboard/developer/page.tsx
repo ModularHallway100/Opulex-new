@@ -1,7 +1,27 @@
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Beaker, Database, Bot, Palmtree } from "lucide-react";
+import Link from "next/link";
 
-import ComponentShowcase from "@/components/developer/component-showcase";
-import FlowTester from "@/components/developer/flow-tester";
-import DataSeeder from "@/components/developer/data-seeder";
+const devFeatures = [
+    {
+        title: "Data Seeder",
+        description: "Populate the app with mock data for testing.",
+        icon: <Database className="h-8 w-8 text-primary" />,
+        href: "/dashboard/developer/data-seeder",
+    },
+    {
+        title: "Flow Tester",
+        description: "Directly test and debug Genkit AI flows.",
+        icon: <Bot className="h-8 w-8 text-primary" />,
+        href: "/dashboard/developer/flow-tester",
+    },
+    {
+        title: "Component Showcase",
+        description: "Visual library of all UI components.",
+        icon: <Palmtree className="h-8 w-8 text-primary" />,
+        href: "/dashboard/developer/component-showcase",
+    },
+]
 
 export default function DeveloperPage() {
   return (
@@ -11,9 +31,21 @@ export default function DeveloperPage() {
         <p className="text-muted-foreground">Tools and utilities for building and testing Opulex.</p>
       </div>
 
-      <DataSeeder />
-      <FlowTester />
-      <ComponentShowcase />
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {devFeatures.map((feature) => (
+            <Link href={feature.href} key={feature.href}>
+                <Card className="bg-secondary/50 border-primary/20 hover:border-primary/40 transition-all h-full">
+                    <CardHeader className="flex-row items-center gap-4">
+                        {feature.icon}
+                        <CardTitle className="font-headline">{feature.title}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <p className="text-muted-foreground">{feature.description}</p>
+                    </CardContent>
+                </Card>
+            </Link>
+        ))}
+      </div>
     </div>
   );
 }
