@@ -33,8 +33,12 @@ export default function SignInPage() {
     
     const handlePhoneSignIn = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        const success = await signInWithPhone(phone);
-        if (success) {
+        const result = await signInWithPhone(phone);
+        if (result.isDev) {
+            // Dev user is handled by the hook's redirect
+            return;
+        }
+        if (result.success) {
             setOtpSent(true);
         }
     }

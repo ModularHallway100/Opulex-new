@@ -40,13 +40,11 @@ export const useAuth = () => {
     }, 1200);
   }
   
-  const handlePhoneAuthSuccess = (user: User, phone: string) => {
+  const handleDevAuthSuccess = () => {
     setIsUnlocking(true);
-    const isDev = phone === DEV_PHONE_NUMBER;
-    setIsDevUser(isDev);
-    const redirectPath = isDev ? '/dashboard/developer' : '/dashboard';
+    setIsDevUser(true);
     setTimeout(() => {
-        router.push(redirectPath);
+        router.push('/dashboard/developer');
     }, 1200);
   }
 
@@ -86,9 +84,6 @@ export const useAuth = () => {
   };
   
   const setupRecaptcha = () => {
-    // Note: The 'recaptcha-container' must be visible.
-    // In this app, it's an empty div, so it's technically invisible.
-    // Firebase allows this for app verification.
     try {
         const recaptcha = new RecaptchaVerifier(auth, 'recaptcha-container', {
             'size': 'invisible',
@@ -102,18 +97,24 @@ export const useAuth = () => {
 
   const signInWithPhone = async (phoneNumber: string) => {
     setError(null);
+
+    if (phoneNumber === DEV_PHONE_NUMBER) {
+        handleDevAuthSuccess();
+        return { isDev: true };
+    }
+
     const verifier = setupRecaptcha();
-    if (!verifier) return false;
+    if (!verifier) return { isDev: false, success: false };
 
     try {
         const result = await signInWithPhoneNumber(auth, phoneNumber, verifier);
         setConfirmationResult(result);
         toast({ title: "Verification code sent!", description: "Check your phone for the OTP." });
-        return true;
+        return { isDev: false, success: true };
     } catch (error) {
         verifier.clear(); // Clear the verifier on error
         handleAuthError(error);
-        return false;
+        return { isDev: false, success: false };
     }
   }
 
@@ -124,8 +125,7 @@ export const useAuth = () => {
     }
     try {
         const result = await confirmationResult.confirm(otp);
-        const originalPhoneNumber = confirmationResult.verificationId ? DEV_PHONE_NUMBER : result.user.phoneNumber!;
-        handlePhoneAuthSuccess(result.user, originalPhoneNumber);
+        handleAuthSuccess(result.user);
     } catch (error) {
         handleAuthError(error);
     }
