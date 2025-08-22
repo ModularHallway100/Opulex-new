@@ -1,4 +1,5 @@
 
+
 "use client";
 
 import { useState } from 'react';
@@ -6,13 +7,25 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { PlusCircle, Target, AlertCircle, TrendingUp } from "lucide-react";
-import { savingsGoals } from "@/lib/goals-data";
+import { savingsGoals as initialGoals } from "@/lib/goals-data";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+  DialogClose,
+} from "@/components/ui/dialog";
+import { Input } from '../ui/input';
+import { Label } from '../ui/label';
+
 
 const getProgressBarColor = (progress: number) => {
   if (progress < 50) return "bg-destructive";
@@ -22,11 +35,11 @@ const getProgressBarColor = (progress: number) => {
 
 
 const SavingsGoals = () => {
-    const [goals, setGoals] = useState(savingsGoals);
-
-    // Modal state would be managed here, e.g., const [isModalOpen, setIsModalOpen] = useState(false);
+    const [goals, setGoals] = useState(initialGoals);
+    const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
 
     return (
+        <>
         <Card className="bg-secondary/50 border-primary/20 mt-4">
             <CardHeader>
                 <div className="flex justify-between items-center">
@@ -34,7 +47,7 @@ const SavingsGoals = () => {
                         <CardTitle className="text-xl font-headline">Savings Goals</CardTitle>
                         <CardDescription>Track and manage your long-term savings objectives.</CardDescription>
                     </div>
-                     <Button>
+                     <Button onClick={() => setIsCreateModalOpen(true)}>
                         <PlusCircle className="mr-2" />
                         New Savings Goal
                     </Button>
@@ -49,6 +62,9 @@ const SavingsGoals = () => {
                     </p>
                 </div>
 
+                {goals.length === 0 ? (
+                     <p className="text-center text-muted-foreground py-10">No savings goals yet. Create one to get started!</p>
+                ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {goals.map(goal => {
                         const progress = (goal.currentAmount / goal.targetAmount) * 100;
@@ -91,11 +107,45 @@ const SavingsGoals = () => {
                         )
                     })}
                 </div>
+                )}
                  <div className="flex justify-end pt-4">
-                    <Button variant="outline">Rebalance Goals</Button>
+                    <Button variant="outline" disabled={goals.length === 0}>Rebalance Goals</Button>
                 </div>
             </CardContent>
         </Card>
+        <Dialog open={isCreateModalOpen} onOpenChange={setIsCreateModalOpen}>
+            <DialogContent className="sm:max-w-[425px] bg-secondary border-primary/20">
+                <DialogHeader>
+                    <DialogTitle className="font-headline text-primary">New Savings Goal</DialogTitle>
+                    <DialogDescription>
+                    Define your next financial objective.
+                    </DialogDescription>
+                </DialogHeader>
+                <div className="grid gap-4 py-4">
+                    <div className="space-y-2">
+                        <Label htmlFor="goal-name">Goal Name</Label>
+                        <Input id="goal-name" placeholder="e.g., Emergency Fund"/>
+                    </div>
+                     <div className="space-y-2">
+                        <Label htmlFor="goal-target">Target Amount</Label>
+                        <Input id="goal-target" type="number" placeholder="10000" />
+                    </div>
+                     <div className="space-y-2">
+                        <Label htmlFor="goal-date">Target Date</Label>
+                        <Input id="goal-date" type="date" />
+                    </div>
+                </div>
+                <DialogFooter>
+                    <DialogClose asChild>
+                        <Button type="button" variant="secondary">
+                            Cancel
+                        </Button>
+                    </DialogClose>
+                    <Button type="submit" onClick={() => setIsCreateModalOpen(false)}>Create Goal</Button>
+                </DialogFooter>
+            </DialogContent>
+        </Dialog>
+        </>
     )
 }
 

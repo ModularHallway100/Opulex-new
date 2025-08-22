@@ -1,4 +1,5 @@
 
+
 "use client"
 
 import * as React from "react"
@@ -9,6 +10,17 @@ import { Badge } from "@/components/ui/badge"
 import { Gem, Info, PlusCircle } from "lucide-react"
 import { Progress } from "../ui/progress"
 import { cn } from "@/lib/utils"
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+  DialogClose,
+} from "@/components/ui/dialog";
+import { Input } from '../ui/input';
+import { Label as UiLabel } from '../ui/label';
 
 const subscriptions: any[] = [];
 
@@ -20,6 +32,8 @@ const getUsageColor = (usage: number) => {
 
 const SubscriptionTracker = () => {
    const hasLowUsageSub = subscriptions.some(sub => sub.usage < 40);
+   const [isCreateModalOpen, setIsCreateModalOpen] = React.useState(false);
+
 
   if (subscriptions.length === 0) {
     return (
@@ -27,11 +41,43 @@ const SubscriptionTracker = () => {
             <CardContent className="pt-6 text-center text-muted-foreground py-12">
                  <p className="text-lg font-semibold mb-2">No Subscriptions Tracked</p>
                  <p className="mb-6">Add your subscriptions to get insights on your recurring spending.</p>
-                 <Button variant="outline">
+                 <Button variant="outline" onClick={() => setIsCreateModalOpen(true)}>
                     <PlusCircle className="mr-2" />
                     Add Subscription
                 </Button>
             </CardContent>
+            <Dialog open={isCreateModalOpen} onOpenChange={setIsCreateModalOpen}>
+                <DialogContent className="sm:max-w-[425px] bg-secondary border-primary/20">
+                    <DialogHeader>
+                        <DialogTitle className="font-headline text-primary">Add Subscription</DialogTitle>
+                        <DialogDescription>
+                        Track a new recurring subscription.
+                        </DialogDescription>
+                    </DialogHeader>
+                    <div className="grid gap-4 py-4">
+                        <div className="space-y-2">
+                            <UiLabel htmlFor="sub-name">Subscription Name</UiLabel>
+                            <Input id="sub-name" placeholder="e.g., Netflix" />
+                        </div>
+                        <div className="space-y-2">
+                            <UiLabel htmlFor="sub-cost">Monthly Cost</UiLabel>
+                            <Input id="sub-cost" type="number" placeholder="15.99" />
+                        </div>
+                         <div className="space-y-2">
+                            <UiLabel htmlFor="sub-date">Next Renewal Date</UiLabel>
+                            <Input id="sub-date" type="date"/>
+                        </div>
+                    </div>
+                    <DialogFooter>
+                        <DialogClose asChild>
+                            <Button type="button" variant="secondary">
+                                Cancel
+                            </Button>
+                        </DialogClose>
+                        <Button type="submit" onClick={() => setIsCreateModalOpen(false)}>Add</Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
         </Card>
     )
   }

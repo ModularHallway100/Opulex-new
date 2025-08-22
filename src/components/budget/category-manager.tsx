@@ -1,4 +1,5 @@
 
+
 "use client";
 
 import * as React from 'react';
@@ -13,6 +14,16 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+  DialogClose,
+} from "@/components/ui/dialog";
+import { Label } from '../ui/label';
 
 interface Category {
   id: string;
@@ -38,6 +49,7 @@ const getStatusColor = (allocated: number, suggestion?: number) => {
 
 const CategoryManager = ({ categories: initialCategories, totalIncome }: CategoryManagerProps) => {
     const [categories, setCategories] = React.useState(initialCategories);
+    const [isCreateModalOpen, setIsCreateModalOpen] = React.useState(false);
 
     const handleAllocationChange = (id: string, value: number[]) => {
         setCategories(prev => prev.map(cat => cat.id === id ? { ...cat, allocated: value[0] } : cat));
@@ -53,16 +65,41 @@ const CategoryManager = ({ categories: initialCategories, totalIncome }: Categor
       <Card className="bg-secondary/50 border-primary/20 mt-4">
         <CardContent className="pt-6 text-center text-muted-foreground">
           <p className="mb-4">No spending categories found. Create one to start building your budget.</p>
-           <Button variant="outline">
+           <Button variant="outline" onClick={() => setIsCreateModalOpen(true)}>
                 <PlusCircle className="mr-2" />
                 Create New Category
             </Button>
+            <Dialog open={isCreateModalOpen} onOpenChange={setIsCreateModalOpen}>
+              <DialogContent className="sm:max-w-[425px] bg-secondary border-primary/20">
+                <DialogHeader>
+                  <DialogTitle className="font-headline text-primary">Create Category</DialogTitle>
+                  <DialogDescription>
+                    Add a new spending category to your budget.
+                  </DialogDescription>
+                </DialogHeader>
+                <div className="grid gap-4 py-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="category-name">Category Name</Label>
+                    <Input id="category-name" placeholder="e.g., Groceries" />
+                  </div>
+                </div>
+                <DialogFooter>
+                    <DialogClose asChild>
+                        <Button type="button" variant="secondary">
+                            Cancel
+                        </Button>
+                    </DialogClose>
+                    <Button type="submit" onClick={() => setIsCreateModalOpen(false)}>Create</Button>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
         </CardContent>
       </Card>
     )
   }
 
   return (
+    <>
     <Card className="bg-secondary/50 border-primary/20">
       <CardHeader>
         <CardTitle className="text-xl font-headline">Spending Categories</CardTitle>
@@ -145,13 +182,38 @@ const CategoryManager = ({ categories: initialCategories, totalIncome }: Categor
           )
         })}
         <div className="pt-4">
-            <Button variant="outline" className="w-full">
+            <Button variant="outline" className="w-full" onClick={() => setIsCreateModalOpen(true)}>
                 <PlusCircle className="mr-2" />
                 Create New Category
             </Button>
         </div>
       </CardContent>
     </Card>
+      <Dialog open={isCreateModalOpen} onOpenChange={setIsCreateModalOpen}>
+        <DialogContent className="sm:max-w-[425px] bg-secondary border-primary/20">
+          <DialogHeader>
+            <DialogTitle className="font-headline text-primary">Create Category</DialogTitle>
+            <DialogDescription>
+              Add a new spending category to your budget.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="grid gap-4 py-4">
+            <div className="space-y-2">
+              <Label htmlFor="category-name">Category Name</Label>
+              <Input id="category-name" placeholder="e.g., Groceries" />
+            </div>
+          </div>
+          <DialogFooter>
+              <DialogClose asChild>
+                  <Button type="button" variant="secondary">
+                      Cancel
+                  </Button>
+              </DialogClose>
+              <Button type="submit" onClick={() => setIsCreateModalOpen(false)}>Create</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 };
 

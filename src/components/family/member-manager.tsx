@@ -1,6 +1,7 @@
 
-"use client";
 
+"use client";
+import * as React from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -9,6 +10,16 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Trash2 } from "lucide-react";
 import { householdMembers } from "@/lib/family-data";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 const MemberManager = () => {
   return (
@@ -20,7 +31,22 @@ const MemberManager = () => {
       <CardContent>
         <div className="flex space-x-2 mb-6">
           <Input type="email" placeholder="new.member@email.com" />
-          <Button>Invite Member</Button>
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button>Invite Member</Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent className="bg-secondary border-primary/20">
+                <AlertDialogHeader>
+                    <AlertDialogTitle>Invitation Sent!</AlertDialogTitle>
+                    <AlertDialogDescription>
+                        An invitation has been sent to the specified email address.
+                    </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                    <AlertDialogAction>OK</AlertDialogAction>
+                </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
         </div>
         <Table>
           <TableHeader>

@@ -1,11 +1,23 @@
-"use client";
 
+"use client";
+import * as React from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Info } from "lucide-react";
 import { sharedExpenses } from "@/lib/family-data";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+
 
 const ExpenseSplitting = () => {
   return (
@@ -53,7 +65,22 @@ const ExpenseSplitting = () => {
           </TableBody>
         </Table>
         <div className="mt-4 flex justify-end">
-            <Button variant="outline">Settle Up</Button>
+            <AlertDialog>
+                <AlertDialogTrigger asChild>
+                    <Button variant="outline">Settle Up</Button>
+                </AlertDialogTrigger>
+                <AlertDialogContent className="bg-secondary border-primary/20">
+                    <AlertDialogHeader>
+                        <AlertDialogTitle>Settle Up Expenses</AlertDialogTitle>
+                        <AlertDialogDescription>
+                           This feature is not yet implemented. It will be available in a future update.
+                        </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                        <AlertDialogAction>OK</AlertDialogAction>
+                    </AlertDialogFooter>
+                </AlertDialogContent>
+            </AlertDialog>
         </div>
       </CardContent>
     </Card>

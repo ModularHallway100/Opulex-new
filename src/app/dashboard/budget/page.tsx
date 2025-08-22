@@ -10,15 +10,28 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import VirtualEnvelopes from '@/components/budget/virtual-envelopes';
 import { Card, CardContent } from '@/components/ui/card';
 import Link from 'next/link';
+import IncomeEditorModal from '@/components/budget/income-editor';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+
 
 export default function BudgetPage() {
   const [budgetData, setBudgetData] = React.useState(initialData);
+  const [isIncomeModalOpen, setIsIncomeModalOpen] = React.useState(false);
 
   const totalIncome = budgetData.income.sources.reduce((sum, source: any) => sum + source.amount, 0);
   const totalAllocated = budgetData.categories.reduce((sum, category: any) => sum + category.allocated, 0);
   const remainingToAllocate = totalIncome - totalAllocated;
 
-  if (budgetData.categories.length === 0) {
+  if (budgetData.categories.length === 0 && totalIncome === 0) {
     return (
        <div className="space-y-8">
         <div>
@@ -33,10 +46,11 @@ export default function BudgetPage() {
                     <Button asChild>
                         <Link href="/dashboard/accounts">Link Account</Link>
                     </Button>
-                    <Button variant="outline">Add Income Manually</Button>
+                    <Button variant="outline" onClick={() => setIsIncomeModalOpen(true)}>Add Income Manually</Button>
                 </div>
             </CardContent>
         </Card>
+        <IncomeEditorModal isOpen={isIncomeModalOpen} onClose={() => setIsIncomeModalOpen(false)} />
       </div>
     )
   }
@@ -71,10 +85,26 @@ export default function BudgetPage() {
       <FinancialHealth />
 
       <div className="flex justify-end pt-4">
-        <Button size="lg" disabled={remainingToAllocate !== 0}>
-          Save Budget Plan
-        </Button>
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <Button size="lg" disabled={remainingToAllocate !== 0}>
+              Save Budget Plan
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent className="bg-secondary border-primary/20">
+            <AlertDialogHeader>
+              <AlertDialogTitle>Budget Saved!</AlertDialogTitle>
+              <AlertDialogDescription>
+                Your budget plan has been successfully saved.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogAction>OK</AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </div>
     </div>
   );
 }
+

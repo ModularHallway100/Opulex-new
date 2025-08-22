@@ -1,4 +1,5 @@
 
+
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -9,6 +10,16 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { User, Upload } from "lucide-react";
 import PasswordStrength from "../password-strength";
 import { useState } from "react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 const ProfileSettings = () => {
     const [password, setPassword] = useState('');
@@ -28,10 +39,25 @@ const ProfileSettings = () => {
                         <AvatarImage src="https://placehold.co/100x100.png" alt="User" data-ai-hint="portrait" />
                         <AvatarFallback>JD</AvatarFallback>
                     </Avatar>
-                    <Button variant="outline">
-                        <Upload className="mr-2 h-4 w-4" />
-                        Upload Picture
-                    </Button>
+                    <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                            <Button variant="outline">
+                                <Upload className="mr-2 h-4 w-4" />
+                                Upload Picture
+                            </Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent className="bg-secondary border-primary/20">
+                            <AlertDialogHeader>
+                                <AlertDialogTitle>Upload Picture</AlertDialogTitle>
+                                <AlertDialogDescription>
+                                    This functionality is not yet implemented.
+                                </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                                <AlertDialogAction>OK</AlertDialogAction>
+                            </AlertDialogFooter>
+                        </AlertDialogContent>
+                    </AlertDialog>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
@@ -61,7 +87,22 @@ const ProfileSettings = () => {
                     </div>
                  </div>
                 <div className="flex justify-end">
-                    <Button>Save Changes</Button>
+                    <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                            <Button>Save Changes</Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent className="bg-secondary border-primary/20">
+                            <AlertDialogHeader>
+                                <AlertDialogTitle>Changes Saved</AlertDialogTitle>
+                                <AlertDialogDescription>
+                                    Your profile information has been updated.
+                                </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                                <AlertDialogAction>OK</AlertDialogAction>
+                            </AlertDialogFooter>
+                        </AlertDialogContent>
+                    </AlertDialog>
                 </div>
             </CardContent>
         </Card>

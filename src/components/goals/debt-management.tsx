@@ -1,4 +1,5 @@
 
+
 "use client"
 
 import { useState, useMemo } from 'react'
@@ -14,6 +15,16 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 type PayoffStrategy = 'snowball' | 'avalanche';
 
@@ -39,13 +50,19 @@ const DebtManagement = () => {
                 <CardTitle className="text-xl font-headline">Debt Payoff Planner</CardTitle>
                 <CardDescription>Strategize how to tackle your outstanding debts.</CardDescription>
             </div>
-            <div className="text-right">
-                <p className="text-muted-foreground text-sm">Total Debt</p>
-                <p className="text-2xl font-bold text-destructive">${totalDebt.toLocaleString()}</p>
-            </div>
+            {totalDebt > 0 && (
+                <div className="text-right">
+                    <p className="text-muted-foreground text-sm">Total Debt</p>
+                    <p className="text-2xl font-bold text-destructive">${totalDebt.toLocaleString()}</p>
+                </div>
+            )}
         </div>
       </CardHeader>
       <CardContent className="space-y-6">
+        {debts.length === 0 ? (
+            <p className="text-center text-muted-foreground py-10">No debts to manage. Your finances are clear!</p>
+        ) : (
+            <>
         <div className="flex items-center justify-center space-x-4 p-4 bg-background/50 rounded-lg">
           <Label htmlFor="strategy-switch" className={strategy === 'avalanche' ? 'text-primary' : ''}>Avalanche (High Interest)</Label>
           <Switch 
@@ -102,12 +119,29 @@ const DebtManagement = () => {
                             <p className="font-semibold">{debt.dueDate}</p>
                         </div>
                          <div className="flex justify-end items-center">
-                            <Button size="sm">Make a Payment</Button>
+                            <AlertDialog>
+                                <AlertDialogTrigger asChild>
+                                    <Button size="sm">Make a Payment</Button>
+                                </AlertDialogTrigger>
+                                <AlertDialogContent className="bg-secondary border-primary/20">
+                                    <AlertDialogHeader>
+                                        <AlertDialogTitle>Make a Payment</AlertDialogTitle>
+                                        <AlertDialogDescription>
+                                            This functionality is not yet implemented.
+                                        </AlertDialogDescription>
+                                    </AlertDialogHeader>
+                                    <AlertDialogFooter>
+                                        <AlertDialogAction>OK</AlertDialogAction>
+                                    </AlertDialogFooter>
+                                </AlertDialogContent>
+                            </AlertDialog>
                          </div>
                     </CardContent>
                 </Card>
             ))}
         </div>
+        </>
+        )}
       </CardContent>
     </Card>
   )

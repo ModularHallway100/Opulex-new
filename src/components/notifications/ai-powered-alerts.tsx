@@ -1,9 +1,20 @@
+
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { AlertTriangle, TrendingUp, ArrowRightLeft } from "lucide-react";
 import { aiAlerts } from "@/lib/notifications-data";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 const AiPoweredAlerts = () => {
   const getIcon = (type: string) => {
@@ -16,6 +27,10 @@ const AiPoweredAlerts = () => {
         return null;
     }
   };
+
+  if(aiAlerts.length === 0) {
+    return null;
+  }
 
   return (
     <Card className="bg-secondary/50 border-primary/20">
@@ -34,10 +49,25 @@ const AiPoweredAlerts = () => {
                   <p className="text-sm text-muted-foreground">{alert.description}</p>
                 </div>
               </div>
-              <Button size="sm">
-                <ArrowRightLeft className="mr-2 h-4 w-4" />
-                {alert.action}
-              </Button>
+              <AlertDialog>
+                <AlertDialogTrigger asChild>
+                    <Button size="sm">
+                        <ArrowRightLeft className="mr-2 h-4 w-4" />
+                        {alert.action}
+                    </Button>
+                </AlertDialogTrigger>
+                <AlertDialogContent className="bg-secondary border-primary/20">
+                    <AlertDialogHeader>
+                        <AlertDialogTitle>Action Confirmation</AlertDialogTitle>
+                        <AlertDialogDescription>
+                            This functionality is not yet implemented.
+                        </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                        <AlertDialogAction>OK</AlertDialogAction>
+                    </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
             </CardContent>
           </Card>
         ))}
