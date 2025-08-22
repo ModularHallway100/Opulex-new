@@ -21,7 +21,7 @@ import { useToast } from './use-toast';
 let recaptchaVerifier: RecaptchaVerifier | null = null;
 
 const DEV_EMAIL = 'dev@opulex.co';
-const DEV_PHONE = '+10000000000';
+const DEV_PHONE = '050308';
 
 export const useAuth = () => {
   const router = useRouter();

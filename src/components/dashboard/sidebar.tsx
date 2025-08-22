@@ -51,7 +51,7 @@ const SidebarLink = ({ href, icon, label }: { href: string, icon: React.ReactEle
 const Sidebar = () => {
   const { signOut } = useAuth();
   const { user } = useAuthContext();
-  const isDev = user?.email === 'dev@opulex.co' || user?.phoneNumber === '+10000000000';
+  const isDev = user?.email === 'dev@opulex.co' || user?.phoneNumber === '050308';
 
   return (
     <aside className="hidden lg:flex flex-col w-64 h-screen px-4 py-8 bg-secondary border-r border-border/40">
