@@ -2,7 +2,7 @@
 'use client';
 
 import { createContext, useState, useEffect, useContext } from 'react';
-import { onAuthStateChanged, User } from 'firebase/auth';
+import { onAuthStateChanged, type User } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
 import { useRouter } from 'next/navigation';
 
@@ -44,3 +44,4 @@ export const useAuthContext = () => {
     }
     return context;
 }
+

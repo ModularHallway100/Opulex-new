@@ -8,10 +8,10 @@ import {
   signOut as firebaseSignOut,
   GoogleAuthProvider,
   signInWithPopup,
-  User,
+  type User,
   RecaptchaVerifier,
   signInWithPhoneNumber,
-  ConfirmationResult,
+  type ConfirmationResult,
 } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
 import { useRouter } from 'next/navigation';
@@ -142,3 +142,4 @@ isUnlocking,
     error,
   };
 };
+

@@ -18,3 +18,4 @@ import { firebaseConfig } from "@/lib/firebase-config";
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export default app;
+
