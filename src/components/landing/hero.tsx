@@ -1,3 +1,4 @@
+
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
@@ -28,7 +29,7 @@ const Hero = () => {
       <div className="absolute inset-0 bg-background/50 z-0" />
       
       {/* Golden threads effect */}
-      <div className="absolute inset-0 opacity-30 blur-xl z-10">
+      <div className="absolute inset-0 opacity-30 z-10">
         <div className="absolute top-0 left-1/4 w-1 h-full bg-primary/80 transform -skew-x-12 animate-pulse duration-3000"></div>
         <div className="absolute top-0 left-1/2 w-px h-full bg-primary/80 transform skew-x-12 animate-pulse duration-2000"></div>
         <div className="absolute top-0 left-3/4 w-0.5 h-full bg-primary/80 transform -skew-x-12 animate-pulse duration-3000"></div>
