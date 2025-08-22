@@ -1,6 +1,7 @@
 
 import ComponentShowcase from "@/components/developer/component-showcase";
 import FlowTester from "@/components/developer/flow-tester";
+import DataSeeder from "@/components/developer/data-seeder";
 
 export default function DeveloperPage() {
   return (
@@ -10,6 +11,7 @@ export default function DeveloperPage() {
         <p className="text-muted-foreground">Tools and utilities for building and testing Opulex.</p>
       </div>
 
+      <DataSeeder />
       <FlowTester />
       <ComponentShowcase />
     </div>
