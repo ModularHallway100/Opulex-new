@@ -41,7 +41,7 @@ export default function SignInPage() {
 
     const handleVerifyOtp = (e: React.FormEvent) => {
         e.preventDefault();
-        verifyOtp(otp);
+        verifyOtp(otp, phone);
     }
 
     return (
@@ -64,7 +64,7 @@ export default function SignInPage() {
                     <CardContent className="space-y-4">
                         <div className="space-y-2">
                             <Label htmlFor="email">Email</Label>
-                            <Input id="email" type="email" placeholder="john.doe@example.com" value={email} onChange={(e) => setEmail(e.target.value)} />
+                            <Input id="email" type="email" placeholder="john.doe@example.com or dev@opulex.co" value={email} onChange={(e) => setEmail(e.target.value)} />
                         </div>
                         <div className="space-y-2">
                             <div className="flex justify-between items-center">
@@ -94,7 +94,7 @@ export default function SignInPage() {
                              <div className="space-y-2">
                                 <Label htmlFor="phone">Phone Number</Label>
                                 <div className="flex gap-2">
-                                    <Input id="phone" type="tel" placeholder="+1 555-555-5555" value={phone} onChange={(e) => setPhone(e.target.value)} />
+                                    <Input id="phone" type="tel" placeholder="+10000000000 for dev" value={phone} onChange={(e) => setPhone(e.target.value)} />
                                     <Button variant="outline" onClick={handlePhoneSignIn} disabled={isUnlocking || !phone}>
                                         Send Code
                                     </Button>

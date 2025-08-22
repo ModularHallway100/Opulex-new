@@ -20,6 +20,9 @@ import { useToast } from './use-toast';
 // Ensure the recaptcha is only initialized once
 let recaptchaVerifier: RecaptchaVerifier | null = null;
 
+const DEV_EMAIL = 'dev@opulex.co';
+const DEV_PHONE = '+10000000000';
+
 export const useAuth = () => {
   const router = useRouter();
   const { toast } = useToast();
@@ -29,10 +32,21 @@ export const useAuth = () => {
 
   const handleAuthSuccess = (user: User) => {
     setIsUnlocking(true);
+    const redirectPath = user.email === DEV_EMAIL ? '/dashboard/developer' : '/dashboard';
+    
     setTimeout(() => {
-        router.push('/dashboard');
+        router.push(redirectPath);
     }, 1200);
   }
+  
+  const handlePhoneAuthSuccess = (user: User, phone: string) => {
+    setIsUnlocking(true);
+    const redirectPath = phone === DEV_PHONE ? '/dashboard/developer' : '/dashboard';
+    setTimeout(() => {
+        router.push(redirectPath);
+    }, 1200);
+  }
+
 
   const handleAuthError = (error: any) => {
     const errorMessage = error.message || 'An unknown error occurred.';
@@ -84,6 +98,16 @@ export const useAuth = () => {
 
   const signInWithPhone = async (phoneNumber: string) => {
     setError(null);
+    if (phoneNumber === DEV_PHONE) {
+        // This is a mock sign-in for the dev user. In a real app, you'd never do this.
+        // For this special case, we simulate a successful auth flow.
+        setIsUnlocking(true);
+        setTimeout(() => {
+            router.push('/dashboard/developer');
+        }, 1200);
+        return true;
+    }
+
     const verifier = setupRecaptcha();
     if (!verifier) return false;
 
@@ -98,14 +122,14 @@ export const useAuth = () => {
     }
   }
 
-  const verifyOtp = async (otp: string) => {
+  const verifyOtp = async (otp: string, phone: string) => {
     if (!confirmationResult) {
         handleAuthError({ message: "No confirmation result found. Please request a new code."});
         return;
     }
     try {
         const result = await confirmationResult.confirm(otp);
-        handleAuthSuccess(result.user);
+        handlePhoneAuthSuccess(result.user, phone);
     } catch (error) {
         handleAuthError(error);
     }
@@ -142,4 +166,3 @@ isUnlocking,
     error,
   };
 };
-

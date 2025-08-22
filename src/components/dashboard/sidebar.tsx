@@ -4,11 +4,11 @@
 import React from 'react';
 import Link from 'next/link'
 import { usePathname } from 'next/navigation';
-import { Home, BarChart2, Wallet, Settings, LogOut, PiggyBank, Receipt, Target, Bell, Users, Briefcase } from 'lucide-react'
+import { Home, BarChart2, Wallet, Settings, LogOut, PiggyBank, Receipt, Target, Bell, Users, Briefcase, Code } from 'lucide-react'
 import Logo from '@/components/logo'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils';
-import { useAuth } from '@/hooks/use-auth';
+import { useAuth, useAuthContext } from '@/context/auth-context';
 
 const navItems = [
   { href: '/dashboard', icon: <Home />, label: 'Dashboard' },
@@ -21,6 +21,10 @@ const navItems = [
   { href: '/dashboard/accounts', icon: <Wallet />, label: 'Accounts' },
   { href: '/dashboard/notifications', icon: <Bell />, label: 'Notifications' },
   { href: '/dashboard/family', icon: <Users />, label: 'Family' },
+]
+
+const devNavItems = [
+    { href: '/dashboard/developer', icon: <Code />, label: 'Developer Zone' },
 ]
 
 const SidebarLink = ({ href, icon, label }: { href: string, icon: React.ReactElement, label: string }) => {
@@ -45,6 +49,9 @@ const SidebarLink = ({ href, icon, label }: { href: string, icon: React.ReactEle
 
 const Sidebar = () => {
   const { signOut } = useAuth();
+  const { user } = useAuthContext();
+  const isDev = user?.email === 'dev@opulex.co' || user?.phoneNumber === '+10000000000';
+
   return (
     <aside className="hidden lg:flex flex-col w-64 h-screen px-4 py-8 bg-secondary border-r border-border/40">
       <div className="flex items-center justify-center mb-12 h-10">
@@ -56,6 +63,13 @@ const Sidebar = () => {
         {navItems.map((item) => (
           <SidebarLink key={item.href} {...item} />
         ))}
+        {isDev && (
+             <div className="pt-4 mt-4 border-t border-primary/20">
+                {devNavItems.map((item) => (
+                    <SidebarLink key={item.href} {...item} />
+                ))}
+            </div>
+        )}
       </nav>
        <div className="mt-auto">
         <SidebarLink href="/dashboard/settings" icon={<Settings />} label="Settings" />
