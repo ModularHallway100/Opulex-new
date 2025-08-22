@@ -24,9 +24,8 @@ export default function DashboardLayout({
     }
   }, [loading, user, router]);
 
-  if (loading || !user) {
-    // While loading or if there's no user, show a loading screen or nothing.
-    // The useEffect above will handle the redirect.
+  // While loading, show the loading screen.
+  if (loading) {
     return (
        <div className="flex items-center justify-center min-h-screen bg-background">
           <div className="gate-unlock-overlay">
@@ -36,20 +35,26 @@ export default function DashboardLayout({
     );
   }
 
-  // If the user is logged in, render the dashboard.
-  return (
-    <div className="flex h-screen bg-background">
-      <Sidebar />
-      <div className="flex-1 flex flex-col overflow-hidden relative">
-        <ParticleField />
-        <div className="relative z-10 flex-1 flex flex-col overflow-hidden">
-            <Header />
-            <main className="flex-1 overflow-x-hidden overflow-y-auto bg-transparent p-4 sm:p-6 lg:p-8">
-            {children}
-            </main>
-            <ChatWidget />
+  // If loading is finished and there is a user, render the dashboard.
+  if (user) {
+      return (
+        <div className="flex h-screen bg-background">
+          <Sidebar />
+          <div className="flex-1 flex flex-col overflow-hidden relative">
+            <ParticleField />
+            <div className="relative z-10 flex-1 flex flex-col overflow-hidden">
+                <Header />
+                <main className="flex-1 overflow-x-hidden overflow-y-auto bg-transparent p-4 sm:p-6 lg:p-8">
+                {children}
+                </main>
+                <ChatWidget />
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  );
+      );
+  }
+  
+  // If loading is finished and there is no user, useEffect will handle the redirect.
+  // Return null to avoid rendering anything while the redirect happens.
+  return null;
 }
