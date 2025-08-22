@@ -1,40 +1,34 @@
+
 "use client"
 
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Info, TrendingUp, TrendingDown, Bell } from "lucide-react"
+import { Info, TrendingUp, TrendingDown, Bell, Bot } from "lucide-react"
 
-const insights = [
-    {
-        icon: <TrendingDown className="text-red-500" />,
-        title: "Dining Expenses Up 20%",
-        description: "Your dining expenses increased by 20% in May compared to April. Consider reducing take-out visits to stay on budget.",
-    },
-    {
-        icon: <TrendingUp className="text-green-500" />,
-        title: "Savings Boost!",
-        description: "Great job! You saved $100 more than last month. Keep the momentum going!",
-    },
-    {
-        icon: <Info className="text-yellow-500" />,
-        title: "Utility Usage High",
-        description: "Your utilities were 15% higher than the same month last year. An energy audit could help identify savings.",
-    }
-]
-
-const forecasts = [
-    {
-        title: "Budget Alert: Dining",
-        description: "If you continue spending at the current rate, you will exceed your June dining budget by $50.",
-    },
-    {
-        title: "Unallocated Funds",
-        description: "You have $500 in unallocated income. Consider boosting your Emergency Fund to reach your goal faster.",
-    }
-]
+const insights: any[] = []
+const forecasts: any[] = []
 
 
 const AiInsights = () => {
+
+    if (insights.length === 0 && forecasts.length === 0) {
+        return (
+             <Card className="bg-secondary/50 border-primary/20">
+                <CardHeader>
+                    <CardTitle className="text-xl font-headline">AI Insights & Royal Decrees</CardTitle>
+                    <CardDescription>Personalized analysis to help you make smarter financial decisions.</CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <div className="text-center py-10 text-muted-foreground">
+                        <Bot className="h-12 w-12 mx-auto mb-4 text-primary/50" />
+                        <p className="font-semibold">The Oracle is Observing</p>
+                        <p className="text-sm">As you use the app, AI-powered insights and forecasts will appear here.</p>
+                    </div>
+                </CardContent>
+            </Card>
+        )
+    }
+
     return (
         <Card className="bg-secondary/50 border-primary/20">
             <CardHeader>
@@ -42,6 +36,7 @@ const AiInsights = () => {
                 <CardDescription>Personalized analysis to help you make smarter financial decisions.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
+                {insights.length > 0 && (
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     {insights.map((insight, index) => (
                         <Card key={index} className="bg-background/50">
@@ -55,7 +50,9 @@ const AiInsights = () => {
                         </Card>
                     ))}
                 </div>
+                )}
 
+                {forecasts.length > 0 && (
                  <div className="space-y-4">
                      <h3 className="text-lg font-semibold text-center text-primary">Predictive Forecasts</h3>
                     {forecasts.map((forecast, index) => (
@@ -76,6 +73,7 @@ const AiInsights = () => {
                         </Card>
                     ))}
                  </div>
+                 )}
 
             </CardContent>
         </Card>
