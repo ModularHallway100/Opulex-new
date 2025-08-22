@@ -55,13 +55,6 @@ const SavingsGoals = () => {
             </CardHeader>
             <CardContent className="space-y-6">
                 
-                <div className="p-3 bg-blue-900/40 border border-blue-500/50 rounded-lg text-sm flex items-center gap-2">
-                    <TrendingUp className="h-5 w-5 text-blue-400" />
-                    <p>
-                        <span className="font-bold">AI Suggestion:</span> You have an extra $250 in unallocated funds this month. Consider allocating it to your 'Emergency Fund' to reach your goal 3 months sooner.
-                    </p>
-                </div>
-
                 {goals.length === 0 ? (
                      <p className="text-center text-muted-foreground py-10">No savings goals yet. Create one to get started!</p>
                 ) : (
