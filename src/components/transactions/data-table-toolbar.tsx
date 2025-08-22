@@ -56,8 +56,6 @@ export function DataTableToolbar<TData>({
             <Cross2Icon className="ml-2 h-4 w-4" />
           </Button>
         )}
-      </div>
-      <div className="flex items-center gap-2">
         <Button variant="outline" size="sm" className="h-9" onClick={onFilterClick}>
             <SlidersHorizontal className="mr-2 h-4 w-4" />
             Advanced Filters
