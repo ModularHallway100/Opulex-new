@@ -25,17 +25,20 @@ const heroFeatures = [
 const Hero = () => {
   return (
     <section className="relative text-center py-20 px-6 bg-secondary/20 overflow-hidden min-h-screen flex items-center justify-center">
-      <div className="absolute inset-0 bg-black/80 z-10" />
+      <div className="absolute inset-0 bg-background/50 z-0" />
       
       {/* Golden threads effect */}
-      <div className="absolute inset-0 opacity-20 blur-xl z-0">
+      <div className="absolute inset-0 opacity-30 blur-xl z-10">
         <div className="absolute top-0 left-1/4 w-1 h-full bg-primary/80 transform -skew-x-12 animate-pulse duration-3000"></div>
         <div className="absolute top-0 left-1/2 w-px h-full bg-primary/80 transform skew-x-12 animate-pulse duration-2000"></div>
         <div className="absolute top-0 left-3/4 w-0.5 h-full bg-primary/80 transform -skew-x-12 animate-pulse duration-3000"></div>
         <div className="absolute bottom-0 right-1/4 w-1 h-full bg-primary/80 transform skew-x-12 animate-pulse duration-2000"></div>
       </div>
+      
+      <div className="absolute inset-0 bg-black/70 z-20" />
 
-      <div className="relative z-20 max-w-4xl mx-auto">
+
+      <div className="relative z-30 max-w-4xl mx-auto">
         <h1 className="text-5xl md:text-6xl font-headline font-bold text-primary mb-4">
             Opulex – The Game of Wealth Mastery
         </h1>
