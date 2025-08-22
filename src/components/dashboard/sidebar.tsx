@@ -8,7 +8,8 @@ import { Home, BarChart2, Wallet, Settings, LogOut, PiggyBank, Receipt, Target, 
 import Logo from '@/components/logo'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils';
-import { useAuth, useAuthContext } from '@/context/auth-context';
+import { useAuthContext } from '@/context/auth-context';
+import { useAuth } from '@/hooks/use-auth';
 
 const navItems = [
   { href: '/dashboard', icon: <Home />, label: 'Dashboard' },
