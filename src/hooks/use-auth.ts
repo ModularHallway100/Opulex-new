@@ -19,6 +19,8 @@ import { useToast } from './use-toast';
 
 // Ensure the recaptcha is only initialized once
 let recaptchaVerifier: RecaptchaVerifier | null = null;
+const DEV_PHONE_NUMBER = '050308';
+const DEV_EMAIL = 'dev@opulex.co';
 
 export const useAuth = () => {
   const router = useRouter();
@@ -29,16 +31,18 @@ export const useAuth = () => {
 
   const handleAuthSuccess = (user: User) => {
     setIsUnlocking(true);
-    const redirectPath = '/dashboard';
+    const isDev = user.email === DEV_EMAIL;
+    const redirectPath = isDev ? '/dashboard/developer' : '/dashboard';
     
     setTimeout(() => {
         router.push(redirectPath);
     }, 1200);
   }
   
-  const handlePhoneAuthSuccess = (user: User) => {
+  const handlePhoneAuthSuccess = (user: User, phone: string) => {
     setIsUnlocking(true);
-    const redirectPath = '/dashboard';
+    const isDev = phone === DEV_PHONE_NUMBER;
+    const redirectPath = isDev ? '/dashboard/developer' : '/dashboard';
     setTimeout(() => {
         router.push(redirectPath);
     }, 1200);
@@ -109,14 +113,14 @@ export const useAuth = () => {
     }
   }
 
-  const verifyOtp = async (otp: string) => {
+  const verifyOtp = async (otp: string, phone: string) => {
     if (!confirmationResult) {
         handleAuthError({ message: "No confirmation result found. Please request a new code."});
         return;
     }
     try {
         const result = await confirmationResult.confirm(otp);
-        handlePhoneAuthSuccess(result.user);
+        handlePhoneAuthSuccess(result.user, phone);
     } catch (error) {
         handleAuthError(error);
     }

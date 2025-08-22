@@ -51,7 +51,6 @@ const SidebarLink = ({ href, icon, label }: { href: string, icon: React.ReactEle
 const Sidebar = () => {
   const { signOut } = useAuth();
   const { user } = useAuthContext();
-  // Manually check a known developer UID or a custom claim for a real app
   const isDev = user?.email === 'dev@opulex.co';
 
   return (
