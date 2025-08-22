@@ -78,13 +78,15 @@ const PreferenceSettings = () => {
                     </Select>
                 </div>
 
-                <div className="flex items-center justify-between pt-4 border-t border-border/50">
-                    <Label htmlFor="date-format" className="flex-shrink-0 pr-4">Use DD/MM/YYYY format</Label>
-                    <Switch id="date-format" />
-                </div>
-                 <div className="flex items-center justify-between">
-                    <Label htmlFor="number-format" className="flex-shrink-0 pr-4">Use dots for thousands separators</Label>
-                    <Switch id="number-format" />
+                <div className="space-y-4 pt-4 border-t border-border/50 p-4 rounded-lg border border-border/50 bg-background/30">
+                    <div className="flex items-center justify-between">
+                        <Label htmlFor="date-format" className="flex-shrink-0 pr-4">Use DD/MM/YYYY format</Label>
+                        <Switch id="date-format" />
+                    </div>
+                    <div className="flex items-center justify-between">
+                        <Label htmlFor="number-format" className="flex-shrink-0 pr-4">Use dots for thousands separators</Label>
+                        <Switch id="number-format" />
+                    </div>
                 </div>
             </CardContent>
         </Card>
