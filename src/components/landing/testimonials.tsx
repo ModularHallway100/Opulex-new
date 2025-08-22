@@ -11,7 +11,26 @@ import {
 } from '@/components/ui/carousel';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
-const testimonials: any[] = [];
+const testimonials = [
+    {
+        quote: "Opulex has revolutionized how I see my finances. The AI insights are incredibly powerful and have helped me identify savings I never thought possible.",
+        name: "Jonathan Reyes",
+        title: "Serial Entrepreneur",
+        avatar: "https://placehold.co/100x100.png"
+    },
+    {
+        quote: "Finally, a budgeting app that doesn't just track, it teaches. The gamified goals kept me motivated, and I crushed my savings targets ahead of schedule.",
+        name: "Samantha Brooks",
+        title: "Financial Analyst",
+        avatar: "https://placehold.co/100x100.png"
+    },
+    {
+        quote: "Managing shared expenses with my partner used to be a nightmare. Opulex's family features made it simple, transparent, and conflict-free. Highly recommend!",
+        name: "Michael Vance",
+        title: "Creative Director",
+        avatar: "https://placehold.co/100x100.png"
+    }
+];
 
 const Testimonials = () => {
   if (testimonials.length === 0) {
