@@ -31,7 +31,7 @@ export default function SignInPage() {
         signInWithEmail(email, password);
     }
     
-    const handlePhoneSignIn = async (e: React.MouseEvent) => {
+    const handlePhoneSignIn = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         const success = await signInWithPhone(phone);
         if (success) {
@@ -41,7 +41,7 @@ export default function SignInPage() {
 
     const handleVerifyOtp = (e: React.FormEvent) => {
         e.preventDefault();
-        verifyOtp(otp, phone);
+        verifyOtp(otp);
     }
 
     return (

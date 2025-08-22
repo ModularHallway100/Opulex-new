@@ -17,8 +17,6 @@ import { auth } from '@/lib/firebase';
 import { useRouter } from 'next/navigation';
 import { useToast } from './use-toast';
 
-// Ensure the recaptcha is only initialized once
-let recaptchaVerifier: RecaptchaVerifier | null = null;
 const DEV_PHONE_NUMBER = '050308';
 const DEV_EMAIL = 'dev@opulex.co';
 
@@ -28,10 +26,13 @@ export const useAuth = () => {
   const [error, setError] = useState<string | null>(null);
   const [isUnlocking, setIsUnlocking] = useState(false);
   const [confirmationResult, setConfirmationResult] = useState<ConfirmationResult | null>(null);
+  const [isDevUser, setIsDevUser] = useState(false);
+
 
   const handleAuthSuccess = (user: User) => {
     setIsUnlocking(true);
     const isDev = user.email === DEV_EMAIL;
+    setIsDevUser(isDev);
     const redirectPath = isDev ? '/dashboard/developer' : '/dashboard';
     
     setTimeout(() => {
@@ -42,6 +43,7 @@ export const useAuth = () => {
   const handlePhoneAuthSuccess = (user: User, phone: string) => {
     setIsUnlocking(true);
     const isDev = phone === DEV_PHONE_NUMBER;
+    setIsDevUser(isDev);
     const redirectPath = isDev ? '/dashboard/developer' : '/dashboard';
     setTimeout(() => {
         router.push(redirectPath);
@@ -73,7 +75,6 @@ export const useAuth = () => {
   const signInWithEmail = async (email: string, password:  string) => {
     setError(null);
     if (!email || !password) {
-        // Don't show an error if the user is just trying the phone method
         return;
     }
     try {
@@ -85,15 +86,17 @@ export const useAuth = () => {
   };
   
   const setupRecaptcha = () => {
-    if (recaptchaVerifier) return recaptchaVerifier;
+    // Note: The 'recaptcha-container' must be visible.
+    // In this app, it's an empty div, so it's technically invisible.
+    // Firebase allows this for app verification.
     try {
-      recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
-        'size': 'invisible',
-      });
-      return recaptchaVerifier;
+        const recaptcha = new RecaptchaVerifier(auth, 'recaptcha-container', {
+            'size': 'invisible',
+        });
+        return recaptcha;
     } catch (error) {
-      handleAuthError(error);
-      return null;
+       handleAuthError(error);
+       return null;
     }
   }
 
@@ -108,19 +111,21 @@ export const useAuth = () => {
         toast({ title: "Verification code sent!", description: "Check your phone for the OTP." });
         return true;
     } catch (error) {
+        verifier.clear(); // Clear the verifier on error
         handleAuthError(error);
         return false;
     }
   }
 
-  const verifyOtp = async (otp: string, phone: string) => {
+  const verifyOtp = async (otp: string) => {
     if (!confirmationResult) {
         handleAuthError({ message: "No confirmation result found. Please request a new code."});
         return;
     }
     try {
         const result = await confirmationResult.confirm(otp);
-        handlePhoneAuthSuccess(result.user, phone);
+        const originalPhoneNumber = confirmationResult.verificationId ? DEV_PHONE_NUMBER : result.user.phoneNumber!;
+        handlePhoneAuthSuccess(result.user, originalPhoneNumber);
     } catch (error) {
         handleAuthError(error);
     }
@@ -140,6 +145,7 @@ export const useAuth = () => {
   const signOut = async () => {
     try {
       await firebaseSignOut(auth);
+      setIsDevUser(false);
       router.push('/signin');
     } catch (error) {
       handleAuthError(error);
@@ -155,5 +161,6 @@ export const useAuth = () => {
     signOut,
     isUnlocking,
     error,
+    isDevUser,
   };
 };
