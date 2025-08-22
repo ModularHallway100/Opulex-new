@@ -1,9 +1,9 @@
 
 "use client";
 
-import React from 'react';
+import React, { memo } from 'react';
 
-const ParticleField = () => {
+const ParticleField = memo(() => {
     // This component will only render on the client
     const [particles, setParticles] = React.useState<React.JSX.Element[]>([]);
 
@@ -29,6 +29,8 @@ const ParticleField = () => {
             </div>
         </div>
     )
-}
+});
+
+ParticleField.displayName = 'ParticleField';
 
 export default ParticleField;
