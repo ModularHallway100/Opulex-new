@@ -1,15 +1,24 @@
 
+"use client";
+
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Shield, RefreshCw, KeyRound, Smartphone } from "lucide-react";
 import Image from 'next/image';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
-const connectedAccounts = [
-    { name: 'Chase Sapphire', logo: 'https://placehold.co/32x32.png', lastRefreshed: '2 min ago' },
-    { name: 'Bank of America', logo: 'https://placehold.co/32x32.png', lastRefreshed: '1 hour ago' },
-]
+const connectedAccounts: any[] = []
 
 const SecuritySettings = () => {
     return (
@@ -38,22 +47,41 @@ const SecuritySettings = () => {
 
                  <div className="space-y-4 pt-6 border-t border-border/50">
                     <h3 className="text-lg font-semibold">Connected Accounts</h3>
-                    {connectedAccounts.map(account => (
-                        <div key={account.name} className="flex items-center justify-between p-3 bg-background/50 rounded-lg">
-                            <div className="flex items-center gap-4">
-                                <Image src={account.logo} alt={account.name} width={32} height={32} data-ai-hint="logo" />
-                                <div>
-                                    <p className="font-semibold">{account.name}</p>
-                                    <p className="text-xs text-muted-foreground">Last updated: {account.lastRefreshed}</p>
+                    {connectedAccounts.length > 0 ? (
+                        connectedAccounts.map(account => (
+                            <div key={account.name} className="flex items-center justify-between p-3 bg-background/50 rounded-lg">
+                                <div className="flex items-center gap-4">
+                                    <Image src={account.logo} alt={account.name} width={32} height={32} data-ai-hint="logo" />
+                                    <div>
+                                        <p className="font-semibold">{account.name}</p>
+                                        <p className="text-xs text-muted-foreground">Last updated: {account.lastRefreshed}</p>
+                                    </div>
+                                </div>
+                                <div className="flex gap-2">
+                                    <Button variant="ghost" size="sm"><RefreshCw className="mr-2" />Refresh</Button>
+                                    <Button variant="destructive" size="sm">Disconnect</Button>
                                 </div>
                             </div>
-                            <div className="flex gap-2">
-                                <Button variant="ghost" size="sm"><RefreshCw className="mr-2" />Refresh</Button>
-                                <Button variant="destructive" size="sm">Disconnect</Button>
-                            </div>
-                        </div>
-                    ))}
-                    <Button variant="outline" className="w-full">Link New Account</Button>
+                        ))
+                    ) : (
+                        <p className="text-sm text-muted-foreground text-center py-4">No financial accounts have been linked.</p>
+                    )}
+                    <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                            <Button variant="outline" className="w-full">Link New Account</Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent className="bg-secondary border-primary/20">
+                            <AlertDialogHeader>
+                                <AlertDialogTitle>Link New Account</AlertDialogTitle>
+                                <AlertDialogDescription>
+                                This functionality is not yet implemented.
+                                </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                                <AlertDialogAction>OK</AlertDialogAction>
+                            </AlertDialogFooter>
+                        </AlertDialogContent>
+                    </AlertDialog>
                 </div>
             </CardContent>
         </Card>
