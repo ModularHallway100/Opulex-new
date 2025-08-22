@@ -1,3 +1,4 @@
+
 "use client"
 
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
@@ -6,16 +7,11 @@ import { Label } from "@/components/ui/label"
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, Legend, ReferenceLine } from "recharts"
 import { AlertTriangle } from "lucide-react"
 
-const agingData = [
-  { name: "Feb 1", income: 5000, expenses: 0, balance: 5000 },
-  { name: "Feb 8", income: 0, expenses: 1200, balance: 3800 },
-  { name: "Feb 15", income: 0, expenses: 500, balance: 3300 },
-  { name: "Feb 22", income: 0, expenses: 800, balance: 2500 },
-  { name: "Feb 28", income: 0, expenses: 2600, balance: -100 },
-  { name: "Mar 1", income: 5000, expenses: 0, balance: 4900 },
-]
+const agingData: any[] = []
 
 const FinancialHealth = () => {
+  const isAgingAlert = agingData.some(d => d.balance < 0);
+
   return (
     <Card className="bg-secondary/50 border-primary/20">
       <CardHeader>
@@ -32,13 +28,16 @@ const FinancialHealth = () => {
 
         <div>
             <h3 className="text-lg font-semibold mb-2 text-center">Aging Your Money</h3>
-            <div className="p-3 bg-red-900/40 border border-destructive/50 rounded-lg text-sm mb-4 flex items-center gap-2">
-                <AlertTriangle className="h-5 w-5 text-destructive" />
-                <p>
-                    <span className="font-bold">Alert:</span> Your January income was fully spent by Feb 25. Consider building an emergency buffer.
-                </p>
-            </div>
+            {isAgingAlert && (
+              <div className="p-3 bg-red-900/40 border border-destructive/50 rounded-lg text-sm mb-4 flex items-center gap-2">
+                  <AlertTriangle className="h-5 w-5 text-destructive" />
+                  <p>
+                      <span className="font-bold">Alert:</span> Your January income was fully spent by Feb 25. Consider building an emergency buffer.
+                  </p>
+              </div>
+            )}
             <div className="h-[250px] w-full">
+              {agingData.length > 0 ? (
                 <ResponsiveContainer width="100%" height="100%">
                     <LineChart data={agingData}>
                         <XAxis dataKey="name" stroke="hsl(var(--muted-foreground))" fontSize={12} />
@@ -58,6 +57,11 @@ const FinancialHealth = () => {
                          <ReferenceLine y={0} stroke="hsl(var(--border))" strokeDasharray="3 3" />
                     </LineChart>
                 </ResponsiveContainer>
+              ) : (
+                <div className="flex items-center justify-center h-full text-muted-foreground">
+                  <p>Not enough data to show money aging yet.</p>
+                </div>
+              )}
             </div>
         </div>
       </CardContent>

@@ -1,3 +1,4 @@
+
 "use client";
 
 import { Card, CardContent } from '@/components/ui/card';
@@ -10,28 +11,13 @@ import {
 } from '@/components/ui/carousel';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
-const testimonials = [
-  {
-    quote: "Opulex completely changed how I see my money. The AI insights are a game-changer. I feel like I finally have a real strategy.",
-    name: 'Sarah J.',
-    title: 'Freelance Designer',
-    avatar: 'https://placehold.co/100x100.png',
-  },
-  {
-    quote: "The design is incredible. It makes me want to open the app and manage my finances. Best-looking finance app out there, period.",
-    name: 'Michael B.',
-    title: 'Tech Entrepreneur',
-    avatar: 'https://placehold.co/100x100.png',
-  },
-  {
-    quote: "My partner and I use the family budgeting feature daily. It's eliminated so many stressful money conversations. Highly recommended!",
-    name: 'Emily & Tom',
-    title: 'Married Couple',
-    avatar: 'https://placehold.co/100x100.png',
-  },
-];
+const testimonials: any[] = [];
 
 const Testimonials = () => {
+  if (testimonials.length === 0) {
+    return null;
+  }
+  
   return (
     <section className="py-20 px-6">
       <div className="text-center max-w-3xl mx-auto">

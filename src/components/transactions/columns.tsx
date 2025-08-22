@@ -1,3 +1,4 @@
+
 "use client";
 
 import { ColumnDef } from '@tanstack/react-table';
@@ -70,7 +71,7 @@ export const columns: ColumnDef<Transaction>[] = [
     ),
     cell: ({ row }) => {
       const date = new Date(row.getValue('date'));
-      const formattedDate = date.toLocaleDateString('en-US', {
+      const formattedDate = date.toLocaleDateString(undefined, {
         year: 'numeric',
         month: 'long',
         day: 'numeric',

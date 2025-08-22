@@ -8,18 +8,9 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
 export default function DashboardPage() {
-  const isBudgetLow = false; // Replace with real logic
 
   return (
     <div className="space-y-8">
-      {isBudgetLow && (
-        <div className="p-4 bg-red-900/50 border border-destructive rounded-lg text-destructive-foreground">
-          <p>
-            <span className="font-bold">Attention:</span> You’re closing in on your total budget for this month.
-          </p>
-        </div>
-      )}
-
       <BudgetSummary />
       
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">

@@ -10,36 +10,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 
-const achievements = [
-    {
-        id: 'ef-guardian',
-        name: 'Emergency Fund Guardian',
-        description: 'Fully funded your emergency savings goal.',
-        icon: <ShieldCheck className="h-8 w-8 text-green-500" />,
-        unlocked: true,
-    },
-    {
-        id: 'debt-slayer',
-        name: 'Debt Slayer',
-        description: 'Paid off a credit card or loan.',
-        icon: <Axe className="h-8 w-8 text-destructive" />,
-        unlocked: true,
-    },
-     {
-        id: 'investor-edge',
-        name: 'Investor\'s Edge',
-        description: 'Maintained a diversified investment portfolio for 6 months.',
-        icon: <TrendingUp className="h-8 w-8 text-blue-500" />,
-        unlocked: true,
-    },
-    {
-        id: 'wealth-sage',
-        name: 'Wealth Sage',
-        description: 'Reach the highest wealth level.',
-        icon: <Award className="h-8 w-8 text-muted-foreground" />,
-        unlocked: false,
-    }
-]
+const achievements: any[] = []
 
 const Achievements = () => {
     return (
@@ -52,6 +23,7 @@ const Achievements = () => {
                 <CardDescription>Recognizing your milestones in the game of wealth.</CardDescription>
             </CardHeader>
             <CardContent>
+              {achievements.length > 0 ? (
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
                     {achievements.map(ach => (
                         <TooltipProvider key={ach.id}>
@@ -70,6 +42,11 @@ const Achievements = () => {
                         </TooltipProvider>
                     ))}
                 </div>
+              ) : (
+                <div className="text-center text-muted-foreground py-8">
+                  <p>Your achievements will appear here as you reach new milestones.</p>
+                </div>
+              )}
             </CardContent>
         </Card>
     )
