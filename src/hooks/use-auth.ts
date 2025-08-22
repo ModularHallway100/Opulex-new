@@ -21,7 +21,6 @@ import { useToast } from './use-toast';
 let recaptchaVerifier: RecaptchaVerifier | null = null;
 
 const DEV_EMAIL = 'dev@opulex.co';
-const DEV_PHONE = '050308';
 
 export const useAuth = () => {
   const router = useRouter();
@@ -39,9 +38,9 @@ export const useAuth = () => {
     }, 1200);
   }
   
-  const handlePhoneAuthSuccess = (user: User, phone: string) => {
+  const handlePhoneAuthSuccess = (user: User) => {
     setIsUnlocking(true);
-    const redirectPath = phone === DEV_PHONE ? '/dashboard/developer' : '/dashboard';
+    const redirectPath = '/dashboard';
     setTimeout(() => {
         router.push(redirectPath);
     }, 1200);
@@ -98,16 +97,6 @@ export const useAuth = () => {
 
   const signInWithPhone = async (phoneNumber: string) => {
     setError(null);
-    if (phoneNumber === DEV_PHONE) {
-        // This is a mock sign-in for the dev user. In a real app, you'd never do this.
-        // For this special case, we simulate a successful auth flow.
-        setIsUnlocking(true);
-        setTimeout(() => {
-            router.push('/dashboard/developer');
-        }, 1200);
-        return true;
-    }
-
     const verifier = setupRecaptcha();
     if (!verifier) return false;
 
@@ -122,14 +111,14 @@ export const useAuth = () => {
     }
   }
 
-  const verifyOtp = async (otp: string, phone: string) => {
+  const verifyOtp = async (otp: string) => {
     if (!confirmationResult) {
         handleAuthError({ message: "No confirmation result found. Please request a new code."});
         return;
     }
     try {
         const result = await confirmationResult.confirm(otp);
-        handlePhoneAuthSuccess(result.user, phone);
+        handlePhoneAuthSuccess(result.user);
     } catch (error) {
         handleAuthError(error);
     }
@@ -162,7 +151,7 @@ export const useAuth = () => {
     verifyOtp,
     signInWithGoogle,
     signOut,
-isUnlocking,
+    isUnlocking,
     error,
   };
 };
