@@ -8,21 +8,45 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from 'next/link';
 import Logo from '@/components/logo';
-import { KeyRound } from 'lucide-react';
+import { KeyRound, Phone } from 'lucide-react';
 import { useAuth } from '@/hooks/use-auth';
+import { Separator } from '@/components/ui/separator';
 
 export default function SignInPage() {
-    const { signInWithEmail, isUnlocking } = useAuth();
+    const { 
+        signInWithEmail, 
+        signInWithPhone, 
+        verifyOtp, 
+        isUnlocking 
+    } = useAuth();
+    
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [phone, setPhone] = useState('');
+    const [otp, setOtp] = useState('');
+    const [otpSent, setOtpSent] = useState(false);
 
     const handleSignIn = (e: React.FormEvent) => {
         e.preventDefault();
         signInWithEmail(email, password);
     }
+    
+    const handlePhoneSignIn = async (e: React.MouseEvent) => {
+        e.preventDefault();
+        const success = await signInWithPhone(phone);
+        if (success) {
+            setOtpSent(true);
+        }
+    }
+
+    const handleVerifyOtp = (e: React.FormEvent) => {
+        e.preventDefault();
+        verifyOtp(otp);
+    }
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-background">
+            <div id="recaptcha-container"></div>
             {isUnlocking && (
                 <div className="gate-unlock-overlay">
                     <KeyRound className="gate-unlock-key" />
@@ -40,7 +64,7 @@ export default function SignInPage() {
                     <CardContent className="space-y-4">
                         <div className="space-y-2">
                             <Label htmlFor="email">Email</Label>
-                            <Input id="email" type="email" placeholder="john.doe@example.com" required value={email} onChange={(e) => setEmail(e.target.value)} />
+                            <Input id="email" type="email" placeholder="john.doe@example.com" value={email} onChange={(e) => setEmail(e.target.value)} />
                         </div>
                         <div className="space-y-2">
                             <div className="flex justify-between items-center">
@@ -49,22 +73,54 @@ export default function SignInPage() {
                                     <Button variant="link" className="p-0 h-auto text-xs">Forgot password?</Button>
                                 </Link>
                             </div>
-                            <Input id="password" type="password" required value={password} onChange={(e) => setPassword(e.target.value)} />
+                            <Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                         </div>
-                    </CardContent>
-                    <CardFooter className="flex-col gap-4">
                         <Button type="submit" className="w-full" disabled={isUnlocking}>
                             <KeyRound className="mr-2" />
-                            Log In
+                            Log In with Email
                         </Button>
-                        <p className="text-xs text-muted-foreground">
-                            Don't have an account?{" "}
-                            <Link href="/signup" passHref>
-                                <span className="text-primary hover:underline cursor-pointer">Enter the Vault</span>
-                            </Link>
-                        </p>
-                    </CardFooter>
+                    </CardContent>
                 </form>
+
+                <div className="flex items-center w-full gap-4 text-xs text-muted-foreground px-6 pb-4">
+                    <Separator className="flex-1" />
+                    OR
+                    <Separator className="flex-1" />
+                </div>
+                
+                <form onSubmit={handleVerifyOtp}>
+                    <CardContent className="space-y-4">
+                        {!otpSent ? (
+                             <div className="space-y-2">
+                                <Label htmlFor="phone">Phone Number</Label>
+                                <div className="flex gap-2">
+                                    <Input id="phone" type="tel" placeholder="+1 555-555-5555" value={phone} onChange={(e) => setPhone(e.target.value)} />
+                                    <Button variant="outline" onClick={handlePhoneSignIn} disabled={isUnlocking || !phone}>
+                                        Send Code
+                                    </Button>
+                                </div>
+                            </div>
+                        ) : (
+                            <div className="space-y-2">
+                                <Label htmlFor="otp">Verification Code</Label>
+                                <Input id="otp" type="text" placeholder="Enter OTP" required value={otp} onChange={(e) => setOtp(e.target.value)} />
+                                <Button type="submit" className="w-full" disabled={isUnlocking || !otp}>
+                                    <Phone className="mr-2" />
+                                    Sign In with Phone
+                                </Button>
+                            </div>
+                        )}
+                    </CardContent>
+                </form>
+
+                <CardFooter className="flex-col gap-4">
+                    <p className="text-xs text-muted-foreground">
+                        Don't have an account?{" "}
+                        <Link href="/signup" passHref>
+                            <span className="text-primary hover:underline cursor-pointer">Enter the Vault</span>
+                        </Link>
+                    </p>
+                </CardFooter>
             </Card>
         </div>
     );

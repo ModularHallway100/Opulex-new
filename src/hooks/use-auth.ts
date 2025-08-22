@@ -9,16 +9,23 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   User,
+  RecaptchaVerifier,
+  signInWithPhoneNumber,
+  ConfirmationResult,
 } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
 import { useRouter } from 'next/navigation';
 import { useToast } from './use-toast';
+
+// Ensure the recaptcha is only initialized once
+let recaptchaVerifier: RecaptchaVerifier | null = null;
 
 export const useAuth = () => {
   const router = useRouter();
   const { toast } = useToast();
   const [error, setError] = useState<string | null>(null);
   const [isUnlocking, setIsUnlocking] = useState(false);
+  const [confirmationResult, setConfirmationResult] = useState<ConfirmationResult | null>(null);
 
   const handleAuthSuccess = (user: User) => {
     setIsUnlocking(true);
@@ -50,6 +57,10 @@ export const useAuth = () => {
 
   const signInWithEmail = async (email: string, password:  string) => {
     setError(null);
+    if (!email || !password) {
+        // Don't show an error if the user is just trying the phone method
+        return;
+    }
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
        handleAuthSuccess(userCredential.user);
@@ -57,6 +68,48 @@ export const useAuth = () => {
       handleAuthError(error);
     }
   };
+  
+  const setupRecaptcha = () => {
+    if (recaptchaVerifier) return recaptchaVerifier;
+    try {
+      recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
+        'size': 'invisible',
+      });
+      return recaptchaVerifier;
+    } catch (error) {
+      handleAuthError(error);
+      return null;
+    }
+  }
+
+  const signInWithPhone = async (phoneNumber: string) => {
+    setError(null);
+    const verifier = setupRecaptcha();
+    if (!verifier) return false;
+
+    try {
+        const result = await signInWithPhoneNumber(auth, phoneNumber, verifier);
+        setConfirmationResult(result);
+        toast({ title: "Verification code sent!", description: "Check your phone for the OTP." });
+        return true;
+    } catch (error) {
+        handleAuthError(error);
+        return false;
+    }
+  }
+
+  const verifyOtp = async (otp: string) => {
+    if (!confirmationResult) {
+        handleAuthError({ message: "No confirmation result found. Please request a new code."});
+        return;
+    }
+    try {
+        const result = await confirmationResult.confirm(otp);
+        handleAuthSuccess(result.user);
+    } catch (error) {
+        handleAuthError(error);
+    }
+  }
 
   const signInWithGoogle = async () => {
     setError(null);
@@ -81,9 +134,11 @@ export const useAuth = () => {
   return {
     signUpWithEmail,
     signInWithEmail,
+    signInWithPhone,
+    verifyOtp,
     signInWithGoogle,
     signOut,
-    isUnlocking,
+isUnlocking,
     error,
   };
 };
