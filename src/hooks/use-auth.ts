@@ -20,8 +20,6 @@ import { useToast } from './use-toast';
 // Ensure the recaptcha is only initialized once
 let recaptchaVerifier: RecaptchaVerifier | null = null;
 
-const DEV_EMAIL = 'dev@opulex.co';
-
 export const useAuth = () => {
   const router = useRouter();
   const { toast } = useToast();
@@ -31,7 +29,7 @@ export const useAuth = () => {
 
   const handleAuthSuccess = (user: User) => {
     setIsUnlocking(true);
-    const redirectPath = user.email === DEV_EMAIL ? '/dashboard/developer' : '/dashboard';
+    const redirectPath = '/dashboard';
     
     setTimeout(() => {
         router.push(redirectPath);

@@ -64,7 +64,7 @@ export default function SignInPage() {
                     <CardContent className="space-y-4">
                         <div className="space-y-2">
                             <Label htmlFor="email">Email</Label>
-                            <Input id="email" type="email" placeholder="john.doe@example.com or dev@opulex.co" value={email} onChange={(e) => setEmail(e.target.value)} />
+                            <Input id="email" type="email" placeholder="john.doe@example.com" value={email} onChange={(e) => setEmail(e.target.value)} />
                         </div>
                         <div className="space-y-2">
                             <div className="flex justify-between items-center">
