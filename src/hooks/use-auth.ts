@@ -17,38 +17,23 @@ import { auth } from '@/lib/firebase';
 import { useRouter } from 'next/navigation';
 import { useToast } from './use-toast';
 
-const DEV_PHONE_NUMBER = '050308';
-const DEV_EMAIL = 'dev@opulex.co';
-
 export const useAuth = () => {
   const router = useRouter();
   const { toast } = useToast();
   const [error, setError] = useState<string | null>(null);
   const [isUnlocking, setIsUnlocking] = useState(false);
   const [confirmationResult, setConfirmationResult] = useState<ConfirmationResult | null>(null);
-  const [isDevUser, setIsDevUser] = useState(false);
 
 
   const handleAuthSuccess = (user: User) => {
     setIsUnlocking(true);
-    const isDev = user.email === DEV_EMAIL;
-    setIsDevUser(isDev);
-    const redirectPath = isDev ? '/dashboard/developer' : '/dashboard';
+    const redirectPath = '/dashboard';
     
     setTimeout(() => {
         router.push(redirectPath);
     }, 1200);
   }
   
-  const handleDevAuthSuccess = () => {
-    setIsUnlocking(true);
-    setIsDevUser(true);
-    setTimeout(() => {
-        router.push('/dashboard/developer');
-    }, 1200);
-  }
-
-
   const handleAuthError = (error: any) => {
     const errorMessage = error.message || 'An unknown error occurred.';
     setError(errorMessage);
@@ -98,23 +83,18 @@ export const useAuth = () => {
   const signInWithPhone = async (phoneNumber: string) => {
     setError(null);
 
-    if (phoneNumber === DEV_PHONE_NUMBER) {
-        handleDevAuthSuccess();
-        return { isDev: true };
-    }
-
     const verifier = setupRecaptcha();
-    if (!verifier) return { isDev: false, success: false };
+    if (!verifier) return { success: false };
 
     try {
         const result = await signInWithPhoneNumber(auth, phoneNumber, verifier);
         setConfirmationResult(result);
         toast({ title: "Verification code sent!", description: "Check your phone for the OTP." });
-        return { isDev: false, success: true };
+        return { success: true };
     } catch (error) {
         verifier.clear(); // Clear the verifier on error
         handleAuthError(error);
-        return { isDev: false, success: false };
+        return { success: false };
     }
   }
 
@@ -145,7 +125,6 @@ export const useAuth = () => {
   const signOut = async () => {
     try {
       await firebaseSignOut(auth);
-      setIsDevUser(false);
       router.push('/signin');
     } catch (error) {
       handleAuthError(error);
@@ -161,6 +140,5 @@ export const useAuth = () => {
     signOut,
     isUnlocking,
     error,
-    isDevUser,
   };
 };
