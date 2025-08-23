@@ -2,7 +2,9 @@
 'use client';
 
 import { createContext, useState, useEffect, useContext, type ReactNode } from 'react';
-import type { User } from 'firebase/auth';
+import { onAuthStateChanged, type User } from 'firebase/auth';
+import { auth } from '@/lib/firebase';
+
 
 interface AuthContextType {
   user: User | null;
@@ -11,27 +13,10 @@ interface AuthContextType {
 
 export const AuthContext = createContext<AuthContextType>({
   user: null,
-  loading: false, // Set loading to false
+  loading: true, 
 });
 
-// Mock user for development
-const mockUser: User = {
-    uid: 'mock-user-id',
-    email: 'dev@opulex.co',
-    emailVerified: true,
-    displayName: 'Mock User',
-    isAnonymous: false,
-    photoURL: 'https://placehold.co/100x100.png',
-    providerData: [],
-    // You may need to fill in more properties depending on what your app uses
-    // For now, these are the basics.
-    // Hack to satisfy the User type
-} as User;
-
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  // The real auth logic is commented out.
-  // We now provide a mock user directly.
-  /*
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -43,10 +28,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     return () => unsubscribe();
   }, []);
-  */
 
   return (
-    <AuthContext.Provider value={{ user: mockUser, loading: false }}>
+    <AuthContext.Provider value={{ user, loading }}>
       {children}
     </AuthContext.Provider>
   );

@@ -1,6 +1,7 @@
 
 'use client';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import Sidebar from '@/components/dashboard/sidebar';
 import Header from '@/components/dashboard/header';
 import ChatWidget from '@/components/chatbot/chat-widget';
@@ -14,11 +15,14 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   const { user, loading } = useAuthContext();
+  const router = useRouter();
 
-  // With auth disabled, we can simplify this.
-  // We'll just show the dashboard directly.
-  // The loading/user check is no longer strictly necessary but
-  // is kept here for when you want to re-enable auth.
+  useEffect(() => {
+    if (!loading && !user) {
+      router.push('/signin');
+    }
+  }, [user, loading, router]);
+
 
   if (loading) {
     return (
@@ -28,6 +32,10 @@ export default function DashboardLayout({
           </div>
        </div>
     );
+  }
+
+  if (!user) {
+    return null; // Don't render anything while redirecting
   }
 
   return (

@@ -34,11 +34,7 @@ export default function SignInPage() {
     const handlePhoneSignIn = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         const result = await signInWithPhone(phone);
-        if (result.isDev) {
-            // Dev user is handled by the hook's redirect
-            return;
-        }
-        if (result.success) {
+        if (result?.success) {
             setOtpSent(true);
         }
     }
@@ -98,7 +94,7 @@ export default function SignInPage() {
                              <div className="space-y-2">
                                 <Label htmlFor="phone">Phone Number</Label>
                                 <div className="flex gap-2">
-                                    <Input id="phone" type="tel" placeholder="Enter phone" value={phone} onChange={(e) => setPhone(e.target.value)} />
+                                    <Input id="phone" type="tel" placeholder="Enter phone number" value={phone} onChange={(e) => setPhone(e.target.value)} />
                                     <Button variant="outline" onClick={handlePhoneSignIn} disabled={isUnlocking || !phone}>
                                         Send Code
                                     </Button>

@@ -70,10 +70,10 @@ export const useAuth = () => {
   
   const setupRecaptcha = () => {
     try {
-        const recaptcha = new RecaptchaVerifier(auth, 'recaptcha-container', {
+        window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
             'size': 'invisible',
         });
-        return recaptcha;
+        return window.recaptchaVerifier;
     } catch (error) {
        handleAuthError(error);
        return null;
@@ -142,3 +142,9 @@ export const useAuth = () => {
     error,
   };
 };
+
+declare global {
+  interface Window {
+    recaptchaVerifier: RecaptchaVerifier
+  }
+}
