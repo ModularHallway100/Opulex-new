@@ -42,6 +42,7 @@ const CreditScoreGauge = ({ score }: { score: number }) => {
                     </linearGradient>
                 </defs>
                 <path
+                    key="gauge-background"
                     d="M 10 60 A 50 50 0 0 1 110 60"
                     stroke="hsl(var(--muted))"
                     strokeWidth="12"
@@ -50,6 +51,7 @@ const CreditScoreGauge = ({ score }: { score: number }) => {
                 />
                 {score > 0 && (
                   <path
+                      key="gauge-foreground"
                       d="M 10 60 A 50 50 0 0 1 110 60"
                       stroke="url(#gaugeGradient)"
                       strokeWidth="12"
