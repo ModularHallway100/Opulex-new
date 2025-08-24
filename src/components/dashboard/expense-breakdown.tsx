@@ -15,17 +15,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip as RechartsTooltip } from 'recharts';
 import { chartConfig, ChartContainer, ChartTooltipContent } from "@/components/ui/chart";
 
-const expenseData = budgetData.categories
-  .filter(cat => (cat.spent || 0) > 0)
-  .map((cat, index) => ({
-    name: cat.name,
-    amount: cat.spent || 0,
-    budget: cat.allocated,
-    fill: `hsl(var(--chart-${index + 1}))`,
-    change: Math.floor(Math.random() * 41) - 20, // Mock change +/- 20%
-    lastMonth: Math.floor((cat.spent || 0) * (1 + (Math.random() * 0.4 - 0.2))), // Mock last month spending
-  }));
-
 const getProgressBarColor = (percent: number) => {
     if (percent > 90) return "bg-destructive";
     if (percent > 75) return "bg-yellow-500";
@@ -33,31 +22,53 @@ const getProgressBarColor = (percent: number) => {
 };
 
 const ExpenseBreakdown = () => {
+    const expenseData = React.useMemo(() => {
+        return budgetData.categories
+          .filter(cat => (cat.spent || 0) > 0)
+          .map((cat) => ({
+            name: cat.name,
+            amount: cat.spent || 0,
+            budget: cat.allocated,
+            change: Math.floor(Math.random() * 41) - 20, // Mock change +/- 20%
+            lastMonth: Math.floor((cat.spent || 0) * (1 + (Math.random() * 0.4 - 0.2))), // Mock last month spending
+          }));
+    }, []);
+
+    const spendingChartConfig = React.useMemo(() => {
+        const config: ChartConfig = {};
+        expenseData.forEach((item, index) => {
+            config[item.name.toLowerCase()] = {
+              label: item.name,
+              color: `hsl(var(--chart-${index + 1}))`,
+            };
+        });
+        return config;
+    }, [expenseData]);
+
+    const chartData = React.useMemo(() => {
+        return expenseData.map(item => ({
+            ...item,
+            fill: `var(--color-${item.name.toLowerCase()})`
+        }))
+    }, [expenseData])
+
+
     if (expenseData.length === 0) {
-    return (
-       <Card className="bg-background/40 border-primary/20 h-full">
-         <CardHeader>
-            <CardTitle className="text-xl font-headline">Expense Breakdown</CardTitle>
-            <CardDescription>Your spending by category for the current month.</CardDescription>
-         </CardHeader>
-        <CardContent className="flex items-center justify-center h-full text-muted-foreground">
-            <p>No expenses recorded this month.</p>
-        </CardContent>
-      </Card>
-    )
-  }
-
-  const spendingChartConfig = expenseData.reduce((acc, item, index) => {
-    acc[item.name.toLowerCase()] = {
-      label: item.name,
-      color: `hsl(var(--chart-${index + 1}))`,
-    };
-    return acc;
-  }, {} as ChartConfig);
-
+        return (
+           <Card className="bg-card border-primary/20 h-full">
+             <CardHeader>
+                <CardTitle className="text-xl font-headline">Expense Breakdown</CardTitle>
+                <CardDescription>Your spending by category for the current month.</CardDescription>
+             </CardHeader>
+            <CardContent className="flex items-center justify-center h-full text-muted-foreground">
+                <p>No expenses recorded this month.</p>
+            </CardContent>
+          </Card>
+        )
+    }
 
   return (
-    <Card className="bg-background/40 border-primary/20 h-full">
+    <Card className="bg-card border-primary/20 h-full">
       <CardHeader>
         <CardTitle className="text-xl font-headline">Expense Breakdown</CardTitle>
         <CardDescription>Your spending by category for the current month.</CardDescription>
@@ -105,12 +116,12 @@ const ExpenseBreakdown = () => {
                 <ChartContainer config={spendingChartConfig} className="min-h-[200px] w-full">
                     <ResponsiveContainer width="100%" height="100%">
                         <PieChart>
-                             <RechartsTooltip
+                            <RechartsTooltip
                                 cursor={false}
                                 content={<ChartTooltipContent hideLabel nameKey="name" />}
-                                />
+                            />
                             <Pie
-                                data={expenseData}
+                                data={chartData}
                                 dataKey="amount"
                                 nameKey="name"
                                 cx="50%"
@@ -121,8 +132,8 @@ const ExpenseBreakdown = () => {
                                 strokeWidth={5}
                                 stroke="hsl(var(--background))"
                             >
-                                {expenseData.map((entry, index) => (
-                                    <Cell key={`cell-${index}`} fill={entry.fill} />
+                                {chartData.map((entry) => (
+                                    <Cell key={`cell-${entry.name}`} fill={entry.fill} />
                                 ))}
                             </Pie>
                         </PieChart>
@@ -137,3 +148,5 @@ const ExpenseBreakdown = () => {
 }
 
 export default ExpenseBreakdown
+
+    
