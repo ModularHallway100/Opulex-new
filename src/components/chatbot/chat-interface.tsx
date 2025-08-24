@@ -8,7 +8,8 @@ import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Bot, User, Send, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { chatbotFlow } from '@/ai/flows/chatbot';
+import { getChatbotResponse } from '@/lib/chatbot-service';
+
 
 interface ChatInterfaceProps {
   onClose: () => void;
@@ -30,7 +31,7 @@ const ChatInterface = ({ onClose }: ChatInterfaceProps) => {
   const [messages, setMessages] = useState<Message[]>([initialMessage]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const scrollAreaRef = useRef<HTMLDivElement>(null);
+  const scrollViewportRef = useRef<HTMLDivElement>(null);
 
   const handleSend = async () => {
     if (!input.trim()) return;
@@ -41,7 +42,7 @@ const ChatInterface = ({ onClose }: ChatInterfaceProps) => {
     setIsLoading(true);
 
     try {
-        const botResponse = await chatbotFlow(input);
+        const botResponse = await getChatbotResponse(input);
         const botMessage: Message = { id: (Date.now() + 1).toString(), text: botResponse, sender: 'bot' };
         setMessages(prev => [...prev, botMessage]);
     } catch (error) {
@@ -56,9 +57,9 @@ const ChatInterface = ({ onClose }: ChatInterfaceProps) => {
     }
   };
   
-  useEffect(() => {
-    if (scrollAreaRef.current) {
-        scrollAreaRef.current.scrollTop = scrollAreaRef.current.scrollHeight;
+ useEffect(() => {
+    if (scrollViewportRef.current) {
+        scrollViewportRef.current.scrollTop = scrollViewportRef.current.scrollHeight;
     }
   }, [messages, isLoading]);
 
@@ -81,7 +82,7 @@ const ChatInterface = ({ onClose }: ChatInterfaceProps) => {
         </Button>
       </CardHeader>
       <CardContent className="flex-1 p-0 overflow-y-auto">
-        <ScrollArea className="h-full p-4" viewportRef={scrollAreaRef}>
+        <ScrollArea className="h-full p-4" viewportRef={scrollViewportRef}>
           <div className="space-y-4">
             {messages.map((message) => (
               <div
