@@ -5,18 +5,9 @@
 'use server';
 
 import { ai } from '@/ai/genkit';
+import { type ChatContext, ChatContextSchema } from '@/ai/schemas/chat-schema';
 import { z } from 'genkit';
-import { budgetData } from '@/lib/budget-data';
-import { transactions } from '@/lib/transactions-data';
-import { savingsGoals } from '@/lib/goals-data';
 
-export const ChatContextSchema = z.object({
-    prompt: z.string(),
-    budget: z.any().describe("The user's budget data, including income and spending categories."),
-    transactions: z.any().describe("A list of the user's recent transactions."),
-    goals: z.any().describe("The user's savings goals."),
-});
-export type ChatContext = z.infer<typeof ChatContextSchema>;
 
 const chatbotFlow = ai.defineFlow(
   {

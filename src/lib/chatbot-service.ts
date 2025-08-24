@@ -1,7 +1,8 @@
 
 'use server';
 
-import { getChatbotResponse as getChatbotResponseFlow, type ChatContext } from "@/ai/flows/chatbot";
+import { getChatbotResponse as getChatbotResponseFlow } from "@/ai/flows/chatbot";
+import { type ChatContext } from "@/ai/schemas/chat-schema";
 import { budgetData } from "./budget-data";
 import { transactions } from "./transactions-data";
 import { savingsGoals } from "./goals-data";
