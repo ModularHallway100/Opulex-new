@@ -23,7 +23,7 @@ export const chatbotFlow = ai.defineFlow(
       If you don't know the answer, say that you are still learning but can help with topics like budgeting, spending, or savings goals.
       Keep your responses concise and easy to understand.
       `,
-      model: 'googleai/gemini-1.5-flash',
+      model: 'googleai/gemini-2.5-flash-preview',
     });
 
     return llmResponse.text;
