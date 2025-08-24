@@ -5,15 +5,20 @@ import * as React from "react"
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis, Tooltip } from "recharts"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
-import { AlertTriangle, Info } from "lucide-react"
+import { AlertTriangle } from "lucide-react"
 import {
   Tooltip as UiTooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import { budgetData as initialBudgetData } from "@/lib/budget-data"
 
-const budgetData: any[] = []; // Empty data initially
+const budgetData = initialBudgetData.categories.map(cat => ({
+    name: cat.name,
+    budgeted: cat.allocated,
+    actual: cat.spent || 0,
+}));
 
 const totalBudget = budgetData.reduce((sum, item) => sum + item.budgeted, 0)
 const totalActual = budgetData.reduce((sum, item) => sum + item.actual, 0)

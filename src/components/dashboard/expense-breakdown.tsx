@@ -10,8 +10,18 @@ import {
   TooltipTrigger,
   TooltipContent,
 } from "@/components/ui/tooltip"
+import { budgetData } from "@/lib/budget-data"
 
-const expenseData: any[] = [];
+const expenseData = budgetData.categories
+  .filter(cat => (cat.spent || 0) > 0)
+  .map(cat => ({
+    name: cat.name,
+    amount: cat.spent || 0,
+    budget: cat.allocated,
+    change: Math.floor(Math.random() * 41) - 20, // Mock change +/- 20%
+    lastMonth: Math.floor((cat.spent || 0) * (1 + (Math.random() * 0.4 - 0.2))), // Mock last month spending
+  }));
+
 
 const getProgressBarColor = (percent: number) => {
     if (percent > 90) return "bg-destructive";

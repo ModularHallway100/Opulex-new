@@ -3,8 +3,15 @@
 import * as React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Bell } from "lucide-react"
+import { upcomingAlerts } from '@/lib/notifications-data';
 
-const bills: any[] = [];
+const bills = upcomingAlerts.map(alert => ({
+    name: alert.name,
+    due: `Due in ${alert.dueIn} days`,
+    dueIn: alert.dueIn,
+    amount: alert.amount.toFixed(2),
+    reminder: true,
+}))
 
 const UpcomingBills = () => {
   if (bills.length === 0) {
