@@ -40,16 +40,25 @@ const ChatInterface = ({ onClose }: ChatInterfaceProps) => {
     setInput('');
     setIsLoading(true);
 
-    const botResponse = await getChatbotResponse(input);
-    
-    const botMessage: Message = { id: (Date.now() + 1).toString(), text: botResponse, sender: 'bot' };
-    setMessages(prev => [...prev, botMessage]);
-    setIsLoading(false);
+    try {
+        const botResponse = await getChatbotResponse(input);
+        const botMessage: Message = { id: (Date.now() + 1).toString(), text: botResponse, sender: 'bot' };
+        setMessages(prev => [...prev, botMessage]);
+    } catch (error) {
+        const errorMessage: Message = { 
+            id: (Date.now() + 1).toString(), 
+            text: "Sorry, I'm having trouble connecting to my brain right now. Please try again in a moment.", 
+            sender: 'bot' 
+        };
+        setMessages(prev => [...prev, errorMessage]);
+    } finally {
+        setIsLoading(false);
+    }
   };
   
   useEffect(() => {
     if (scrollAreaRef.current) {
-        const viewport = scrollAreaRef.current.querySelector('div');
+        const viewport = scrollAreaRef.current.querySelector('div[data-radix-scroll-area-viewport]');
         if (viewport) {
            viewport.scrollTop = viewport.scrollHeight;
         }
