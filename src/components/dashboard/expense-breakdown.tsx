@@ -137,4 +137,3 @@ const ExpenseBreakdown = () => {
 }
 
 export default ExpenseBreakdown
-
