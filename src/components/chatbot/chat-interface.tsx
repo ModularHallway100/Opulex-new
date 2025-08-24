@@ -8,7 +8,7 @@ import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Bot, User, Send, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { getChatbotResponse } from '@/lib/chatbot-service';
+import { chatbotFlow } from '@/ai/flows/chatbot';
 
 interface ChatInterfaceProps {
   onClose: () => void;
@@ -41,7 +41,7 @@ const ChatInterface = ({ onClose }: ChatInterfaceProps) => {
     setIsLoading(true);
 
     try {
-        const botResponse = await getChatbotResponse(input);
+        const botResponse = await chatbotFlow(input);
         const botMessage: Message = { id: (Date.now() + 1).toString(), text: botResponse, sender: 'bot' };
         setMessages(prev => [...prev, botMessage]);
     } catch (error) {
@@ -58,12 +58,9 @@ const ChatInterface = ({ onClose }: ChatInterfaceProps) => {
   
   useEffect(() => {
     if (scrollAreaRef.current) {
-        const viewport = scrollAreaRef.current.querySelector('div[data-radix-scroll-area-viewport]');
-        if (viewport) {
-           viewport.scrollTop = viewport.scrollHeight;
-        }
+        scrollAreaRef.current.scrollTop = scrollAreaRef.current.scrollHeight;
     }
-  }, [messages]);
+  }, [messages, isLoading]);
 
 
   return (
@@ -83,8 +80,8 @@ const ChatInterface = ({ onClose }: ChatInterfaceProps) => {
           <X className="h-5 w-5" />
         </Button>
       </CardHeader>
-      <CardContent className="flex-1 p-0">
-        <ScrollArea className="h-full p-4" ref={scrollAreaRef}>
+      <CardContent className="flex-1 p-0 overflow-y-auto">
+        <ScrollArea className="h-full p-4" viewportRef={scrollAreaRef}>
           <div className="space-y-4">
             {messages.map((message) => (
               <div
