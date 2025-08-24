@@ -8,7 +8,6 @@ import { Home, BarChart2, Wallet, Settings, LogOut, Receipt, Target, Bell, Users
 import Logo from '@/components/logo'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils';
-import { useAuth } from '@/hooks/use-auth';
 
 const navItems = [
   { href: '/dashboard', icon: <Home />, label: 'Dashboard' },
@@ -45,7 +44,6 @@ const SidebarLink = ({ href, icon, label }: { href: string, icon: React.ReactEle
 }
 
 const Sidebar = () => {
-  const { signOut } = useAuth();
   return (
     <aside className="hidden lg:flex flex-col w-64 h-screen px-4 py-8 bg-card border-r border-border/40">
       <div className="flex items-center justify-center mb-12 h-10">
@@ -60,10 +58,12 @@ const Sidebar = () => {
       </nav>
        <div className="mt-auto">
         <SidebarLink href="/dashboard/settings" icon={<Settings />} label="Settings" />
-        <Button variant="ghost" className="w-full justify-start text-base py-6" onClick={signOut}>
-            <LogOut className="mr-4" />
-            <span>Sign Out</span>
-        </Button>
+        <Link href="/" passHref>
+            <Button variant="ghost" className="w-full justify-start text-base py-6">
+                <LogOut className="mr-4" />
+                <span>Sign Out</span>
+            </Button>
+        </Link>
       </div>
     </aside>
   )
