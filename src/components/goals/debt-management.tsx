@@ -1,5 +1,4 @@
 
-
 "use client"
 
 import { useState, useMemo } from 'react'
@@ -43,7 +42,7 @@ const DebtManagement = () => {
   const freedomPoints = strategy === 'avalanche' ? 1500 : 1200;
 
   return (
-    <Card className="bg-secondary/50 border-primary/20 mt-4">
+    <Card className="bg-card mt-4">
       <CardHeader>
         <div className="flex justify-between items-start">
             <div>
@@ -123,7 +122,7 @@ const DebtManagement = () => {
                                 <AlertDialogTrigger asChild>
                                     <Button size="sm">Make a Payment</Button>
                                 </AlertDialogTrigger>
-                                <AlertDialogContent className="bg-secondary border-primary/20">
+                                <AlertDialogContent className="bg-card border-primary/20">
                                     <AlertDialogHeader>
                                         <AlertDialogTitle>Make a Payment</AlertDialogTitle>
                                         <AlertDialogDescription>

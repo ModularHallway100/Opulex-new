@@ -52,7 +52,7 @@ export default function SignInPage() {
                     <KeyRound className="gate-unlock-key" />
                 </div>
             )}
-            <Card className="w-full max-w-md bg-secondary border-primary/20 overflow-hidden">
+            <Card className="w-full max-w-md bg-card border-primary/20 overflow-hidden">
                 <CardHeader className="text-center">
                     <div className="flex justify-center mb-4">
                         <Logo />

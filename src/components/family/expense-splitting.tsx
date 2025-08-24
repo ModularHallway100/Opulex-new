@@ -21,7 +21,7 @@ import {
 
 const ExpenseSplitting = () => {
   return (
-    <Card className="bg-secondary/50 border-primary/20">
+    <Card className="bg-card border-primary/20">
       <CardHeader>
         <CardTitle className="text-xl font-headline">Shared Expense Tracker</CardTitle>
         <CardDescription>View and manage split household expenses.</CardDescription>
@@ -69,7 +69,7 @@ const ExpenseSplitting = () => {
                 <AlertDialogTrigger asChild>
                     <Button variant="outline" disabled={sharedExpenses.length === 0}>Settle Up</Button>
                 </AlertDialogTrigger>
-                <AlertDialogContent className="bg-secondary border-primary/20">
+                <AlertDialogContent className="bg-card border-primary/20">
                     <AlertDialogHeader>
                         <AlertDialogTitle>Settle Up Expenses</AlertDialogTitle>
                         <AlertDialogDescription>

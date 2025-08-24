@@ -1,5 +1,4 @@
 
-
 "use client"
 
 import * as React from "react"
@@ -21,8 +20,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from '../ui/input';
 import { Label as UiLabel } from '../ui/label';
-
-const subscriptions: any[] = [];
+import { subscriptions } from "@/lib/subscriptions-data"
 
 const getUsageColor = (usage: number) => {
     if (usage >= 80) return "bg-green-500"; // Emerald
@@ -37,7 +35,7 @@ const SubscriptionTracker = () => {
 
   if (subscriptions.length === 0) {
     return (
-        <Card className="bg-secondary/50 border-primary/20">
+        <Card className="bg-card border-primary/20">
             <CardContent className="pt-6 text-center text-muted-foreground py-12">
                  <p className="text-lg font-semibold mb-2">No Subscriptions Tracked</p>
                  <p className="mb-6">Add your subscriptions to get insights on your recurring spending.</p>
@@ -47,7 +45,7 @@ const SubscriptionTracker = () => {
                 </Button>
             </CardContent>
             <Dialog open={isCreateModalOpen} onOpenChange={setIsCreateModalOpen}>
-                <DialogContent className="sm:max-w-[425px] bg-secondary border-primary/20">
+                <DialogContent className="sm:max-w-[425px] bg-card border-primary/20">
                     <DialogHeader>
                         <DialogTitle className="font-headline text-primary">Add Subscription</DialogTitle>
                         <DialogDescription>
@@ -83,7 +81,7 @@ const SubscriptionTracker = () => {
   }
 
   return (
-    <Card className="bg-secondary/50 border-primary/20">
+    <Card className="bg-card border-primary/20">
       <CardContent className="pt-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
           {subscriptions.map((sub, index) => {

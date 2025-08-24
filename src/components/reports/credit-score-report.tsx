@@ -134,7 +134,7 @@ const AiCoachSection = () => {
 const CreditScoreReport = () => {
     if(creditScoreData.score === 0) {
         return (
-             <Card className="bg-secondary/50 border-primary/20 h-full">
+             <Card className="bg-card h-full">
                 <CardHeader>
                     <CardTitle className="text-xl font-headline">Credit Score</CardTitle>
                     <CardDescription>Monitor your credit health.</CardDescription>
@@ -148,7 +148,7 @@ const CreditScoreReport = () => {
     }
 
   return (
-    <Card className="bg-secondary/50 border-primary/20 h-full flex flex-col">
+    <Card className="bg-card h-full flex flex-col">
       <CardHeader>
         <CardTitle className="text-xl font-headline">Credit Score</CardTitle>
         <CardDescription>Provided by {creditScoreData.provider}</CardDescription>
@@ -180,7 +180,7 @@ const CreditScoreReport = () => {
                     Update Score
                 </Button>
             </AlertDialogTrigger>
-             <AlertDialogContent className="bg-secondary border-primary/20">
+             <AlertDialogContent className="bg-card border-primary/20">
                 <AlertDialogHeader>
                     <AlertDialogTitle>Update Credit Score</AlertDialogTitle>
                     <AlertDialogDescription>

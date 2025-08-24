@@ -1,3 +1,4 @@
+
 "use client"
 
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
@@ -6,7 +7,7 @@ import { portfolioSummary } from "@/lib/portfolio-data"
 
 const AssetOverview = () => {
     return (
-        <Card className="bg-secondary/50 border-primary/20">
+        <Card className="bg-card border-primary/20">
             <CardHeader>
                 <div className="flex justify-between items-start">
                     <div>

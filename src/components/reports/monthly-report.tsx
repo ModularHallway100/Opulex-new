@@ -10,7 +10,7 @@ import IncomeExpenseChart from "./income-expense-chart"
 
 const MonthlyReport = () => {
   return (
-    <Card className="bg-secondary/50 border-primary/20 mt-4">
+    <Card className="bg-card mt-4">
       <CardHeader>
         <div className="flex justify-between items-center">
           <div>

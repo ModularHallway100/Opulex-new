@@ -36,7 +36,7 @@ export default function SignUpPage() {
                     <KeyRound className="gate-unlock-key" />
                 </div>
             )}
-            <Card className="w-full max-w-md bg-secondary border-primary/20 shadow-2xl shadow-primary/10 overflow-hidden">
+            <Card className="w-full max-w-md bg-card border-primary/20 shadow-2xl shadow-primary/10 overflow-hidden">
                 <CardHeader className="text-center p-8 bg-black/30 border-b-2 border-primary">
                      <div className="flex justify-center mb-4 h-12">
                         <Logo />

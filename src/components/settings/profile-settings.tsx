@@ -24,7 +24,7 @@ const ProfileSettings = () => {
     const [password, setPassword] = useState('');
 
     return (
-        <Card className="bg-secondary/50 border-primary/20">
+        <Card className="bg-card border-primary/20">
             <CardHeader>
                 <div className="flex items-center gap-4">
                     <User className="h-6 w-6 text-primary" />
@@ -45,7 +45,7 @@ const ProfileSettings = () => {
                                 Upload Picture
                             </Button>
                         </AlertDialogTrigger>
-                        <AlertDialogContent className="bg-secondary border-primary/20">
+                        <AlertDialogContent className="bg-card border-primary/20">
                             <AlertDialogHeader>
                                 <AlertDialogTitle>Upload Picture</AlertDialogTitle>
                                 <AlertDialogDescription>
@@ -90,7 +90,7 @@ const ProfileSettings = () => {
                         <AlertDialogTrigger asChild>
                             <Button>Save Changes</Button>
                         </AlertDialogTrigger>
-                        <AlertDialogContent className="bg-secondary border-primary/20">
+                        <AlertDialogContent className="bg-card border-primary/20">
                             <AlertDialogHeader>
                                 <AlertDialogTitle>Changes Saved</AlertDialogTitle>
                                 <AlertDialogDescription>

@@ -1,3 +1,4 @@
+
 "use client"
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -7,7 +8,7 @@ import { ArrowUp, ArrowDown } from "lucide-react"
 
 const HoldingsTable = () => {
     return (
-        <Card className="bg-secondary/50 border-primary/20">
+        <Card className="bg-card border-primary/20">
             <CardHeader>
                 <CardTitle className="text-xl font-headline">Your Holdings</CardTitle>
             </CardHeader>

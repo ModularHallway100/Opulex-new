@@ -1,3 +1,4 @@
+
 "use client"
 
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
@@ -6,7 +7,7 @@ import { portfolioHistory } from "@/lib/portfolio-data"
 
 const PortfolioPerformanceChart = () => {
     return (
-        <Card className="bg-secondary/50 border-primary/20 h-full">
+        <Card className="bg-card border-primary/20 h-full">
             <CardHeader>
                 <CardTitle className="text-xl font-headline">Performance Over Time</CardTitle>
                 <CardDescription>Your portfolio's value history.</CardDescription>

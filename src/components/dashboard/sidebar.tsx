@@ -4,7 +4,7 @@
 import React from 'react';
 import Link from 'next/link'
 import { usePathname } from 'next/navigation';
-import { Home, BarChart2, Wallet, Settings, LogOut, PiggyBank, Receipt, Target, Bell, Users, Briefcase } from 'lucide-react'
+import { Home, BarChart2, Wallet, Settings, LogOut, Receipt, Target, Bell, Users, Briefcase, ListCollapse } from 'lucide-react'
 import Logo from '@/components/logo'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils';
@@ -14,7 +14,7 @@ const navItems = [
   { href: '/dashboard', icon: <Home />, label: 'Dashboard' },
   { href: '/dashboard/budget', icon: <Wallet />, label: 'Budget' },
   { href: '/dashboard/transactions', icon: <Receipt />, label: 'Transactions' },
-  { href: '/dashboard/subscriptions', icon: <Receipt />, label: 'Subscriptions' },
+  { href: '/dashboard/subscriptions', icon: <ListCollapse />, label: 'Subscriptions' },
   { href: '/dashboard/goals', icon: <Target />, label: 'Goals' },
   { href: '/dashboard/reports', icon: <BarChart2 />, label: 'Reports' },
   { href: '/dashboard/portfolio', icon: <Briefcase />, label: 'Portfolio' },
@@ -47,7 +47,7 @@ const SidebarLink = ({ href, icon, label }: { href: string, icon: React.ReactEle
 const Sidebar = () => {
   const { signOut } = useAuth();
   return (
-    <aside className="hidden lg:flex flex-col w-64 h-screen px-4 py-8 bg-secondary border-r border-border/40">
+    <aside className="hidden lg:flex flex-col w-64 h-screen px-4 py-8 bg-card border-r border-border/40">
       <div className="flex items-center justify-center mb-12 h-10">
         <Link href="/dashboard">
             <Logo />

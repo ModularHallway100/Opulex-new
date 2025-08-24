@@ -33,7 +33,7 @@ const AiPoweredAlerts = () => {
   }
 
   return (
-    <Card className="bg-secondary/50 border-primary/20">
+    <Card className="bg-card border-primary/20">
       <CardHeader>
         <CardTitle className="text-xl font-headline">AI-Powered Alerts</CardTitle>
         <CardDescription>Proactive insights from your financial oracle.</CardDescription>
@@ -56,7 +56,7 @@ const AiPoweredAlerts = () => {
                         {alert.action}
                     </Button>
                 </AlertDialogTrigger>
-                <AlertDialogContent className="bg-secondary border-primary/20">
+                <AlertDialogContent className="bg-card border-primary/20">
                     <AlertDialogHeader>
                         <AlertDialogTitle>Action Confirmation</AlertDialogTitle>
                         <AlertDialogDescription>

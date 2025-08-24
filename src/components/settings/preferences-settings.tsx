@@ -25,7 +25,7 @@ const PreferenceSettings = () => {
 
 
     return (
-        <Card className="bg-secondary/50 border-primary/20">
+        <Card className="bg-card border-primary/20">
             <CardHeader>
                  <div className="flex items-center gap-4">
                     <Palette className="h-6 w-6 text-primary" />

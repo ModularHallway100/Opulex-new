@@ -25,7 +25,7 @@ const DueDateAlerts = () => {
     }
 
   return (
-    <Card className="bg-secondary/50 border-primary/20">
+    <Card className="bg-card border-primary/20">
       <CardHeader>
         <CardTitle className="text-xl font-headline">Decrees & Due Dates</CardTitle>
         <CardDescription>Official notices of your upcoming financial obligations.</CardDescription>
@@ -49,7 +49,7 @@ const DueDateAlerts = () => {
                             <AlertDialogTrigger asChild>
                                 <Button size="sm">{alert.action}</Button>
                             </AlertDialogTrigger>
-                             <AlertDialogContent className="bg-secondary border-primary/20">
+                             <AlertDialogContent className="bg-card border-primary/20">
                                 <AlertDialogHeader>
                                     <AlertDialogTitle>Action Confirmation</AlertDialogTitle>
                                     <AlertDialogDescription>
@@ -95,7 +95,7 @@ const DueDateAlerts = () => {
                                     Snooze
                                 </Button>
                             </AlertDialogTrigger>
-                            <AlertDialogContent className="bg-secondary border-primary/20">
+                            <AlertDialogContent className="bg-card border-primary/20">
                                 <AlertDialogHeader>
                                     <AlertDialogTitle>Snooze Alert</AlertDialogTitle>
                                     <AlertDialogDescription>
@@ -111,7 +111,7 @@ const DueDateAlerts = () => {
                             <AlertDialogTrigger asChild>
                                 <Button size="sm">Pay Now</Button>
                             </AlertDialogTrigger>
-                            <AlertDialogContent className="bg-secondary border-primary/20">
+                            <AlertDialogContent className="bg-card border-primary/20">
                                 <AlertDialogHeader>
                                     <AlertDialogTitle>Pay Bill</AlertDialogTitle>
                                     <AlertDialogDescription>

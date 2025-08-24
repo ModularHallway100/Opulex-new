@@ -22,7 +22,7 @@ const getEnvelopeColor = (allocated: number, spent: number) => {
     const remaining = allocated - spent;
     if (remaining < 0) return 'border-destructive bg-destructive/10';
     if (remaining < allocated * 0.15) return 'border-yellow-500 bg-yellow-900/20';
-    return 'border-primary/20 bg-secondary/50';
+    return 'border-primary/20 bg-card';
 }
 
 const getAlert = (category: Category) => {
@@ -53,7 +53,7 @@ const VirtualEnvelopes = ({ categories: initialCategories }: VirtualEnvelopesPro
 
    if (initialCategories.length === 0) {
     return (
-      <Card className="bg-secondary/50 border-primary/20 mt-4">
+      <Card className="bg-card mt-4">
         <CardContent className="pt-6 text-center text-muted-foreground">
           <p>No envelopes created. Assign funds to categories to create virtual envelopes.</p>
         </CardContent>
@@ -62,7 +62,7 @@ const VirtualEnvelopes = ({ categories: initialCategories }: VirtualEnvelopesPro
   }
 
   return (
-    <Card className="bg-secondary/50 border-primary/20">
+    <Card className="bg-card">
       <CardHeader>
         <CardTitle className="text-xl font-headline">Virtual Envelopes</CardTitle>
         <CardDescription>Manage your budget with a visual envelope system.</CardDescription>

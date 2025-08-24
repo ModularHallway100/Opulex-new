@@ -4,16 +4,14 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Info, TrendingUp, TrendingDown, Bell, Bot } from "lucide-react"
-
-const insights: any[] = []
-const forecasts: any[] = []
+import { insights, forecasts } from "@/lib/reports-data"
 
 
 const AiInsights = () => {
 
     if (insights.length === 0 && forecasts.length === 0) {
         return (
-             <Card className="bg-secondary/50 border-primary/20">
+             <Card className="bg-card border-primary/20">
                 <CardHeader>
                     <CardTitle className="text-xl font-headline">AI Insights & Royal Decrees</CardTitle>
                     <CardDescription>Personalized analysis to help you make smarter financial decisions.</CardDescription>
@@ -30,7 +28,7 @@ const AiInsights = () => {
     }
 
     return (
-        <Card className="bg-secondary/50 border-primary/20">
+        <Card className="bg-card border-primary/20">
             <CardHeader>
                 <CardTitle className="text-xl font-headline">AI Insights & Royal Decrees</CardTitle>
                 <CardDescription>Personalized analysis to help you make smarter financial decisions.</CardDescription>

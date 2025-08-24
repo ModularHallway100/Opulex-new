@@ -47,7 +47,7 @@ const IncomeEditorModal = ({ isOpen, onClose, initialSources = [] }: IncomeEdito
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[425px] bg-secondary border-primary/20">
+      <DialogContent className="sm:max-w-[425px] bg-card border-primary/20">
         <DialogHeader>
           <DialogTitle className="font-headline text-primary">Edit Income</DialogTitle>
           <DialogDescription>

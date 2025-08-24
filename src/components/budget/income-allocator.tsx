@@ -19,7 +19,7 @@ const IncomeAllocator = ({ totalIncome, totalAllocated, remainingToAllocate }: I
 
   return (
     <>
-      <Card className="bg-secondary/50 border-primary/20">
+      <Card className="bg-card border-primary/20">
         <CardHeader className="flex flex-row items-center justify-between">
           <div className="flex items-center gap-4">
             <div className="p-3 bg-primary/10 rounded-lg">

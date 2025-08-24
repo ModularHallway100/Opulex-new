@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useRef, useEffect } from 'react';
@@ -19,8 +20,14 @@ interface Message {
   sender: 'user' | 'bot';
 }
 
+const initialMessage: Message = {
+    id: 'initial',
+    sender: 'bot',
+    text: "Hello! I'm Opulex, your personal finance assistant. How can I help you achieve your wealth goals today? You can ask me about budgeting, spending, or your savings goals."
+};
+
 const ChatInterface = ({ onClose }: ChatInterfaceProps) => {
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<Message[]>([initialMessage]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
@@ -33,7 +40,6 @@ const ChatInterface = ({ onClose }: ChatInterfaceProps) => {
     setInput('');
     setIsLoading(true);
 
-    // Simulate API call
     const botResponse = await getChatbotResponse(input);
     
     const botMessage: Message = { id: (Date.now() + 1).toString(), text: botResponse, sender: 'bot' };
@@ -43,8 +49,6 @@ const ChatInterface = ({ onClose }: ChatInterfaceProps) => {
   
   useEffect(() => {
     if (scrollAreaRef.current) {
-        // A bit of a hack to scroll to the bottom. 
-        // A better way would be to get the viewport element from the ScrollArea component
         const viewport = scrollAreaRef.current.querySelector('div');
         if (viewport) {
            viewport.scrollTop = viewport.scrollHeight;
@@ -54,7 +58,7 @@ const ChatInterface = ({ onClose }: ChatInterfaceProps) => {
 
 
   return (
-    <Card className="fixed bottom-24 right-6 w-96 h-[600px] bg-secondary border-primary/20 shadow-2xl flex flex-col z-50">
+    <Card className="fixed bottom-24 right-6 w-96 h-[600px] bg-card border-primary/20 shadow-2xl flex flex-col z-50">
       <CardHeader className="flex flex-row items-center justify-between p-4 border-b border-border/40">
         <div className="flex items-center gap-3">
           <Bot className="h-7 w-7 text-primary" />

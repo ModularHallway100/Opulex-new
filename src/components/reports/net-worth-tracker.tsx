@@ -13,7 +13,7 @@ const NetWorthTracker = () => {
     const isEmpty = netWorthData.length === 0 && assets.length === 0 && liabilities.length === 0;
 
   return (
-    <Card className="bg-secondary/50 border-primary/20 mt-4">
+    <Card className="bg-card mt-4">
       <CardHeader>
          <div className="flex justify-between items-start">
             <div>

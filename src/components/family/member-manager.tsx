@@ -1,5 +1,4 @@
 
-
 "use client";
 import * as React from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -23,7 +22,7 @@ import {
 
 const MemberManager = () => {
   return (
-    <Card className="bg-secondary/50 border-primary/20">
+    <Card className="bg-card border-primary/20">
       <CardHeader>
         <CardTitle className="text-xl font-headline">Manage Collaborators</CardTitle>
         <CardDescription>Invite members to your Inner Circle and set their permissions.</CardDescription>
@@ -35,7 +34,7 @@ const MemberManager = () => {
             <AlertDialogTrigger asChild>
               <Button>Invite Member</Button>
             </AlertDialogTrigger>
-            <AlertDialogContent className="bg-secondary border-primary/20">
+            <AlertDialogContent className="bg-card border-primary/20">
                 <AlertDialogHeader>
                     <AlertDialogTitle>Invitation Sent!</AlertDialogTitle>
                     <AlertDialogDescription>

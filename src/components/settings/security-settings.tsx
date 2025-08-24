@@ -17,12 +17,11 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-
-const connectedAccounts: any[] = []
+import { connectedAccounts } from "@/lib/settings-data";
 
 const SecuritySettings = () => {
     return (
-        <Card className="bg-secondary/50 border-primary/20">
+        <Card className="bg-card border-primary/20">
             <CardHeader>
                 <div className="flex items-center gap-4">
                     <Shield className="h-6 w-6 text-primary" />
@@ -70,7 +69,7 @@ const SecuritySettings = () => {
                         <AlertDialogTrigger asChild>
                             <Button variant="outline" className="w-full">Link New Account</Button>
                         </AlertDialogTrigger>
-                        <AlertDialogContent className="bg-secondary border-primary/20">
+                        <AlertDialogContent className="bg-card border-primary/20">
                             <AlertDialogHeader>
                                 <AlertDialogTitle>Link New Account</AlertDialogTitle>
                                 <AlertDialogDescription>

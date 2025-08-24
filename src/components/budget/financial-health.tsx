@@ -13,7 +13,7 @@ const FinancialHealth = () => {
   const isAgingAlert = agingData.some(d => d.balance < 0);
 
   return (
-    <Card className="bg-secondary/50 border-primary/20">
+    <Card className="bg-card border-primary/20">
       <CardHeader>
         <CardTitle className="text-xl font-headline">Financial Health Tools</CardTitle>
         <CardDescription>Advanced tools to help you get ahead.</CardDescription>

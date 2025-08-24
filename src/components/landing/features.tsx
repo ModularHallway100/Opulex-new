@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { PiggyBank, Target, BarChart2, Bot, Users, Shield } from 'lucide-react';
 
@@ -36,7 +37,7 @@ const features = [
 
 const Features = () => {
   return (
-    <section className="py-20 px-6 bg-secondary/50">
+    <section className="py-20 px-6 bg-card/50">
       <div className="text-center max-w-3xl mx-auto">
         <h2 className="text-4xl font-headline font-bold mb-4">Your Arsenal for Financial Victory</h2>
         <p className="text-muted-foreground mb-12">

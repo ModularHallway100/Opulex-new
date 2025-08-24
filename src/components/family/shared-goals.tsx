@@ -23,7 +23,7 @@ const SharedGoals = () => {
     const [isCreateModalOpen, setIsCreateModalOpen] = React.useState(false);
 
   return (
-    <Card className="bg-secondary/50 border-primary/20">
+    <Card className="bg-card border-primary/20">
       <CardHeader>
         <div className="flex justify-between items-center">
             <div>
@@ -63,7 +63,7 @@ const SharedGoals = () => {
         })}
       </CardContent>
        <Dialog open={isCreateModalOpen} onOpenChange={setIsCreateModalOpen}>
-        <DialogContent className="sm:max-w-[425px] bg-secondary border-primary/20">
+        <DialogContent className="sm:max-w-[425px] bg-card border-primary/20">
           <DialogHeader>
             <DialogTitle className="font-headline text-primary">Create New Shared Goal</DialogTitle>
             <DialogDescription>

@@ -1,5 +1,4 @@
 
-
 "use client";
 
 import * as React from 'react';
@@ -62,7 +61,7 @@ const CategoryManager = ({ categories: initialCategories, totalIncome }: Categor
 
   if (categories.length === 0) {
     return (
-      <Card className="bg-secondary/50 border-primary/20 mt-4">
+      <Card className="bg-card mt-4">
         <CardContent className="pt-6 text-center text-muted-foreground">
           <p className="mb-4">No spending categories found. Create one to start building your budget.</p>
            <Button variant="outline" onClick={() => setIsCreateModalOpen(true)}>
@@ -70,7 +69,7 @@ const CategoryManager = ({ categories: initialCategories, totalIncome }: Categor
                 Create New Category
             </Button>
             <Dialog open={isCreateModalOpen} onOpenChange={setIsCreateModalOpen}>
-              <DialogContent className="sm:max-w-[425px] bg-secondary border-primary/20">
+              <DialogContent className="sm:max-w-[425px] bg-card border-primary/20">
                 <DialogHeader>
                   <DialogTitle className="font-headline text-primary">Create Category</DialogTitle>
                   <DialogDescription>
@@ -100,7 +99,7 @@ const CategoryManager = ({ categories: initialCategories, totalIncome }: Categor
 
   return (
     <>
-    <Card className="bg-secondary/50 border-primary/20">
+    <Card className="bg-card">
       <CardHeader>
         <CardTitle className="text-xl font-headline">Spending Categories</CardTitle>
         <CardDescription>Allocate your income to different spending categories.</CardDescription>
@@ -190,7 +189,7 @@ const CategoryManager = ({ categories: initialCategories, totalIncome }: Categor
       </CardContent>
     </Card>
       <Dialog open={isCreateModalOpen} onOpenChange={setIsCreateModalOpen}>
-        <DialogContent className="sm:max-w-[425px] bg-secondary border-primary/20">
+        <DialogContent className="sm:max-w-[425px] bg-card border-primary/20">
           <DialogHeader>
             <DialogTitle className="font-headline text-primary">Create Category</DialogTitle>
             <DialogDescription>

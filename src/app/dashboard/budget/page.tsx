@@ -38,7 +38,7 @@ export default function BudgetPage() {
             <h1 className="text-3xl font-headline text-primary">The Treasury Room</h1>
             <p className="text-muted-foreground">Set up your budget for the month using your preferred method.</p>
         </div>
-        <Card className="bg-secondary/50 border-primary/20 text-center py-12">
+        <Card className="bg-card text-center py-12">
             <CardContent>
                 <p className="text-lg font-semibold mb-2">Your Treasury is Empty</p>
                 <p className="text-muted-foreground mb-6">Start by linking a financial account or manually adding your income sources.</p>
@@ -91,7 +91,7 @@ export default function BudgetPage() {
               Save Budget Plan
             </Button>
           </AlertDialogTrigger>
-          <AlertDialogContent className="bg-secondary border-primary/20">
+          <AlertDialogContent className="bg-card border-primary/20">
             <AlertDialogHeader>
               <AlertDialogTitle>Budget Saved!</AlertDialogTitle>
               <AlertDialogDescription>
@@ -107,4 +107,3 @@ export default function BudgetPage() {
     </div>
   );
 }
-

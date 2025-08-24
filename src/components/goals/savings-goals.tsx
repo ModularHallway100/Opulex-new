@@ -1,5 +1,4 @@
 
-
 "use client";
 
 import { useState } from 'react';
@@ -40,7 +39,7 @@ const SavingsGoals = () => {
 
     return (
         <>
-        <Card className="bg-secondary/50 border-primary/20 mt-4">
+        <Card className="bg-card mt-4">
             <CardHeader>
                 <div className="flex justify-between items-center">
                     <div>
@@ -107,7 +106,7 @@ const SavingsGoals = () => {
             </CardContent>
         </Card>
         <Dialog open={isCreateModalOpen} onOpenChange={setIsCreateModalOpen}>
-            <DialogContent className="sm:max-w-[425px] bg-secondary border-primary/20">
+            <DialogContent className="sm:max-w-[425px] bg-card border-primary/20">
                 <DialogHeader>
                     <DialogTitle className="font-headline text-primary">New Savings Goal</DialogTitle>
                     <DialogDescription>

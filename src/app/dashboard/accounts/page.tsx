@@ -34,7 +34,7 @@ export default function AccountsPage() {
                 Link New Account
             </Button>
           </AlertDialogTrigger>
-          <AlertDialogContent className="bg-secondary border-primary/20">
+          <AlertDialogContent className="bg-card border-primary/20">
             <AlertDialogHeader>
               <AlertDialogTitle>Link a New Account</AlertDialogTitle>
               <AlertDialogDescription>
@@ -48,7 +48,7 @@ export default function AccountsPage() {
         </AlertDialog>
       </div>
 
-      <Card className="bg-secondary/50 border-primary/20">
+      <Card className="bg-card border-primary/20">
         <CardHeader>
           <CardTitle>Your Accounts</CardTitle>
           <CardDescription>All your financial accounts in one place.</CardDescription>
