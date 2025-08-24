@@ -37,9 +37,10 @@ const ExpenseBreakdown = () => {
     const spendingChartConfig = React.useMemo(() => {
         const config: ChartConfig = {};
         expenseData.forEach((item, index) => {
-            config[item.name.toLowerCase()] = {
+            const chartKey = item.name.toLowerCase();
+            config[chartKey] = {
               label: item.name,
-              color: `hsl(var(--chart-${index + 1}))`,
+              color: `hsl(var(--chart-${index % 5 + 1}))`,
             };
         });
         return config;
@@ -114,30 +115,28 @@ const ExpenseBreakdown = () => {
           <TabsContent value="chart">
              <div className="h-[300px] w-full mt-4">
                 <ChartContainer config={spendingChartConfig} className="min-h-[200px] w-full">
-                    <ResponsiveContainer width="100%" height="100%">
-                        <PieChart>
-                            <RechartsTooltip
-                                cursor={false}
-                                content={<ChartTooltipContent hideLabel nameKey="name" />}
-                            />
-                            <Pie
-                                data={chartData}
-                                dataKey="amount"
-                                nameKey="name"
-                                cx="50%"
-                                cy="50%"
-                                outerRadius={100}
-                                innerRadius={60}
-                                labelLine={false}
-                                strokeWidth={5}
-                                stroke="hsl(var(--background))"
-                            >
-                                {chartData.map((entry) => (
-                                    <Cell key={`cell-${entry.name}`} fill={entry.fill} />
-                                ))}
-                            </Pie>
-                        </PieChart>
-                    </ResponsiveContainer>
+                  <ResponsiveContainer width="100%" height="100%">
+                    <PieChart>
+                      <RechartsTooltip
+                        cursor={false}
+                        content={<ChartTooltipContent hideLabel nameKey="name" />}
+                      />
+                      <Pie
+                        data={chartData}
+                        dataKey="amount"
+                        nameKey="name"
+                        cx="50%"
+                        cy="50%"
+                        outerRadius={100}
+                        innerRadius={60}
+                        labelLine={false}
+                      >
+                        {chartData.map((entry) => (
+                          <Cell key={`cell-${entry.name}`} fill={entry.fill} />
+                        ))}
+                      </Pie>
+                    </PieChart>
+                  </ResponsiveContainer>
                 </ChartContainer>
             </div>
           </TabsContent>
@@ -148,5 +147,3 @@ const ExpenseBreakdown = () => {
 }
 
 export default ExpenseBreakdown
-
-    
