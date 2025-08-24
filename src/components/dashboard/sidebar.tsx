@@ -61,7 +61,7 @@ const Sidebar = () => {
         <Link href="/" passHref>
             <Button variant="ghost" className="w-full justify-start text-base py-6">
                 <LogOut className="mr-4" />
-                <span>Sign Out</span>
+                <span>Exit</span>
             </Button>
         </Link>
       </div>
