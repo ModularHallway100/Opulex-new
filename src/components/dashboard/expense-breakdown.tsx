@@ -49,6 +49,7 @@ const ExpenseBreakdown = () => {
     const chartData = React.useMemo(() => {
         return expenseData.map(item => ({
             ...item,
+            name: item.name.toLowerCase(),
             fill: `var(--color-${item.name.toLowerCase()})`
         }))
     }, [expenseData])
