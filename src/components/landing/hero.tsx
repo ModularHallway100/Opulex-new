@@ -47,7 +47,7 @@ const Hero = () => {
             Command your money. Conquer your goals. Live in luxury.
         </p>
          <div className="flex justify-center gap-4 mb-16">
-            <Link href="/signup" passHref>
+            <Link href="/dashboard" passHref>
                 <Button size="lg">
                     <KeyRound className="mr-2" />
                     Enter the Vault
