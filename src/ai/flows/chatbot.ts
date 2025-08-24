@@ -16,8 +16,9 @@ export const ChatContextSchema = z.object({
     transactions: z.any().describe("A list of the user's recent transactions."),
     goals: z.any().describe("The user's savings goals."),
 });
+export type ChatContext = z.infer<typeof ChatContextSchema>;
 
-export const chatbotFlow = ai.defineFlow(
+const chatbotFlow = ai.defineFlow(
   {
     name: 'chatbotFlow',
     inputSchema: ChatContextSchema,
@@ -46,3 +47,7 @@ export const chatbotFlow = ai.defineFlow(
     return llmResponse.text;
   }
 );
+
+export async function getChatbotResponse(context: ChatContext): Promise<string> {
+    return chatbotFlow(context);
+}
