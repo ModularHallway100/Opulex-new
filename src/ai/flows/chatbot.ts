@@ -17,6 +17,7 @@ const chatbotFlow = ai.defineFlow(
   },
   async (context) => {
     const llmResponse = await ai.generate({
+      model: 'googleai/gemini-1.5-flash-preview',
       prompt: `You are Opulex, a sophisticated and encouraging financial AI assistant. Your goal is to help users master their wealth with clarity and confidence.
 
       You have access to the user's financial data. Use it to answer their questions accurately and provide personalized insights.
@@ -32,7 +33,6 @@ const chatbotFlow = ai.defineFlow(
       If you don't know the answer, say that you are still learning but can help with topics like budgeting, spending, or savings goals.
       Keep your responses concise and easy to understand.
       `,
-      model: 'googleai/gemini-2.5-flash-preview',
     });
 
     return llmResponse.text;
