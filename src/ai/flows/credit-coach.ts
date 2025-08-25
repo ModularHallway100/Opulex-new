@@ -51,7 +51,7 @@ const creditCoachFlow = ai.defineFlow(
     outputSchema: CreditCoachOutputSchema,
   },
   async (input) => {
-    const { output } = await prompt(input);
+    const { output } = await prompt(input, { model: 'googleai/gemini-1.5-flash-preview' });
     return output!;
   }
 );
